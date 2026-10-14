@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="512" height="512" role="img" aria-label="Stonemere Life Management">
+  <rect width="48" height="48" rx="11" fill="#0A0A0A"/>
+  <path d="M8 44V26a16 16 0 0 1 32 0v18" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round"/>
+  <path d="M14 44V26a10 10 0 0 1 20 0v18" fill="none" stroke="#FFFFFF" stroke-width="1.2" stroke-linecap="round" opacity=".45"/>
+  <path d="M19.5 5h9l-1.8 9h-5.4z" fill="#C9A24D"/>
+</svg>

@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 6 440 104" width="880" height="208" role="img" aria-labelledby="t">
+  <title id="t">Stonemere Life Management (for dark backgrounds)</title>
+  <style>@import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,450&amp;family=Plus+Jakarta+Sans:wght@700&amp;display=block');</style>
+  <g transform="translate(-15 0) scale(2.3)">
+    <path d="M8 44V26a16 16 0 0 1 32 0v18" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round"/>
+    <path d="M14 44V26a10 10 0 0 1 20 0v18" fill="none" stroke="#FFFFFF" stroke-width="1.2" stroke-linecap="round" opacity=".45"/>
+    <path d="M19.5 5h9l-1.8 9h-5.4z" fill="#C9A24D"/>
+  </g>
+  <text x="100" y="72" fill="#FFFFFF" font-family="'Bodoni Moda', Didot, 'Bodoni 72', Georgia, serif" font-size="62" font-weight="450" letter-spacing="3.72">Stonemere</text>
+  <text x="101" y="103" fill="#E6CC8A" font-family="'Plus Jakarta Sans', Arial, Helvetica, sans-serif" font-size="17.5" font-weight="700" letter-spacing="4.55">LIFE MANAGEMENT</text>
+</svg>
