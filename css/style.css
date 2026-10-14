@@ -3315,3 +3315,92 @@ a.chip:hover { border-color: var(--brass); color: var(--brass-dark); transform: 
   .js [data-reveal], .js .mask-reveal { opacity: 1 !important; transform: none !important; clip-path: none !important; }
   .split-word__inner { transform: none !important; }
 }
+
+
+
+/* Fix laptop card height without disturbing gallery animation */
+.hgallery {
+  position: relative;
+  min-width: 0;
+}
+
+.hgallery__pin {
+  padding-block: var(--section-pad);
+  overflow: hidden;
+}
+
+.hgallery__viewport {
+  box-sizing: border-box;
+  min-width: 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  padding-inline: var(--gutter);
+  padding-bottom: 12px;
+}
+
+.hgallery__viewport::-webkit-scrollbar {
+  display: none;
+}
+
+.hgallery__track {
+  align-items: stretch;
+}
+
+.gcard {
+  box-sizing: border-box;
+  flex: 0 0 clamp(280px, 30vw, 420px);
+  height: auto;
+  aspect-ratio: 3 / 4;
+  min-height: 0;
+}
+
+/* Laptop screens: prevent cards from exceeding available height */
+
+@media (min-width: 1024px) and (max-height: 900px) {
+  .gcard {
+    /* height: min(52vw, 500px, calc(100vh - 320px)); */
+    /* aspect-ratio: auto; */
+    flex-shrink: 0;
+  }
+
+  .hgallery__pin {
+    padding-bottom: calc(var(--section-pad) + 20px);
+  }
+
+  .hgallery__viewport {
+    padding-bottom: 200px;
+  }
+}
+
+
+
+/* Fix Keystone Story eyebrow overlapping the section above */
+.kstory {
+  position: relative;
+  isolation: isolate;
+  scroll-margin-top: 0;
+  padding-top: 150px;
+  padding-bottom: 150px;
+}
+
+.kstory__pin {
+  box-sizing: border-box;
+  padding-top: calc(var(--section-pad) + 24px);
+  padding-bottom: var(--section-pad);
+}
+
+/* Keep the heading and eyebrow inside their own section */
+.kstory__copy {
+  position: relative;
+  min-width: 0;
+  align-self: center;
+}
+
+.kstory__copy .eyebrow,
+.kstory__copy .section-eyebrow {
+  position: relative;
+  z-index: 1;
+  margin-top: 0;
+}
