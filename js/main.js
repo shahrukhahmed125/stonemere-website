@@ -801,15 +801,10 @@ const SITE_CONFIG = {
       const steps = section.querySelectorAll('.kstory__step');
       const nodes = section.querySelectorAll('.kstory__node');
       const count = section.querySelector('.kstory__count');
-      const pinContent = section.querySelector('.kstory__pin');
 
       const setPinned = () => {
-        let pin = desktop.matches && !isReduced();
+        const pin = desktop.matches && !isReduced();
         section.classList.toggle('is-pinned', pin);
-        if (pin && pinContent.scrollHeight > window.innerHeight) {
-          pin = false;
-          section.classList.remove('is-pinned');
-        }
         if (!pin) {
           if (svg) { svg.style.setProperty('--draw', '1'); svg.style.setProperty('--key', '1'); }
           steps.forEach((s) => s.classList.add('is-active'));
@@ -821,7 +816,6 @@ const SITE_CONFIG = {
       let lastActive = -1;
       setPinned();
       onMediaChange(desktop, () => { setPinned(); lastActive = -1; Scroll.request(); });
-      $win.on('resize', () => { setPinned(); lastActive = -1; Scroll.request(); });
 
       Scroll.read(() => { rect = section.classList.contains('is-pinned') ? section.getBoundingClientRect() : null; });
       Scroll.add((y, vh) => {
@@ -886,17 +880,12 @@ const SITE_CONFIG = {
       const viewport = section.querySelector('.hgallery__viewport');
       const track = section.querySelector('.hgallery__track');
       const bar = section.querySelector('.hgallery__progress');
-      const pin = section.querySelector('.hgallery__pin');
       let shift = 0;
 
       const measure = () => {
-        let shouldPin = desktop.matches && !isReduced();
-        section.classList.toggle('is-pinned', shouldPin);
-        if (shouldPin && pin.scrollHeight > window.innerHeight) {
-          shouldPin = false;
-          section.classList.remove('is-pinned');
-        }
-        if (!shouldPin) {
+        const pin = desktop.matches && !isReduced();
+        section.classList.toggle('is-pinned', pin);
+        if (!pin) {
           section.style.height = '';
           track.style.removeProperty('--tx');
           return;
