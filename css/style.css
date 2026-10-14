@@ -1898,7 +1898,7 @@ strong { font-weight: 700; }
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  width: clamp(280px, 30vw, 420px);
+  width: clamp(240px, 22vw, 360px);
   aspect-ratio: 3 / 4;
   overflow: hidden;
   isolation: isolate;
