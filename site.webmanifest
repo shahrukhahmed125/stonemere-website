@@ -1,0 +1,20 @@
+{
+  "name": "Stonemere Life Management",
+  "short_name": "Stonemere",
+  "start_url": "./index.html",
+  "display": "browser",
+  "background_color": "#141C30",
+  "theme_color": "#1F2943",
+  "icons": [
+    {
+      "src": "images/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "images/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

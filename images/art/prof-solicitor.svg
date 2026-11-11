@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480" width="640" height="480">
+<defs>
+<linearGradient id="gscales6404801b" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#26324F"/><stop offset=".55" stop-color="#1F2943"/><stop offset="1" stop-color="#121A2C"/></linearGradient>
+<radialGradient id="gscales6404801r" cx="0.7" cy="0.25" r="0.8"><stop offset="0" stop-color="#3A4C78" stop-opacity=".55"/><stop offset="1" stop-color="#3A4C78" stop-opacity="0"/></radialGradient>
+<linearGradient id="gscales6404801g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#A9883A"/><stop offset=".45" stop-color="#E7D08F"/><stop offset=".6" stop-color="#CFAF58"/><stop offset="1" stop-color="#9C7B2F"/></linearGradient>
+</defs>
+<rect width="640" height="480" fill="url(#gscales6404801b)"/>
+<rect width="640" height="480" fill="url(#gscales6404801r)"/>
+<path d="M0.0 0V480M106.7 0V480M213.3 0V480M320.0 0V480M426.7 0V480M533.3 0V480M640.0 0V480M0 0.0H640M0 142.2H640M0 284.4H640M0 426.7H640" stroke="#CFAF58" stroke-width="1" opacity=".08" fill="none"/>
+<rect x="16.8" y="16.8" width="606.4" height="446.4" fill="none" stroke="#CFAF58" stroke-opacity=".28" stroke-width="1.5"/>
+<path d="M104.4 432.96000000000004V237.12A215.6 215.6 0 0 1 535.6 237.12V432.96000000000004" fill="none" stroke="#CFAF58" stroke-opacity=".18" stroke-width="1.5"/>
+<path d="M118.4 432.96000000000004V237.12A201.6 201.6 0 0 1 521.6 237.12V432.96000000000004" fill="#CFAF58" fill-opacity=".035" stroke="#CFAF58" stroke-opacity=".45" stroke-width="2"/>
+<path d="M309.92 17.52000000000001H330.08L326.4512 43.728000000000016H313.5488Z" fill="#CFAF58" fill-opacity=".9"/>
+<g transform="translate(176.0 110.4) scale(0.7200)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+<path d="M162 318h76v14h-76Z" fill="url(#gscales6404801g)" fill-opacity=".42" stroke="none"/>
+<path d="M188 82a12 12 0 1 0 24 0a12 12 0 1 0 -24 0" stroke="url(#gscales6404801g)" stroke-width="3.8500000000000005" opacity=".85"/>
+<path d="M200 92V318M138 332H262M84 136H316M84 136L52 230M84 136L116 230M316 136L284 230M316 136L348 230M44 230a40 22 0 0 0 80 0ZM276 230a40 22 0 0 0 80 0Z" stroke="url(#gscales6404801g)" stroke-width="7"/>
+</g>
+</svg>

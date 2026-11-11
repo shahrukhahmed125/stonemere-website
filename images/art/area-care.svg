@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" width="800" height="1000">
+<defs>
+<linearGradient id="gnetwork80010001b" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#26324F"/><stop offset=".55" stop-color="#1F2943"/><stop offset="1" stop-color="#121A2C"/></linearGradient>
+<radialGradient id="gnetwork80010001r" cx="0.3" cy="0.25" r="0.8"><stop offset="0" stop-color="#3A4C78" stop-opacity=".55"/><stop offset="1" stop-color="#3A4C78" stop-opacity="0"/></radialGradient>
+<linearGradient id="gnetwork80010001g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#A9883A"/><stop offset=".45" stop-color="#E7D08F"/><stop offset=".6" stop-color="#CFAF58"/><stop offset="1" stop-color="#9C7B2F"/></linearGradient>
+</defs>
+<rect width="800" height="1000" fill="url(#gnetwork80010001b)"/>
+<rect width="800" height="1000" fill="url(#gnetwork80010001r)"/>
+<path d="M0.0 0V1000M133.3 0V1000M266.7 0V1000M400.0 0V1000M533.3 0V1000M666.7 0V1000M0 0.0H800M0 177.8H800M0 355.6H800M0 533.3H800M0 711.1H800M0 888.9H800" stroke="#CFAF58" stroke-width="1" opacity=".08" fill="none"/>
+<rect x="28.000000000000004" y="28.000000000000004" width="744" height="944" fill="none" stroke="#CFAF58" stroke-opacity=".28" stroke-width="1.5"/>
+<path d="M50 797.6V471.2A350 350 0 0 1 750 471.2V797.6" fill="none" stroke="#CFAF58" stroke-opacity=".18" stroke-width="1.5"/>
+<path d="M64 797.6V471.2A336 336 0 0 1 736 471.2V797.6" fill="#CFAF58" fill-opacity=".035" stroke="#CFAF58" stroke-opacity=".45" stroke-width="2"/>
+<path d="M383.2 117.19999999999999H416.8L410.752 160.88H389.248Z" fill="#CFAF58" fill-opacity=".9"/>
+<g transform="translate(160.0 260.0) scale(1.2000)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+<path d="M185 176H215L208 216H192Z" fill="url(#gnetwork80010001g)" fill-opacity=".42" stroke="none"/>
+<path d="M200.0 150.0L200.0 82.0M243.3 175.0L302.2 141.0M243.3 225.0L302.2 259.0M200.0 250.0L200.0 318.0M156.7 225.0L97.8 259.0M156.7 175.0L97.8 141.0" stroke="url(#gnetwork80010001g)" stroke-width="3.8500000000000005" opacity=".85"/>
+<path d="M154 200a46 46 0 1 0 92 0a46 46 0 1 0 -92 0M180 60a20 20 0 1 0 40 0a20 20 0 1 0 -40 0M301.2 130a20 20 0 1 0 40 0a20 20 0 1 0 -40 0M301.2 270a20 20 0 1 0 40 0a20 20 0 1 0 -40 0M180 340a20 20 0 1 0 40 0a20 20 0 1 0 -40 0M58.8 270a20 20 0 1 0 40 0a20 20 0 1 0 -40 0M58.8 130a20 20 0 1 0 40 0a20 20 0 1 0 -40 0" stroke="url(#gnetwork80010001g)" stroke-width="7"/>
+</g>
+</svg>

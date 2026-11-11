@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480" width="640" height="480">
+<defs>
+<linearGradient id="gwindow6404802b" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#26324F"/><stop offset=".55" stop-color="#1F2943"/><stop offset="1" stop-color="#121A2C"/></linearGradient>
+<radialGradient id="gwindow6404802r" cx="0.7" cy="0.25" r="0.8"><stop offset="0" stop-color="#3A4C78" stop-opacity=".55"/><stop offset="1" stop-color="#3A4C78" stop-opacity="0"/></radialGradient>
+<linearGradient id="gwindow6404802g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#A9883A"/><stop offset=".45" stop-color="#E7D08F"/><stop offset=".6" stop-color="#CFAF58"/><stop offset="1" stop-color="#9C7B2F"/></linearGradient>
+</defs>
+<rect width="640" height="480" fill="url(#gwindow6404802b)"/>
+<rect width="640" height="480" fill="url(#gwindow6404802r)"/>
+<path d="M240 480A80 80 0 0 1 400 480M194 480A126 126 0 0 1 446 480M148 480A172 172 0 0 1 492 480M102 480A218 218 0 0 1 538 480M56 480A264 264 0 0 1 584 480M10 480A310 310 0 0 1 630 480M-36 480A356 356 0 0 1 676 480M-82 480A402 402 0 0 1 722 480M-128 480A448 448 0 0 1 768 480M-174 480A494 494 0 0 1 814 480M-220 480A540 540 0 0 1 860 480M-266 480A586 586 0 0 1 906 480M-312 480A632 632 0 0 1 952 480M-358 480A678 678 0 0 1 998 480" stroke="#CFAF58" stroke-width="1" opacity=".08" fill="none"/>
+<rect x="16.8" y="16.8" width="606.4" height="446.4" fill="none" stroke="#CFAF58" stroke-opacity=".28" stroke-width="1.5"/>
+<path d="M111.12000000000003 427.008V237.696A208.87999999999997 208.87999999999997 0 0 1 528.88 237.696V427.008" fill="none" stroke="#CFAF58" stroke-opacity=".18" stroke-width="1.5"/>
+<path d="M125.12000000000003 427.008V237.696A194.87999999999997 194.87999999999997 0 0 1 514.88 237.696V427.008" fill="#CFAF58" fill-opacity=".035" stroke="#CFAF58" stroke-opacity=".45" stroke-width="2"/>
+<path d="M310.256 24.81600000000003H329.744L326.23616000000004 50.15040000000003H313.76383999999996Z" fill="#CFAF58" fill-opacity=".9"/>
+<g transform="translate(180.8 115.2) scale(0.6960)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+<path d="M112 58h176v68H112Z" fill="url(#gwindow6404802g)" fill-opacity=".42" stroke="none"/>
+<path d="M176 330l8-36h32l8 36M200 294c-6-24-24-34-40-34M200 294c6-24 24-34 40-34M200 294V250" stroke="url(#gwindow6404802g)" stroke-width="3.8500000000000005" opacity=".85"/>
+<path d="M112 58h176v272H112ZM112 194H288M170 58V330M230 58V330M112 126H288M112 262H288M92 330H308" stroke="url(#gwindow6404802g)" stroke-width="7"/>
+</g>
+</svg>

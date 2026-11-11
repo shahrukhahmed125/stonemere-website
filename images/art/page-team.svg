@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" width="800" height="1000">
+<defs>
+<linearGradient id="gpeople280010001b" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#26324F"/><stop offset=".55" stop-color="#1F2943"/><stop offset="1" stop-color="#121A2C"/></linearGradient>
+<radialGradient id="gpeople280010001r" cx="0.7" cy="0.25" r="0.8"><stop offset="0" stop-color="#3A4C78" stop-opacity=".55"/><stop offset="1" stop-color="#3A4C78" stop-opacity="0"/></radialGradient>
+<linearGradient id="gpeople280010001g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#A9883A"/><stop offset=".45" stop-color="#E7D08F"/><stop offset=".6" stop-color="#CFAF58"/><stop offset="1" stop-color="#9C7B2F"/></linearGradient>
+</defs>
+<rect width="800" height="1000" fill="url(#gpeople280010001b)"/>
+<rect width="800" height="1000" fill="url(#gpeople280010001r)"/>
+<path d="M0.0 0V1000M133.3 0V1000M266.7 0V1000M400.0 0V1000M533.3 0V1000M666.7 0V1000M0 0.0H800M0 177.8H800M0 355.6H800M0 533.3H800M0 711.1H800M0 888.9H800" stroke="#CFAF58" stroke-width="1" opacity=".08" fill="none"/>
+<rect x="28.000000000000004" y="28.000000000000004" width="744" height="944" fill="none" stroke="#CFAF58" stroke-opacity=".28" stroke-width="1.5"/>
+<path d="M50 817.6V491.2A350 350 0 0 1 750 491.2V817.6" fill="none" stroke="#CFAF58" stroke-opacity=".18" stroke-width="1.5"/>
+<path d="M64 817.6V491.2A336 336 0 0 1 736 491.2V817.6" fill="#CFAF58" fill-opacity=".035" stroke="#CFAF58" stroke-opacity=".45" stroke-width="2"/>
+<path d="M383.2 137.2H416.8L410.752 180.88H389.248Z" fill="#CFAF58" fill-opacity=".9"/>
+<g transform="translate(160.0 280.0) scale(1.2000)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+<path d="M110 120a30 30 0 1 0 60 0a30 30 0 1 0 -60 0" fill="url(#gpeople280010001g)" fill-opacity=".42" stroke="none"/>
+<path d="M150 320C190 350 240 350 280 318M60 330H340" stroke="url(#gpeople280010001g)" stroke-width="3.8500000000000005" opacity=".85"/>
+<path d="M110 120a30 30 0 1 0 60 0a30 30 0 1 0 -60 0M82 250Q82 168 140 168Q198 168 198 250M236.5 150a25.5 25.5 0 1 0 51 0a25.5 25.5 0 1 0 -51 0M212.7 260.5Q212.7 190.8 262 190.8Q311.3 190.8 311.3 260.5" stroke="url(#gpeople280010001g)" stroke-width="7"/>
+</g>
+</svg>
