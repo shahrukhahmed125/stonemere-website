@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title','About Stonemere Life Management | Bath')
+@section('title','Stonemere Life Management | Practical coordination for care providers, solicitors &amp; health professionals in Bath')
 
 @section('css')
 

@@ -217,14 +217,14 @@
 <header class="site-header">
   <div class="site-header__inner">
     <nav class="nav nav--left" aria-label="Primary">
-      <ul role="list"><li><a class="nav__link" href="services.html"><span class="roll" data-text="Services">Services</span></a></li><li><a class="nav__link" href="professionals.html"><span class="roll" data-text="Professionals">Professionals</span></a></li><li><a class="nav__link" href="price-menu.html"><span class="roll" data-text="Price Menu">Price Menu</span></a></li></ul>
+      <ul role="list"><li><a class="nav__link" href="{{ route('services') }}" @if(request()->routeIs('services')) aria-current="page" @endif><span class="roll" data-text="Services">Services</span></a></li><li><a class="nav__link" href="{{ route('professionals') }}" @if(request()->routeIs('professionals')) aria-current="page" @endif><span class="roll" data-text="Professionals">Professionals</span></a></li><li><a class="nav__link" href="{{ route('price-menu') }}" @if(request()->routeIs('price-menu')) aria-current="page" @endif><span class="roll" data-text="Price Menu">Price Menu</span></a></li></ul>
     </nav>
-    <a class="brand" href="index.html" aria-label="Stonemere Life Management, home">
+    <a class="brand" href="{{ route('home') }}" aria-label="Stonemere Life Management, home">
       <img class="brand__logo brand__logo--light" src="{{ asset('assets/images/brand/stonemere-logo-reverse.svg') }}" width="230" height="46" alt="">
       <img class="brand__logo brand__logo--dark" src="{{ asset('assets/images/brand/stonemere-logo.svg') }}" width="230" height="46" alt="">
     </a>
     <nav class="nav nav--right" aria-label="Secondary">
-      <ul role="list"><li><a class="nav__link" href="about.html"><span class="roll" data-text="About">About</span></a></li><li><a class="nav__link" href="team.html"><span class="roll" data-text="Our Team">Our Team</span></a></li><li><a class="nav__link" href="contact.html"><span class="roll" data-text="Contact">Contact</span></a></li></ul>
+      <ul role="list"><li><a class="nav__link" href="{{ route('about') }}" @if(request()->routeIs('about')) aria-current="page" @endif><span class="roll" data-text="About">About</span></a></li><li><a class="nav__link" href="{{ route('team') }}" @if(request()->routeIs('team')) aria-current="page" @endif><span class="roll" data-text="Our Team">Our Team</span></a></li><li><a class="nav__link" href="{{ route('contact') }}" @if(request()->routeIs('contact')) aria-current="page" @endif><span class="roll" data-text="Contact">Contact</span></a></li></ul>
     </nav>
     <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="menu"><span class="menu-toggle__lines" aria-hidden="true"><span></span><span></span></span><span class="menu-toggle__text">Menu</span></button>
   </div>
@@ -234,20 +234,20 @@
     <nav class="menu__nav" aria-label="Menu">
       <p class="menu__eyebrow">Pages</p>
       <ol class="menu__list" role="list">
-        <li><a class="menu__link" href="{{ route('home') }}" data-preview="{{ asset('assets/images/art/page-about.svg') }}" aria-current="page">Home</a></li>
-        <li><a class="menu__link" href="services.html" data-preview="{{ asset('assets/images/art/page-services.svg') }}">Services</a></li>
-        <li><a class="menu__link" href="professionals.html" data-preview="{{ asset('assets/images/art/page-professionals.svg') }}">Professionals</a></li>
-        <li><a class="menu__link" href="price-menu.html" data-preview="{{ asset('assets/images/art/page-price.svg') }}">Price Menu</a></li>
-        <li><a class="menu__link" href="about.html" data-preview="{{ asset('assets/images/art/page-about.svg') }}">About</a></li>
-        <li><a class="menu__link" href="team.html" data-preview="{{ asset('assets/images/art/page-team.svg') }}">Our Team</a></li>
-        <li><a class="menu__link" href="contact.html" data-preview="{{ asset('assets/images/art/page-contact.svg') }}">Contact</a></li>
+        <li><a class="menu__link" href="{{ route('home') }}" data-preview="{{ asset('assets/images/art/page-about.svg') }}" @if(request()->routeIs('home')) aria-current="page" @endif>Home</a></li>
+        <li><a class="menu__link" href="{{ route('services') }}" data-preview="{{ asset('assets/images/art/page-services.svg') }}" @if(request()->routeIs('services')) aria-current="page" @endif>Services</a></li>
+        <li><a class="menu__link" href="{{ route('professionals') }}" data-preview="{{ asset('assets/images/art/page-professionals.svg') }}" @if(request()->routeIs('professionals')) aria-current="page" @endif>Professionals</a></li>
+        <li><a class="menu__link" href="{{ route('price-menu') }}" data-preview="{{ asset('assets/images/art/page-price.svg') }}" @if(request()->routeIs('price-menu')) aria-current="page" @endif>Price Menu</a></li>
+        <li><a class="menu__link" href="{{ route('about') }}" data-preview="{{ asset('assets/images/art/page-about.svg') }}" @if(request()->routeIs('about')) aria-current="page" @endif>About</a></li>
+        <li><a class="menu__link" href="{{ route('team') }}" data-preview="{{ asset('assets/images/art/page-team.svg') }}" @if(request()->routeIs('team')) aria-current="page" @endif>Our Team</a></li>
+        <li><a class="menu__link" href="{{ route('contact') }}" data-preview="{{ asset('assets/images/art/page-contact.svg') }}" @if(request()->routeIs('contact')) aria-current="page" @endif>Contact</a></li>
       </ol>
       <p class="menu__eyebrow">Service areas</p>
       <ul class="menu__areas" role="list">
-        <li><a href="family-client-support.html" data-preview="{{ asset('assets/images/art/area-family.svg') }}">Family &amp; Client Support</a></li>
-        <li><a href="care-professional-liaison.html" data-preview="{{ asset('assets/images/art/area-care.svg') }}">Care &amp; Professional Liaison</a></li>
-        <li><a href="property-asset-management.html" data-preview="{{ asset('assets/images/art/area-property.svg') }}">Property &amp; Asset Management</a></li>
-        <li><a href="urgent-complex-cases.html" data-preview="{{ asset('assets/images/art/area-urgent.svg') }}">Urgent &amp; Complex Case Support</a></li>
+        <li><a href="{{ route('family-client-support') }}" data-preview="{{ asset('assets/images/art/area-family.svg') }}" @if(request()->routeIs('family-client-support')) aria-current="page" @endif>Family &amp; Client Support</a></li>
+        <li><a href="{{ route('care-professional-liaison') }}" data-preview="{{ asset('assets/images/art/area-care.svg') }}" @if(request()->routeIs('care-professional-liaison')) aria-current="page" @endif>Care &amp; Professional Liaison</a></li>
+        <li><a href="{{ route('property-asset-management') }}" data-preview="{{ asset('assets/images/art/area-property.svg') }}" @if(request()->routeIs('property-asset-management')) aria-current="page" @endif>Property &amp; Asset Management</a></li>
+        <li><a href="{{ route('urgent-complex-cases') }}" data-preview="{{ asset('assets/images/art/area-urgent.svg') }}" @if(request()->routeIs('urgent-complex-cases')) aria-current="page" @endif>Urgent &amp; Complex Case Support</a></li>
       </ul>
     </nav>
     <div class="menu__side">
@@ -278,11 +278,11 @@
     </div>
     <nav class="site-footer__col" aria-label="Service areas">
       <h2 class="site-footer__title">Service areas</h2>
-      <ul role="list"><li><a href="family-client-support.html">Family &amp; Client Support</a></li><li><a href="care-professional-liaison.html">Care &amp; Professional Liaison</a></li><li><a href="property-asset-management.html">Property &amp; Asset Management</a></li><li><a href="urgent-complex-cases.html">Urgent &amp; Complex Case Support</a></li></ul>
+      <ul role="list"><li><a href="{{ route('family-client-support') }}">Family &amp; Client Support</a></li><li><a href="{{ route('care-professional-liaison') }}">Care &amp; Professional Liaison</a></li><li><a href="{{ route('property-asset-management') }}">Property &amp; Asset Management</a></li><li><a href="{{ route('urgent-complex-cases') }}">Urgent &amp; Complex Case Support</a></li></ul>
     </nav>
     <nav class="site-footer__col" aria-label="Company">
       <h2 class="site-footer__title">Stonemere</h2>
-      <ul role="list"><li><a href="services.html">Services</a></li><li><a href="professionals.html">Professionals</a></li><li><a href="price-menu.html">Price Menu</a></li><li><a href="about.html">About</a></li><li><a href="team.html">Our Team</a></li><li><a href="contact.html">Contact</a></li></ul>
+      <ul role="list"><li><a href="{{ route('services') }}">Services</a></li><li><a href="{{ route('professionals') }}">Professionals</a></li><li><a href="{{ route('price-menu') }}">Price Menu</a></li><li><a href="{{ route('about') }}">About</a></li><li><a href="{{ route('team') }}">Our Team</a></li><li><a href="{{ route('contact') }}">Contact</a></li></ul>
     </nav>
     <div class="site-footer__col">
       <h2 class="site-footer__title">Talk to us</h2>
@@ -297,8 +297,8 @@
   <div class="wrap site-footer__base">
     <p>&copy; <span data-year>2026</span> Stonemere Life Management. We coordinate practical matters; we do not provide medical treatment, nursing, regulated personal care, or legal or financial advice. If someone is in immediate danger, call 999.</p>
     <ul role="list" class="site-footer__legal">
-      <li><a href="privacy.html">Privacy</a></li>
-      <li><a href="terms.html">Terms</a></li>
+      <li><a href="{{ route('privacy') }}">Privacy</a></li>
+      <li><a href="{{ route('terms') }}">Terms</a></li>
       <li><button class="motion-toggle" type="button" aria-pressed="false">Reduce motion</button></li>
     </ul>
     <p class="credit">Designed &amp; Developed with <svg class="credit__heart" aria-hidden="true" focusable="false"><use href="#i-heart"/></svg><span class="sr">love</span> by <a href="https://xpertwebstudio.co.uk/" target="_blank" rel="noopener">Xpert Web Studios</a></p>
