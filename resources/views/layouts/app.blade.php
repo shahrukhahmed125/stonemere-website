@@ -234,7 +234,7 @@
     <nav class="menu__nav" aria-label="Menu">
       <p class="menu__eyebrow">Pages</p>
       <ol class="menu__list" role="list">
-        <li><a class="menu__link" href="index.html" data-preview="{{ asset('assets/images/art/page-about.svg') }}" aria-current="page">Home</a></li>
+        <li><a class="menu__link" href="{{ route('home') }}" data-preview="{{ asset('assets/images/art/page-about.svg') }}" aria-current="page">Home</a></li>
         <li><a class="menu__link" href="services.html" data-preview="{{ asset('assets/images/art/page-services.svg') }}">Services</a></li>
         <li><a class="menu__link" href="professionals.html" data-preview="{{ asset('assets/images/art/page-professionals.svg') }}">Professionals</a></li>
         <li><a class="menu__link" href="price-menu.html" data-preview="{{ asset('assets/images/art/page-price.svg') }}">Price Menu</a></li>
