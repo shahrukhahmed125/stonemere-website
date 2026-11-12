@@ -1,0 +1,4 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Stonemere"><title>Stonemere</title><path d="M12 60V34a20 20 0 0 1 40 0v26" fill="none" stroke="#1F2943" stroke-width="3.2" stroke-linecap="square"/>
+  <path d="M19 60V34a13 13 0 0 1 26 0v26" fill="none" stroke="#1F2943" stroke-width="1.6" stroke-opacity="0.5" stroke-linecap="square"/>
+  <path d="M8 60h13M43 60h13" stroke="#1F2943" stroke-width="3.2"/>
+  <path d="M26.2 4h11.6l-2.4 13.2h-6.8z" fill="#CFAF58"/></svg>

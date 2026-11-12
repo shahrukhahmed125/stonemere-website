@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480" width="640" height="480">
+<defs>
+<linearGradient id="gplane6404801b" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#26324F"/><stop offset=".55" stop-color="#1F2943"/><stop offset="1" stop-color="#121A2C"/></linearGradient>
+<radialGradient id="gplane6404801r" cx="0.7" cy="0.25" r="0.8"><stop offset="0" stop-color="#3A4C78" stop-opacity=".55"/><stop offset="1" stop-color="#3A4C78" stop-opacity="0"/></radialGradient>
+<linearGradient id="gplane6404801g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#A9883A"/><stop offset=".45" stop-color="#E7D08F"/><stop offset=".6" stop-color="#CFAF58"/><stop offset="1" stop-color="#9C7B2F"/></linearGradient>
+</defs>
+<rect width="640" height="480" fill="url(#gplane6404801b)"/>
+<rect width="640" height="480" fill="url(#gplane6404801r)"/>
+<path d="M0.0 0V480M106.7 0V480M213.3 0V480M320.0 0V480M426.7 0V480M533.3 0V480M640.0 0V480M0 0.0H640M0 142.2H640M0 284.4H640M0 426.7H640" stroke="#CFAF58" stroke-width="1" opacity=".08" fill="none"/>
+<rect x="16.8" y="16.8" width="606.4" height="446.4" fill="none" stroke="#CFAF58" stroke-opacity=".28" stroke-width="1.5"/>
+<path d="M111.12000000000003 427.008V237.696A208.87999999999997 208.87999999999997 0 0 1 528.88 237.696V427.008" fill="none" stroke="#CFAF58" stroke-opacity=".18" stroke-width="1.5"/>
+<path d="M125.12000000000003 427.008V237.696A194.87999999999997 194.87999999999997 0 0 1 514.88 237.696V427.008" fill="#CFAF58" fill-opacity=".035" stroke="#CFAF58" stroke-opacity=".45" stroke-width="2"/>
+<path d="M310.256 24.81600000000003H329.744L326.23616000000004 50.15040000000003H313.76383999999996Z" fill="#CFAF58" fill-opacity=".9"/>
+<g transform="translate(180.8 115.2) scale(0.6960)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+<path d="M300 70l52-16-10 16 26 22-14 4-22-14-26 16-6-8Z" fill="url(#gplane6404801g)" fill-opacity=".42" stroke="none"/>
+<path d="M272 112c22-20 44-34 66-40M226 156c10-10 22-20 34-28" stroke="url(#gplane6404801g)" stroke-width="3.8500000000000005" opacity=".85"/>
+<path d="M72 226a104 104 0 1 0 208 0a104 104 0 1 0 -208 0M72 226H280M176 122c-46 40-46 168 0 208M176 122c46 40 46 168 0 208M88 172c60 18 116 18 176 0M88 280c60-18 116-18 176 0" stroke="url(#gplane6404801g)" stroke-width="7"/>
+</g>
+</svg>

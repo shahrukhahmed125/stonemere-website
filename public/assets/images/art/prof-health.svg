@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480" width="640" height="480">
+<defs>
+<linearGradient id="gclipboard6404800b" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#26324F"/><stop offset=".55" stop-color="#1F2943"/><stop offset="1" stop-color="#121A2C"/></linearGradient>
+<radialGradient id="gclipboard6404800r" cx="0.7" cy="0.25" r="0.8"><stop offset="0" stop-color="#3A4C78" stop-opacity=".55"/><stop offset="1" stop-color="#3A4C78" stop-opacity="0"/></radialGradient>
+<linearGradient id="gclipboard6404800g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#A9883A"/><stop offset=".45" stop-color="#E7D08F"/><stop offset=".6" stop-color="#CFAF58"/><stop offset="1" stop-color="#9C7B2F"/></linearGradient>
+</defs>
+<rect width="640" height="480" fill="url(#gclipboard6404800b)"/>
+<rect width="640" height="480" fill="url(#gclipboard6404800r)"/>
+<path d="M-480 480L0 0M-446 480L34 0M-412 480L68 0M-378 480L102 0M-344 480L136 0M-310 480L170 0M-276 480L204 0M-242 480L238 0M-208 480L272 0M-174 480L306 0M-140 480L340 0M-106 480L374 0M-72 480L408 0M-38 480L442 0M-4 480L476 0M30 480L510 0M64 480L544 0M98 480L578 0M132 480L612 0M166 480L646 0M200 480L680 0M234 480L714 0M268 480L748 0M302 480L782 0M336 480L816 0M370 480L850 0M404 480L884 0M438 480L918 0M472 480L952 0M506 480L986 0M540 480L1020 0M574 480L1054 0M608 480L1088 0" stroke="#CFAF58" stroke-width="1" opacity=".07" fill="none"/>
+<rect x="16.8" y="16.8" width="606.4" height="446.4" fill="none" stroke="#CFAF58" stroke-opacity=".28" stroke-width="1.5"/>
+<path d="M104.4 432.96000000000004V237.12A215.6 215.6 0 0 1 535.6 237.12V432.96000000000004" fill="none" stroke="#CFAF58" stroke-opacity=".18" stroke-width="1.5"/>
+<path d="M118.4 432.96000000000004V237.12A201.6 201.6 0 0 1 521.6 237.12V432.96000000000004" fill="#CFAF58" fill-opacity=".035" stroke="#CFAF58" stroke-opacity=".45" stroke-width="2"/>
+<path d="M309.92 17.52000000000001H330.08L326.4512 43.728000000000016H313.5488Z" fill="#CFAF58" fill-opacity=".9"/>
+<g transform="translate(176.0 110.4) scale(0.7200)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+<path d="M168 66h64v42h-64Z" fill="url(#gclipboard6404800g)" fill-opacity=".42" stroke="none"/>
+<path d="M204 172h52M204 232h52M204 292h40" stroke="url(#gclipboard6404800g)" stroke-width="3.8500000000000005" opacity=".85"/>
+<path d="M118 88h164v268H118ZM168 66h64v42h-64ZM146 168l14 14 26-28M146 228l14 14 26-28M146 288l14 14 26-28" stroke="url(#gclipboard6404800g)" stroke-width="7"/>
+</g>
+</svg>

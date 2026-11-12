@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" width="800" height="1000">
+<defs>
+<linearGradient id="gkeystone80010002b" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#26324F"/><stop offset=".55" stop-color="#1F2943"/><stop offset="1" stop-color="#121A2C"/></linearGradient>
+<radialGradient id="gkeystone80010002r" cx="0.7" cy="0.25" r="0.8"><stop offset="0" stop-color="#3A4C78" stop-opacity=".55"/><stop offset="1" stop-color="#3A4C78" stop-opacity="0"/></radialGradient>
+<linearGradient id="gkeystone80010002g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#A9883A"/><stop offset=".45" stop-color="#E7D08F"/><stop offset=".6" stop-color="#CFAF58"/><stop offset="1" stop-color="#9C7B2F"/></linearGradient>
+</defs>
+<rect width="800" height="1000" fill="url(#gkeystone80010002b)"/>
+<rect width="800" height="1000" fill="url(#gkeystone80010002r)"/>
+<path d="M320 1000A80 80 0 0 1 480 1000M274 1000A126 126 0 0 1 526 1000M228 1000A172 172 0 0 1 572 1000M182 1000A218 218 0 0 1 618 1000M136 1000A264 264 0 0 1 664 1000M90 1000A310 310 0 0 1 710 1000M44 1000A356 356 0 0 1 756 1000M-2 1000A402 402 0 0 1 802 1000M-48 1000A448 448 0 0 1 848 1000M-94 1000A494 494 0 0 1 894 1000M-140 1000A540 540 0 0 1 940 1000M-186 1000A586 586 0 0 1 986 1000M-232 1000A632 632 0 0 1 1032 1000M-278 1000A678 678 0 0 1 1078 1000M-324 1000A724 724 0 0 1 1124 1000M-370 1000A770 770 0 0 1 1170 1000M-416 1000A816 816 0 0 1 1216 1000M-462 1000A862 862 0 0 1 1262 1000M-508 1000A908 908 0 0 1 1308 1000M-554 1000A954 954 0 0 1 1354 1000M-600 1000A1000 1000 0 0 1 1400 1000M-646 1000A1046 1046 0 0 1 1446 1000M-692 1000A1092 1092 0 0 1 1492 1000" stroke="#CFAF58" stroke-width="1" opacity=".08" fill="none"/>
+<rect x="28.000000000000004" y="28.000000000000004" width="744" height="944" fill="none" stroke="#CFAF58" stroke-opacity=".28" stroke-width="1.5"/>
+<path d="M50 817.6V491.2A350 350 0 0 1 750 491.2V817.6" fill="none" stroke="#CFAF58" stroke-opacity=".18" stroke-width="1.5"/>
+<path d="M64 817.6V491.2A336 336 0 0 1 736 491.2V817.6" fill="#CFAF58" fill-opacity=".035" stroke="#CFAF58" stroke-opacity=".45" stroke-width="2"/>
+<path d="M383.2 137.2H416.8L410.752 180.88H389.248Z" fill="#CFAF58" fill-opacity=".9"/>
+<g transform="translate(160.0 280.0) scale(1.2000)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+<path d="M178 52H222L215 110H185Z" fill="url(#gkeystone80010002g)" fill-opacity=".42" stroke="none"/>
+<path d="M140 360V250h120v110M200 250v110" stroke="url(#gkeystone80010002g)" stroke-width="3.8500000000000005" opacity=".85"/>
+<path d="M70 360V205a130 130 0 0 1 260 0v155M112 360V210a88 88 0 0 1 176 0v150M40 360H360M88 140L118 160M312 140L282 160M134 96L150 124M266 96L250 124" stroke="url(#gkeystone80010002g)" stroke-width="7"/>
+</g>
+</svg>
