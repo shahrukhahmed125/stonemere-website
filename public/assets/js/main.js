@@ -579,7 +579,24 @@
       need('area', !!d.get('area'), 'Please choose where the client lives.');
       var bad = validate(form);
       if (first || bad) { (first || bad).focus(); return; }
-      openWhatsApp(form, compose());
+      var text = compose();
+      openWhatsApp(form, text);
+      var csrf = document.querySelector('meta[name="csrf-token"]');
+      if (csrf) {
+        var ref = form.querySelector('input[name="referrer"]:checked');
+        var refLabel = ref ? ref.closest('label').textContent.trim() : null;
+        fetch('/contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json', 'X-CSRF-TOKEN': csrf.getAttribute('content') },
+          body: JSON.stringify({
+            name: d.get('name'),
+            phone: d.get('phone'),
+            organisation: d.get('organisation') || null,
+            role: refLabel ? 'Referral — ' + refLabel : 'Referral',
+            message: text
+          })
+        }).catch(function () {});
+      }
     });
   }
 
