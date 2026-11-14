@@ -1,10 +1,21 @@
 @extends('layouts.app')
-@section('title', $page?->meta_title ?: 'For Professionals | Refer a Client to Stonemere Life Management, Bath')
-@if($page?->meta_description)
-@section('meta_description', $page->meta_description)
+@section('title', $professionalsContent?->meta_title ?: ($page?->meta_title ?: 'For Professionals | Refer a Client to Stonemere Life Management, Bath'))
+@if($professionalsContent?->meta_description || $page?->meta_description)
+@section('meta_description', $professionalsContent?->meta_description ?: $page->meta_description)
 @endif
-@if($page?->canonical_url)
-@section('canonical_url', $page->canonical_url)
+@if($professionalsContent?->meta_keywords || $page?->meta_keywords)
+@section('meta_keywords', $professionalsContent?->meta_keywords ?: $page->meta_keywords)
+@endif
+@if($professionalsContent?->og_title || $page?->og_title)
+@section('og_title', $professionalsContent?->og_title ?: $page->og_title)
+@endif
+@if($professionalsContent?->og_description || $page?->og_description)
+@section('og_description', $professionalsContent?->og_description ?: $page->og_description)
+@endif
+@if($professionalsContent?->og_image)
+@section('og_image', \App\Helpers\ImageUrlHelper::resolve($professionalsContent->og_image))
+@elseif($page?->og_image)
+@section('og_image', \App\Helpers\ImageUrlHelper::resolve($page->og_image))
 @endif
 
 @section('css')
@@ -22,10 +33,10 @@
   <div class="wrap phero__grid">
     <div class="phero__text">
       <nav class="crumbs" aria-label="Breadcrumb"><ol role="list"><li><a href="{{ route('home') }}">Home</a></li><li><span aria-current="page">For professionals</span></li></ol></nav>
-      <p class="eyebrow eyebrow--light">{{ $content['hero']['eyebrow'] ?? 'For professionals' }}</p>
-      <h1 id="page-title" class="phero__title" data-split>@safeHtml($content['hero']['title'] ?? 'Hand over the practical side. <em>We follow it through.</em>')</h1>
-      <p class="phero__lead" data-reveal>{{ $content['hero']['lead'] ?? 'For care providers, solicitors, healthcare and property professionals whose clients need practical coordination beyond your core service. One named contact, a clear remit and no chasing.' }}</p>
-      <div class="actions" data-reveal><a class="btn btn--gold" href="{{ $content['hero']['cta_primary']['url'] ?? '#referral' }}" data-magnetic><span class="roll" data-text="{{ $content['hero']['cta_primary']['text'] ?? 'Build a referral' }}">{{ $content['hero']['cta_primary']['text'] ?? 'Build a referral' }}</span><svg class="i" aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg></a><a class="btn btn--line-light" href="{{ $content['hero']['cta_secondary']['url'] ?? 'tel:+441225338436' }}" data-magnetic><svg class="i" aria-hidden="true" focusable="false"><use href="#i-phone"/></svg><span class="roll" data-text="{{ $content['hero']['cta_secondary']['text'] ?? 'Call 01225 338436' }}">{{ $content['hero']['cta_secondary']['text'] ?? 'Call 01225 338436' }}</span></a></div>
+      <p class="eyebrow eyebrow--light">{{ $professionalsContent->hero_eyebrow ?? 'For professionals' }}</p>
+      <h1 id="page-title" class="phero__title" data-split>@safeHtml($professionalsContent->hero_title ?? 'Hand over the practical side. <em>We follow it through.</em>')</h1>
+      <p class="phero__lead" data-reveal>{{ $professionalsContent->hero_lead ?? 'For care providers, solicitors, healthcare and property professionals whose clients need practical coordination beyond your core service. One named contact, a clear remit and no chasing.' }}</p>
+      <div class="actions" data-reveal><a class="btn btn--gold" href="{{ $professionalsContent->hero_cta_primary_url ?? '#referral' }}" data-magnetic><span class="roll" data-text="{{ $professionalsContent->hero_cta_primary_text ?? 'Build a referral' }}">{{ $professionalsContent->hero_cta_primary_text ?? 'Build a referral' }}</span><svg class="i" aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg></a><a class="btn btn--line-light" href="{{ $professionalsContent->hero_cta_secondary_url ?? 'tel:+441225338436' }}" data-magnetic><svg class="i" aria-hidden="true" focusable="false"><use href="#i-phone"/></svg><span class="roll" data-text="{{ $professionalsContent->hero_cta_secondary_text ?? 'Call 01225 338436' }}">{{ $professionalsContent->hero_cta_secondary_text ?? 'Call 01225 338436' }}</span></a></div>
     </div>
     <figure class="phero__art" data-reveal="mask">
       <img src="{{ asset('assets/images/art/page-professionals.svg') }}" width="800" height="1000" alt="Illustration of a referral being passed between two hands, in gold line on navy" fetchpriority="high">
@@ -36,12 +47,12 @@
 <section class="remit" aria-labelledby="remit-title">
   <div class="wrap remit__grid">
     <div>
-      <p class="eyebrow">{{ $content['remit']['eyebrow'] ?? 'The remit' }}</p>
-      <h2 id="remit-title" data-split>@safeHtml($content['remit']['title'] ?? 'Where your service ends, <em>ours begins</em>')</h2>
+      <p class="eyebrow">{{ $professionalsContent->remit_eyebrow ?? 'The remit' }}</p>
+      <h2 id="remit-title" data-split>@safeHtml($professionalsContent->remit_title ?? 'Where your service ends, <em>ours begins</em>')</h2>
     </div>
     <div class="remit__body" data-reveal>
-      <p class="remit__lede">{{ $content['remit']['lede'] ?? 'Every service has edges. The practical matters just outside them, such as the empty house, the family abroad, the appointment nobody can attend or the clearance after a death, are where clients come to harm and professionals lose time.' }}</p>
-      <p>{{ $content['remit']['body'] ?? 'Stonemere takes those matters on, coordinates everyone involved and sees each one through, working alongside you and never instead of you.' }}</p>
+      <p class="remit__lede">{{ $professionalsContent->remit_lede ?? 'Every service has edges. The practical matters just outside them, such as the empty house, the family abroad, the appointment nobody can attend or the clearance after a death, are where clients come to harm and professionals lose time.' }}</p>
+      <p>{{ $professionalsContent->remit_body ?? 'Stonemere takes those matters on, coordinates everyone involved and sees each one through, working alongside you and never instead of you.' }}</p>
     </div>
   </div>
 </section>
@@ -73,21 +84,21 @@
 <section class="builder-wrap" id="referral" aria-labelledby="builder-title">
   <div class="wrap">
     <div class="builder-wrap__head">
-      <p class="eyebrow eyebrow--light">{{ $content['builder']['eyebrow'] ?? 'Referral builder' }}</p>
-      <h2 id="builder-title" data-split>@safeHtml($content['builder']['title'] ?? 'Build a referral <em>in two minutes</em>')</h2>
-      <p>{{ $content['builder']['intro'] ?? 'Choose what applies and your message writes itself. It opens in WhatsApp for you to check and send.' }}</p>
+      <p class="eyebrow eyebrow--light">{{ $professionalsContent->builder_eyebrow ?? 'Referral builder' }}</p>
+      <h2 id="builder-title" data-split>@safeHtml($professionalsContent->builder_title ?? 'Build a referral <em>in two minutes</em>')</h2>
+      <p>{{ $professionalsContent->builder_intro ?? 'Choose what applies and your message writes itself. It opens in WhatsApp for you to check and send.' }}</p>
     </div>
     <form class="builder" data-wa-form="referral" novalidate aria-labelledby="builder-title">
   <div class="builder__steps">
     <fieldset class="builder__step">
       <legend><span class="builder__n">1</span> You are referring as</legend>
-      <div class="chips">@foreach($content['builder']['referrer_options'] ?? [] as $opt)<label class="chip"><input type="radio" name="referrer" value="{{ $opt['value'] }}" required><span>{{ $opt['label'] }}</span></label>@endforeach</div>
+      <div class="chips">@foreach($professionalsContent->builder_referrer_options ?? [] as $opt)<label class="chip"><input type="radio" name="referrer" value="{{ $opt['value'] }}" required><span>{{ $opt['label'] }}</span></label>@endforeach</div>
       <p class="field__error" data-error="referrer" aria-live="polite"></p>
     </fieldset>
     <fieldset class="builder__step">
       <legend><span class="builder__n">2</span> What the client needs <span class="builder__hint">(choose any)</span></legend>
       <div class="builder__groups">
-        @foreach($content['builder']['needs_groups'] ?? [] as $group)
+        @foreach($professionalsContent->builder_needs_groups ?? [] as $group)
         <div><p class="builder__group">@safeHtml($group['label'])</p><div class="chips">@foreach($group['options'] ?? [] as $opt)<label class="chip"><input type="checkbox" name="needs" value="{{ $opt['value'] }}"><span>{{ $opt['label'] }}</span></label>@endforeach</div></div>
         @endforeach
       </div>
@@ -95,12 +106,12 @@
     </fieldset>
     <fieldset class="builder__step">
       <legend><span class="builder__n">3</span> How soon</legend>
-      <div class="chips">@foreach($content['builder']['urgency_options'] ?? [] as $opt)<label class="chip"><input type="radio" name="urgency" value="{{ $opt['value'] }}" required><span>{{ $opt['label'] }}</span></label>@endforeach</div>
+      <div class="chips">@foreach($professionalsContent->builder_urgency_options ?? [] as $opt)<label class="chip"><input type="radio" name="urgency" value="{{ $opt['value'] }}" required><span>{{ $opt['label'] }}</span></label>@endforeach</div>
       <p class="field__error" data-error="urgency" aria-live="polite"></p>
     </fieldset>
     <fieldset class="builder__step">
       <legend><span class="builder__n">4</span> Where the client lives</legend>
-      <div class="chips">@foreach($content['builder']['area_options'] ?? [] as $opt)<label class="chip"><input type="radio" name="area" value="{{ $opt['value'] }}" required><span>@safeHtml($opt['label'])</span></label>@endforeach</div>
+      <div class="chips">@foreach($professionalsContent->builder_area_options ?? [] as $opt)<label class="chip"><input type="radio" name="area" value="{{ $opt['value'] }}" required><span>@safeHtml($opt['label'])</span></label>@endforeach</div>
       <p class="field__error" data-error="area" aria-live="polite"></p>
     </fieldset>
     <fieldset class="builder__step builder__step--fields">
@@ -157,11 +168,11 @@
 <section class="questions" aria-labelledby="pfaq-title">
   <div class="wrap questions__grid">
     <div class="questions__head">
-      <p class="eyebrow">{{ $content['faqs']['eyebrow'] ?? 'Questions' }}</p>
-      <h2 id="pfaq-title" data-split>@safeHtml($content['faqs']['title'] ?? 'What referrers <em>ask first</em>')</h2>
+      <p class="eyebrow">{{ $professionalsContent->faqs_eyebrow ?? 'Questions' }}</p>
+      <h2 id="pfaq-title" data-split>@safeHtml($professionalsContent->faqs_title ?? 'What referrers <em>ask first</em>')</h2>
     </div>
     <div class="faq" data-faq>
-      @foreach($content['faqs']['items'] ?? [] as $index => $faq)
+      @foreach($professionalsContent->faqs_items ?? [] as $index => $faq)
       <div class="faq__item">
         <h3 class="faq__q"><button type="button" aria-expanded="false" aria-controls="pfaq-a{{ $index }}" id="pfaq-q{{ $index }}">{{ $faq['question'] ?? '' }}<span class="faq__icon" aria-hidden="true"></span></button></h3>
         <div class="faq__a" id="pfaq-a{{ $index }}" role="region" aria-labelledby="pfaq-q{{ $index }}"><div class="faq__inner"><p>@safeHtml($faq['answer'] ?? '')</p></div></div>
@@ -174,13 +185,13 @@
 <section class="cta-band" aria-labelledby="cta-band-title">
   <div class="wrap cta-band__inner">
     <div>
-      <p class="eyebrow">{{ $content['cta']['eyebrow'] ?? 'Next step' }}</p>
-      <h2 id="cta-band-title" data-split>@safeHtml($content['cta']['title'] ?? 'Prefer to talk it through?')</h2>
-      <p>{{ $content['cta']['text'] ?? 'Call 01225 338436 or message us. Outline the situation and we will tell you straight away whether we can help.' }}</p>
+      <p class="eyebrow">{{ $professionalsContent->cta_eyebrow ?? 'Next step' }}</p>
+      <h2 id="cta-band-title" data-split>@safeHtml($professionalsContent->cta_title ?? 'Prefer to talk it through?')</h2>
+      <p>{{ $professionalsContent->cta_text ?? 'Call 01225 338436 or message us. Outline the situation and we will tell you straight away whether we can help.' }}</p>
     </div>
     <div class="actions actions--stack">
-      <a class="btn btn--gold" href="{{ $content['cta']['button_primary']['url'] ?? 'https://wa.me/447891341414?text=Hello%20Stonemere%2C%20I%20am%20a%20professional%20and%20would%20like%20to%20discuss%20a%20possible%20referral.' }}" target="_blank" rel="noopener" data-magnetic><svg class="i" aria-hidden="true" focusable="false"><use href="#i-whatsapp"/></svg><span class="roll" data-text="{{ $content['cta']['button_primary']['text'] ?? 'Message on WhatsApp' }}">{{ $content['cta']['button_primary']['text'] ?? 'Message on WhatsApp' }}</span></a>
-      <a class="btn btn--line" href="{{ $content['cta']['button_secondary']['url'] ?? 'tel:+441225338436' }}" data-magnetic><svg class="i" aria-hidden="true" focusable="false"><use href="#i-phone"/></svg><span class="roll" data-text="{{ $content['cta']['button_secondary']['text'] ?? 'Call 01225 338436' }}">{{ $content['cta']['button_secondary']['text'] ?? 'Call 01225 338436' }}</span></a>
+      <a class="btn btn--gold" href="{{ $professionalsContent->cta_button_primary_url ?? 'https://wa.me/447891341414?text=Hello%20Stonemere%2C%20I%20am%20a%20professional%20and%20would%20like%20to%20discuss%20a%20possible%20referral.' }}" target="_blank" rel="noopener" data-magnetic><svg class="i" aria-hidden="true" focusable="false"><use href="#i-whatsapp"/></svg><span class="roll" data-text="{{ $professionalsContent->cta_button_primary_text ?? 'Message on WhatsApp' }}">{{ $professionalsContent->cta_button_primary_text ?? 'Message on WhatsApp' }}</span></a>
+      <a class="btn btn--line" href="{{ $professionalsContent->cta_button_secondary_url ?? 'tel:+441225338436' }}" data-magnetic><svg class="i" aria-hidden="true" focusable="false"><use href="#i-phone"/></svg><span class="roll" data-text="{{ $professionalsContent->cta_button_secondary_text ?? 'Call 01225 338436' }}">{{ $professionalsContent->cta_button_secondary_text ?? 'Call 01225 338436' }}</span></a>
     </div>
   </div>
 </section>

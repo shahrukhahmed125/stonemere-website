@@ -29,6 +29,7 @@ class WebsiteController extends Controller
         return view('pages.home', [
             'page' => $page,
             'content' => $page?->content ?? [],
+            'homeContent' => $this->contentOrNull(\App\Models\HomepageContent::class),
             'membershipLevels' => $membershipLevels,
             'faqItems' => $faqItems,
         ]);
@@ -44,6 +45,7 @@ class WebsiteController extends Controller
         return view('pages.about', [
             'page' => $page,
             'content' => $page?->content ?? [],
+            'aboutContent' => $this->contentOrNull(\App\Models\AboutContent::class),
         ]);
     }
 
@@ -57,6 +59,7 @@ class WebsiteController extends Controller
         return view('pages.contact', [
             'page' => $page,
             'content' => $page?->content ?? [],
+            'contactContent' => $this->contentOrNull(\App\Models\ContactContent::class),
         ]);
     }
 
@@ -77,6 +80,7 @@ class WebsiteController extends Controller
         return view('pages.team', [
             'page' => $page,
             'content' => $page?->content ?? [],
+            'teamContent' => $this->contentOrNull(\App\Models\TeamContent::class),
             'teamMembers' => $teamMembers,
         ]);
     }
@@ -98,6 +102,7 @@ class WebsiteController extends Controller
         return view('pages.professionals', [
             'page' => $page,
             'content' => $page?->content ?? [],
+            'professionalsContent' => $this->contentOrNull(\App\Models\ProfessionalsContent::class),
             'audiences' => $audiences,
         ]);
     }
@@ -117,7 +122,7 @@ class WebsiteController extends Controller
         }
 
         try {
-            $servicesContent = \App\Models\ServicesContent::current();
+            $servicesContent = $this->contentOrNull(\App\Models\ServicesContent::class);
         } catch (\Exception $e) {
             $servicesContent = null;
         }
@@ -153,6 +158,7 @@ class WebsiteController extends Controller
         return view('pages.price-menu', [
             'page' => $page,
             'content' => $page?->content ?? [],
+            'priceMenuContent' => $this->contentOrNull(\App\Models\PriceMenuContent::class),
             'membershipLevels' => $membershipLevels,
             'pricingItems' => $pricingItems,
         ]);
@@ -164,6 +170,15 @@ class WebsiteController extends Controller
             return \App\Models\ServiceArea::where('slug', $slug)
                 ->with(['services' => fn ($q) => $q->published()->ordered(), 'scenarios' => fn ($q) => $q->ordered(), 'timelineItems' => fn ($q) => $q->ordered(), 'checkItems' => fn ($q) => $q->ordered(), 'faqs' => fn ($q) => $q->ordered(), 'callFlowItems' => fn ($q) => $q->ordered()])
                 ->first();
+        } catch (\Exception $e) {
+            return null;
+        }
+    }
+
+    private function contentOrNull(string $class)
+    {
+        try {
+            return $class::current();
         } catch (\Exception $e) {
             return null;
         }
@@ -220,6 +235,7 @@ class WebsiteController extends Controller
         return view('pages.privacy', [
             'page' => $page,
             'content' => $page?->content ?? [],
+            'privacyContent' => $this->contentOrNull(\App\Models\PrivacyContent::class),
         ]);
     }
 
@@ -233,6 +249,7 @@ class WebsiteController extends Controller
         return view('pages.terms', [
             'page' => $page,
             'content' => $page?->content ?? [],
+            'termsContent' => $this->contentOrNull(\App\Models\TermsContent::class),
         ]);
     }
 

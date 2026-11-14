@@ -1,10 +1,21 @@
 @extends('layouts.app')
-@section('title', $page?->meta_title ?: 'Contact Stonemere Life Management | Call 01225 338436 | Bath')
-@if($page?->meta_description)
-@section('meta_description', $page->meta_description)
+@section('title', $contactContent?->meta_title ?: ($page?->meta_title ?: 'Contact Stonemere Life Management | Call 01225 338436 | Bath'))
+@if($contactContent?->meta_description || $page?->meta_description)
+@section('meta_description', $contactContent?->meta_description ?: $page->meta_description)
 @endif
-@if($page?->canonical_url)
-@section('canonical_url', $page->canonical_url)
+@if($contactContent?->meta_keywords || $page?->meta_keywords)
+@section('meta_keywords', $contactContent?->meta_keywords ?: $page->meta_keywords)
+@endif
+@if($contactContent?->og_title || $page?->og_title)
+@section('og_title', $contactContent?->og_title ?: $page->og_title)
+@endif
+@if($contactContent?->og_description || $page?->og_description)
+@section('og_description', $contactContent?->og_description ?: $page->og_description)
+@endif
+@if($contactContent?->og_image)
+@section('og_image', \App\Helpers\ImageUrlHelper::resolve($contactContent->og_image))
+@elseif($page?->og_image)
+@section('og_image', \App\Helpers\ImageUrlHelper::resolve($page->og_image))
 @endif
 
 @section('css')
@@ -18,18 +29,18 @@
   <div class="wrap contact-hero__grid">
     <div class="contact-hero__copy">
       <nav class="crumbs" aria-label="Breadcrumb"><ol role="list"><li><a href="{{ route('home') }}">Home</a></li><li><span aria-current="page">Contact</span></li></ol></nav>
-      <p class="eyebrow eyebrow--light">{{ $content['hero']['eyebrow'] ?? 'Contact' }}</p>
-      <h1 id="page-title" class="phero__title" data-split>@safeHtml($content['hero']['title'] ?? 'Talk to <em>Stonemere</em>')</h1>
-      <p class="phero__lead" data-reveal>{{ $content['hero']['lead'] ?? 'Message, call or send the form. Tell us who you are and, in outline, what is needed.' }}</p>
+      <p class="eyebrow eyebrow--light">{{ $contactContent->hero_eyebrow ?? 'Contact' }}</p>
+      <h1 id="page-title" class="phero__title" data-split>@safeHtml($contactContent->hero_title ?? 'Talk to <em>Stonemere</em>')</h1>
+      <p class="phero__lead" data-reveal>{{ $contactContent->hero_lead ?? 'Message, call or send the form. Tell us who you are and, in outline, what is needed.' }}</p>
       <ul class="routes" role="list">
-        <li data-reveal><a class="route" href="https://wa.me/{{ $settings_whatsapp_tel }}?text=Hello%20Stonemere%2C%20I%20would%20like%20to%20talk%20about%20some%20support." target="_blank" rel="noopener" data-cursor="Message"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-whatsapp"/></svg><span class="route__label">{{ $content['routes']['whatsapp_label'] ?? 'WhatsApp' }}</span><span class="route__value">{{ $settings_whatsapp }}</span></a></li>
-        <li data-reveal><a class="route" href="tel:{{ $settings_phone_tel }}" data-cursor="Call"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-phone"/></svg><span class="route__label">{{ $content['routes']['phone_label'] ?? 'Call' }}</span><span class="route__value">{{ $settings_phone }}</span></a></li>
+        <li data-reveal><a class="route" href="https://wa.me/{{ $settings_whatsapp_tel }}?text=Hello%20Stonemere%2C%20I%20would%20like%20to%20talk%20about%20some%20support." target="_blank" rel="noopener" data-cursor="Message"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-whatsapp"/></svg><span class="route__label">{{ $contactContent->routes_whatsapp_label ?? 'WhatsApp' }}</span><span class="route__value">{{ $settings_whatsapp }}</span></a></li>
+        <li data-reveal><a class="route" href="tel:{{ $settings_phone_tel }}" data-cursor="Call"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-phone"/></svg><span class="route__label">{{ $contactContent->routes_phone_label ?? 'Call' }}</span><span class="route__value">{{ $settings_phone }}</span></a></li>
         @if($settings_email)
         <li data-reveal><a class="route" href="mailto:{{ $settings_email }}"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-mail"/></svg><span class="route__label">Email</span><span class="route__value">{{ $settings_email }}</span></a></li>
         @endif
-        <li data-reveal><span class="route route--static"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-pin"/></svg><span class="route__label">{{ $content['routes']['area_label'] ?? 'Area' }}</span><span class="route__value">{{ $settings_address }}</span></span></li>
+        <li data-reveal><span class="route route--static"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-pin"/></svg><span class="route__label">{{ $contactContent->routes_area_label ?? 'Area' }}</span><span class="route__value">{{ $settings_address }}</span></span></li>
       </ul>
-      <p class="contact-hero__pro">{{ $content['referral']['prefix'] ?? 'Referring a client?' }} <a class="tlink" href="{{ route('professionals') }}#referral">{{ $content['referral']['link_text'] ?? 'Use the referral builder' }}<svg class="i" aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg></a></p>
+      <p class="contact-hero__pro">{{ $contactContent->referral_prefix ?? 'Referring a client?' }} <a class="tlink" href="{{ route('professionals') }}#referral">{{ $contactContent->referral_link_text ?? 'Use the referral builder' }}<svg class="i" aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg></a></p>
     </div>
     <div class="contact-hero__form">
       <form class="form form--dark" data-wa-form="enquiry" novalidate aria-labelledby="ct-form-title">
@@ -59,8 +70,8 @@
       </div>
       <div class="field field--select">
         <select id="ct-role" name="role" required aria-describedby="ct-role-error">
-          <option value="" selected disabled>{{ $content['form']['role_placeholder'] ?? 'Choose one' }}</option>
-          @foreach($content['form']['role_options'] ?? [] as $role)
+          <option value="" selected disabled>{{ $contactContent->form_role_placeholder ?? 'Choose one' }}</option>
+          @foreach($contactContent->form_role_options ?? [] as $role)
           <option value="{{ $role['value'] ?? $role }}">{{ $role['label'] ?? $role }}</option>
           @endforeach
         </select>

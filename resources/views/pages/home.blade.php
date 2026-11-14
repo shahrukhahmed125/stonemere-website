@@ -1,16 +1,20 @@
 @extends('layouts.app')
-@section('title', $page?->meta_title ?? 'Stonemere Life Management | Practical coordination for care providers, solicitors & health professionals in Bath')
-@section('meta_description', $page?->meta_description ?? 'One named contact who coordinates the practical side of a client’s life in Bath: family liaison, care liaison, property and urgent cases.')
-@if($page?->meta_keywords)
-@section('meta_keywords', $page->meta_keywords)
+@section('title', $homeContent?->meta_title ?: ($page?->meta_title ?: 'Stonemere Life Management | Practical coordination for care providers, solicitors & health professionals in Bath'))
+@if($homeContent?->meta_description || $page?->meta_description)
+@section('meta_description', $homeContent?->meta_description ?: $page->meta_description)
 @endif
-@if($page?->og_title)
-@section('og_title', $page->og_title)
+@if($homeContent?->meta_keywords || $page?->meta_keywords)
+@section('meta_keywords', $homeContent?->meta_keywords ?: $page->meta_keywords)
 @endif
-@if($page?->og_description)
-@section('og_description', $page->og_description)
+@if($homeContent?->og_title || $page?->og_title)
+@section('og_title', $homeContent?->og_title ?: $page->og_title)
 @endif
-@if($page?->og_image)
+@if($homeContent?->og_description || $page?->og_description)
+@section('og_description', $homeContent?->og_description ?: $page->og_description)
+@endif
+@if($homeContent?->og_image)
+@section('og_image', \App\Helpers\ImageUrlHelper::resolve($homeContent->og_image))
+@elseif($page?->og_image)
 @section('og_image', \App\Helpers\ImageUrlHelper::resolve($page->og_image))
 @endif
 
@@ -21,22 +25,21 @@
 @section('content')
 
 @php
-$content = $content ?? [];
-$hero = $content['hero'] ?? [];
-$strap = $content['strap'] ?? [];
-$statement = $content['statement'] ?? [];
-$keystone = $content['keystone'] ?? [];
-$track = $content['track'] ?? [];
-$refer = $content['refer'] ?? [];
-$mapper = $content['mapper'] ?? [];
-$steps = $content['steps'] ?? [];
-$bounds = $content['bounds'] ?? [];
-$standards = $content['standards'] ?? [];
-$where = $content['where'] ?? [];
-$lead = $content['lead'] ?? [];
-$tiers = $content['tiers'] ?? [];
-$questions = $content['questions'] ?? [];
-$contact = $content['contact'] ?? [];
+$hero = $homeContent?->hero ?? [];
+$strap = $homeContent?->strap ?? [];
+$statement = $homeContent?->statement ?? [];
+$keystone = $homeContent?->keystone ?? [];
+$track = $homeContent?->track ?? [];
+$refer = $homeContent?->refer ?? [];
+$mapper = $homeContent?->mapper ?? [];
+$steps = $homeContent?->steps ?? [];
+$bounds = $homeContent?->bounds ?? [];
+$standards = $homeContent?->standards ?? [];
+$where = $homeContent?->where ?? [];
+$lead = $homeContent?->lead ?? [];
+$tiers = $homeContent?->tiers ?? [];
+$questions = $homeContent?->questions ?? [];
+$contact = $homeContent?->contact ?? [];
 @endphp
 
 <main id="main" tabindex="-1">

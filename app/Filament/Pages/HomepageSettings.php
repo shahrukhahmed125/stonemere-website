@@ -2,7 +2,7 @@
 
 namespace App\Filament\Pages;
 
-use App\Models\Page;
+use App\Models\HomepageContent;
 use App\Rules\SafeUrl;
 use BackedEnum;
 use Filament\Actions\Action;
@@ -33,20 +33,17 @@ class HomepageSettings extends FilamentPage
 
     public function mount(): void
     {
-        $page = $this->getRecord();
+        $record = $this->getRecord();
 
-        if ($page) {
-            $this->form->fill([
-                'title' => $page->title,
-                'meta_title' => $page->meta_title,
-                'meta_description' => $page->meta_description,
-                'meta_keywords' => $page->meta_keywords,
-                'og_title' => $page->og_title,
-                'og_description' => $page->og_description,
-                'og_image' => $page->og_image,
-                'content' => $page->content ?? [],
-            ]);
-        }
+        $this->form->fill([
+            'meta_title' => $record->meta_title,
+            'meta_description' => $record->meta_description,
+            'meta_keywords' => $record->meta_keywords,
+            'og_title' => $record->og_title,
+            'og_description' => $record->og_description,
+            'og_image' => $record->og_image,
+            'content' => $record->toContentArray(),
+        ]);
     }
 
     public function form(Schema $schema): Schema
@@ -680,33 +677,29 @@ class HomepageSettings extends FilamentPage
     {
         $data = $this->form->getState();
 
-        $page = $this->getRecord();
+        $record = $this->getRecord();
 
-        if ($page) {
-            $page->update([
+        $record->fill(array_merge(
+            $record->attributesToContentColumns($data['content'] ?? []),
+            [
                 'meta_title' => $data['meta_title'],
                 'meta_description' => $data['meta_description'],
                 'meta_keywords' => $data['meta_keywords'] ?? null,
                 'og_title' => $data['og_title'] ?? null,
                 'og_description' => $data['og_description'] ?? null,
                 'og_image' => $data['og_image'] ?? null,
-                'content' => $data['content'],
-            ]);
+            ]
+        ));
+        $record->save();
 
-            Notification::make()
-                ->success()
-                ->title('Homepage content saved successfully')
-                ->send();
-        } else {
-            Notification::make()
-                ->danger()
-                ->title('Homepage page not found')
-                ->send();
-        }
+        Notification::make()
+            ->success()
+            ->title('Homepage content saved successfully')
+            ->send();
     }
 
-    public function getRecord(): ?Page
+    public function getRecord(): HomepageContent
     {
-        return Page::where('slug', 'home')->first();
+        return HomepageContent::current();
     }
 }

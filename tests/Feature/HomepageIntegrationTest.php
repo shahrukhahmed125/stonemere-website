@@ -30,23 +30,13 @@ class HomepageIntegrationTest extends TestCase
      */
     public function test_homepage_uses_database_content(): void
     {
-        // Create test page with content
-        $page = Page::create([
-            'title' => 'Home',
-            'slug' => 'home',
-            'template_key' => 'home',
-            'content' => [
-                'hero' => [
-                    'title' => 'Test Hero Title',
-                    'lead' => 'Test lead text',
-                    'cta_primary' => [
-                        'text' => 'Test CTA',
-                        'url' => '/test',
-                    ],
-                ],
-            ],
-            'is_published' => true,
-        ]);
+        // Update homepage content record
+        $content = \App\Models\HomepageContent::current();
+        $content->hero_title = 'Test Hero Title';
+        $content->hero_lead = 'Test lead text';
+        $content->hero_cta_primary_text = 'Test CTA';
+        $content->hero_cta_primary_url = '/test';
+        $content->save();
 
         $response = $this->get('/');
         $response->assertStatus(200);
