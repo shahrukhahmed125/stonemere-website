@@ -36,7 +36,12 @@ class ImageUrlHelper
 
         // If it's a storage path (homepage/cards/...), use Storage::url()
         // This assumes files are stored in storage/app/public/
-        if (str_starts_with($path, 'homepage/')) {
+        if (str_starts_with($path, 'homepage/') || str_starts_with($path, 'branding/')) {
+            return Storage::disk('public')->url($path);
+        }
+
+        // If the file exists on the public disk (uploaded via FileUpload), use Storage::url()
+        if (Storage::disk('public')->exists($path)) {
             return Storage::disk('public')->url($path);
         }
 

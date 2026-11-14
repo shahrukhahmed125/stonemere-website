@@ -35,7 +35,7 @@
 <meta name="twitter:image" content="https://www.stonemeremanagement.com/images/og-image.jpg">
 @endif
 <link rel="icon" href="favicon.ico" sizes="48x48">
-<link rel="icon" href="{{ asset('assets/images/favicon.svg') }}" type="image/svg+xml">
+<link rel="icon" href="{{ $settings_logos['favicon'] ?? asset('assets/images/favicon.svg') }}" type="image/svg+xml">
 <link rel="icon" href="{{ asset('assets/images/favicon-32.png') }}" type="image/png" sizes="32x32">
 <link rel="icon" href="{{ asset('assets/images/favicon-16.png') }}" type="image/png" sizes="16x16">
 <link rel="apple-touch-icon" href="{{ asset('assets/images/apple-touch-icon.png') }}">
@@ -135,8 +135,8 @@ if ($ldFaqs->isNotEmpty()) {
       <ul role="list"><li><a class="nav__link" href="{{ route('services') }}" @if(request()->routeIs('services')) aria-current="page" @endif><span class="roll" data-text="Services">Services</span></a></li><li><a class="nav__link" href="{{ route('professionals') }}" @if(request()->routeIs('professionals')) aria-current="page" @endif><span class="roll" data-text="Professionals">Professionals</span></a></li><li><a class="nav__link" href="{{ route('price-menu') }}" @if(request()->routeIs('price-menu')) aria-current="page" @endif><span class="roll" data-text="Price Menu">Price Menu</span></a></li></ul>
     </nav>
     <a class="brand" href="{{ route('home') }}" aria-label="{{ $settings_company_name }}, home">
-      <img class="brand__logo brand__logo--light" src="{{ asset('assets/images/brand/stonemere-logo-reverse.svg') }}" width="230" height="46" alt="">
-      <img class="brand__logo brand__logo--dark" src="{{ asset('assets/images/brand/stonemere-logo.svg') }}" width="230" height="46" alt="">
+      <img class="brand__logo brand__logo--light" src="{{ $settings_logos['light'] ?? asset('assets/images/brand/stonemere-logo-reverse.svg') }}" width="230" height="46" alt="">
+      <img class="brand__logo brand__logo--dark" src="{{ $settings_logos['dark'] ?? asset('assets/images/brand/stonemere-logo.svg') }}" width="230" height="46" alt="">
     </a>
     <nav class="nav nav--right" aria-label="Secondary">
       <ul role="list"><li><a class="nav__link" href="{{ route('about') }}" @if(request()->routeIs('about')) aria-current="page" @endif><span class="roll" data-text="About">About</span></a></li><li><a class="nav__link" href="{{ route('team') }}" @if(request()->routeIs('team')) aria-current="page" @endif><span class="roll" data-text="Our Team">Our Team</span></a></li><li><a class="nav__link" href="{{ route('contact') }}" @if(request()->routeIs('contact')) aria-current="page" @endif><span class="roll" data-text="Contact">Contact</span></a></li></ul>
@@ -188,7 +188,7 @@ if ($ldFaqs->isNotEmpty()) {
   </div>
   <div class="wrap site-footer__grid">
     <div class="site-footer__brand">
-      <img src="{{ asset('assets/images/brand/stonemere-logo-stacked-reverse.svg') }}" width="220" height="210" alt="{{ $settings_company_name }}" loading="lazy">
+      <img src="{{ $settings_logos['stacked_reverse'] ?? asset('assets/images/brand/stonemere-logo-stacked-reverse.svg') }}" width="220" height="210" alt="{{ $settings_company_name }}" loading="lazy">
       <p>{{ $settings_tagline ?: 'Practical coordination for the clients of care providers, solicitors, healthcare and property professionals, and for their families. Bath and Bath & North East Somerset.' }}</p>
     </div>
     <nav class="site-footer__col" aria-label="Service areas">

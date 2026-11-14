@@ -2,6 +2,8 @@
 
 namespace App\Providers\Filament;
 
+use App\Helpers\ImageUrlHelper;
+use App\Models\SiteSettings;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -21,13 +23,27 @@ class AdminPanelProvider extends PanelProvider
 {
     public function panel(Panel $panel): Panel
     {
+        $logo = null;
+        $companyName = 'Stonemere Life Management';
+
+        try {
+            $settings = SiteSettings::getSettings();
+            $logo = !empty($settings->logo_light)
+                ? ImageUrlHelper::resolve($settings->logo_light)
+                : null;
+            $companyName = $settings->company_name ?: $companyName;
+        } catch (\Throwable $e) {
+            // Database may not be available (e.g. during installation/migrations)
+        }
+
         return $panel
             ->default()
             ->id('admin')
             ->path('admin')
             ->login()
-            ->brandName('Stonemere Life Management')
-            ->brandLogo(asset('assets/images/brand/stonemere-logo.svg'))
+            ->profile()
+            ->brandName($companyName)
+            ->brandLogo($logo ?? asset('assets/images/brand/stonemere-logo.svg'))
             ->brandLogoHeight('2.5rem')
             ->colors([
                 'primary' => Color::Amber,

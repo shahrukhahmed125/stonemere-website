@@ -22,6 +22,12 @@ class SiteSettingsComposer
         if (!$settings) {
             // Provide fallback values when settings are not available
             $view->with('settings', null);
+            $view->with('settings_logos', [
+                'light' => null,
+                'dark' => null,
+                'stacked_reverse' => null,
+                'favicon' => null,
+            ]);
             $view->with('settings_phone', '01225 338436');
             $view->with('settings_phone_tel', '+441225338436');
             $view->with('settings_whatsapp', '07891 341414');
@@ -84,5 +90,13 @@ class SiteSettingsComposer
         $view->with('settings_meta_description', $settings->default_meta_description ?? 'One named contact who coordinates the practical side of a client’s life in Bath: family liaison, care liaison, property and urgent cases, alongside care providers, solicitors and health teams.');
         $view->with('settings_og_image', $settings->default_og_image ?? '');
         $view->with('settings_twitter_image', $settings->default_twitter_image ?? '');
+
+        // Logo images (uploaded files or legacy asset paths), resolved to URLs
+        $view->with('settings_logos', [
+            'light' => !empty($settings->logo_light) ? \App\Helpers\ImageUrlHelper::resolve($settings->logo_light) : null,
+            'dark' => !empty($settings->logo_dark) ? \App\Helpers\ImageUrlHelper::resolve($settings->logo_dark) : null,
+            'stacked_reverse' => !empty($settings->logo_stacked_reverse) ? \App\Helpers\ImageUrlHelper::resolve($settings->logo_stacked_reverse) : null,
+            'favicon' => !empty($settings->favicon) ? \App\Helpers\ImageUrlHelper::resolve($settings->favicon) : null,
+        ]);
     }
 }
