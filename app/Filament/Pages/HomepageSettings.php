@@ -4,9 +4,18 @@ namespace App\Filament\Pages;
 
 use App\Models\Page;
 use App\Rules\SafeUrl;
+use BackedEnum;
+use Filament\Actions\Action;
 use Filament\Forms;
+use Filament\Forms\Components\FileUpload;
+use Filament\Notifications\Notification;
 use Filament\Pages\Page as FilamentPage;
+use Filament\Schemas\Components\Actions as SchemaActions;
+use Filament\Schemas\Components\Form;
+use Filament\Schemas\Components\Grid;
+use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
+use UnitEnum;
 
 class HomepageSettings extends FilamentPage
 {
@@ -14,9 +23,9 @@ class HomepageSettings extends FilamentPage
 
     protected static ?int $navigationSort = 0;
 
-    protected static string | \UnitEnum | null $navigationGroup = 'Website Settings';
+    protected static string | UnitEnum | null $navigationGroup = 'Website Settings';
 
-    protected static string | \BackedEnum | null $navigationIcon = 'heroicon-o-home';
+    protected static string | BackedEnum | null $navigationIcon = 'heroicon-o-home';
 
     protected string $view = 'filament.pages.homepage-settings';
 
@@ -24,13 +33,17 @@ class HomepageSettings extends FilamentPage
 
     public function mount(): void
     {
-        $page = Page::where('slug', 'home')->first();
-        
+        $page = $this->getRecord();
+
         if ($page) {
             $this->form->fill([
                 'title' => $page->title,
                 'meta_title' => $page->meta_title,
                 'meta_description' => $page->meta_description,
+                'meta_keywords' => $page->meta_keywords,
+                'og_title' => $page->og_title,
+                'og_description' => $page->og_description,
+                'og_image' => $page->og_image,
                 'content' => $page->content ?? [],
             ]);
         }
@@ -39,20 +52,47 @@ class HomepageSettings extends FilamentPage
     public function form(Schema $schema): Schema
     {
         return $schema
-            ->schema([
-                \Filament\Schemas\Components\Section::make('SEO Settings')
+            ->components([
+                Form::make([
+                Section::make('Search Engine Optimization (SEO) & Social Sharing')
+                    ->description('Manage how this page appears on Google search results and social media cards.')
                     ->schema([
                         Forms\Components\TextInput::make('meta_title')
                             ->label('Meta Title')
                             ->maxLength(255)
-                            ->helperText('Page title for search engines'),
+                            ->helperText('Recommended length: 50-60 characters'),
+                        Forms\Components\TextInput::make('meta_keywords')
+                            ->label('Meta Keywords')
+                            ->maxLength(255),
                         Forms\Components\Textarea::make('meta_description')
                             ->label('Meta Description')
                             ->rows(3)
-                            ->helperText('Page description for search engines'),
-                    ]),
+                            ->maxLength(500)
+                            ->helperText('Recommended length: 150-160 characters'),
+                        Forms\Components\TextInput::make('og_title')
+                            ->label('Social Share Title (OG / Twitter)')
+                            ->maxLength(255)
+                            ->helperText('Leave blank to use the Meta Title'),
+                        FileUpload::make('og_image')
+                            ->label('Social Share Image (OG Image)')
+                            ->image()
+                            ->acceptedFileTypes(['image/png', 'image/jpeg', 'image/webp'])
+                            ->disk('public')
+                            ->directory('seo')
+                            ->visibility('public')
+                            ->maxSize(4096)
+                            ->helperText('Recommended size: 1200x630 pixels'),
+                        Forms\Components\Textarea::make('og_description')
+                            ->label('Social Share Description (OG / Twitter)')
+                            ->rows(2)
+                            ->maxLength(500)
+                            ->helperText('Leave blank to use the Meta Description')
+                            ->columnSpanFull(),
+                    ])
+                    ->columns(2)
+                    ->columnSpanFull(),
 
-                \Filament\Schemas\Components\Section::make('Hero Section')
+                Section::make('Hero Section')
                     ->schema([
                         Forms\Components\TextInput::make('content.hero.title')
                             ->label('Hero Title')
@@ -64,7 +104,7 @@ class HomepageSettings extends FilamentPage
                             ->required()
                             ->rows(3)
                             ->maxLength(1000),
-                        \Filament\Schemas\Components\Grid::make(2)
+                        Grid::make(2)
                             ->schema([
                                 Forms\Components\TextInput::make('content.hero.cta_primary.text')
                                     ->label('Primary CTA Text')
@@ -87,7 +127,7 @@ class HomepageSettings extends FilamentPage
                             ]),
                     ]),
 
-                \Filament\Schemas\Components\Section::make('Strap Section')
+                Section::make('Strap Section')
                     ->schema([
                         Forms\Components\Textarea::make('content.strap.text')
                             ->label('Marquee Text')
@@ -97,7 +137,7 @@ class HomepageSettings extends FilamentPage
                             ->helperText('Use ◆ for separators'),
                     ]),
 
-                \Filament\Schemas\Components\Section::make('Statement Section')
+                Section::make('Statement Section')
                     ->schema([
                         Forms\Components\TextInput::make('content.statement.eyebrow')
                             ->label('Eyebrow Text')
@@ -110,17 +150,16 @@ class HomepageSettings extends FilamentPage
                             ->helperText('Supports HTML (e.g., <em> for italic)'),
                         Forms\Components\Repeater::make('content.statement.paragraphs')
                             ->label('Paragraphs')
-                            ->schema([
+                            ->simple(
                                 Forms\Components\Textarea::make('text')
                                     ->label('Paragraph')
                                     ->required()
                                     ->rows(3)
-                                    ->maxLength(1000),
-                            ])
-                            ->columns(1)
+                                    ->maxLength(1000)
+                            )
                             ->defaultItems(2)
                             ->addActionLabel('Add Paragraph'),
-                        \Filament\Schemas\Components\Grid::make(2)
+                        Grid::make(2)
                             ->schema([
                                 Forms\Components\TextInput::make('content.statement.link_text')
                                     ->label('Link Text')
@@ -134,7 +173,7 @@ class HomepageSettings extends FilamentPage
                             ]),
                     ]),
 
-                \Filament\Schemas\Components\Section::make('Keystone Section')
+                Section::make('Keystone Section')
                     ->schema([
                         Forms\Components\TextInput::make('content.keystone.eyebrow')
                             ->label('Eyebrow Text')
@@ -159,7 +198,7 @@ class HomepageSettings extends FilamentPage
                             ->addActionLabel('Add Caption'),
                     ]),
 
-                \Filament\Schemas\Components\Section::make('Track Section (Service Cards)')
+                Section::make('Track Section (Service Cards)')
                     ->schema([
                         Forms\Components\TextInput::make('content.track.eyebrow')
                             ->label('Eyebrow Text')
@@ -175,7 +214,7 @@ class HomepageSettings extends FilamentPage
                             ->required()
                             ->rows(2)
                             ->maxLength(500),
-                        \Filament\Schemas\Components\Grid::make(2)
+                        Grid::make(2)
                             ->schema([
                                 Forms\Components\TextInput::make('content.track.link_text')
                                     ->label('Link Text')
@@ -190,7 +229,7 @@ class HomepageSettings extends FilamentPage
                         Forms\Components\Repeater::make('content.track.cards')
                             ->label('Service Cards')
                             ->schema([
-                                \Filament\Schemas\Components\Grid::make(2)
+                                Grid::make(2)
                                     ->schema([
                                         Forms\Components\TextInput::make('number')
                                             ->label('Number')
@@ -227,13 +266,12 @@ class HomepageSettings extends FilamentPage
                                     ->maxLength(500),
                                 Forms\Components\Repeater::make('items')
                                     ->label('List Items')
-                                    ->schema([
+                                    ->simple(
                                         Forms\Components\TextInput::make('text')
                                             ->label('Item')
                                             ->required()
-                                            ->maxLength(255),
-                                    ])
-                                    ->columns(1)
+                                            ->maxLength(255)
+                                    )
                                     ->defaultItems(4)
                                     ->addActionLabel('Add Item'),
                             ])
@@ -244,7 +282,7 @@ class HomepageSettings extends FilamentPage
                             ->collapsible(),
                     ]),
 
-                \Filament\Schemas\Components\Section::make('Refer Section (Audience Cards)')
+                Section::make('Refer Section (Audience Cards)')
                     ->schema([
                         Forms\Components\TextInput::make('content.refer.eyebrow')
                             ->label('Eyebrow Text')
@@ -258,7 +296,7 @@ class HomepageSettings extends FilamentPage
                         Forms\Components\Repeater::make('content.refer.cards')
                             ->label('Audience Cards')
                             ->schema([
-                                \Filament\Schemas\Components\Grid::make(2)
+                                Grid::make(2)
                                     ->schema([
                                         Forms\Components\TextInput::make('number')
                                             ->label('Number')
@@ -288,7 +326,7 @@ class HomepageSettings extends FilamentPage
                                     ->required()
                                     ->rows(3)
                                     ->maxLength(1000),
-                                \Filament\Schemas\Components\Grid::make(2)
+                                Grid::make(2)
                                     ->schema([
                                         Forms\Components\TextInput::make('link_text')
                                             ->label('Link Text')
@@ -308,7 +346,7 @@ class HomepageSettings extends FilamentPage
                             ->collapsible(),
                     ]),
 
-                \Filament\Schemas\Components\Section::make('Mapper Section')
+                Section::make('Mapper Section')
                     ->schema([
                         Forms\Components\TextInput::make('content.mapper.eyebrow')
                             ->label('Eyebrow Text')
@@ -329,7 +367,7 @@ class HomepageSettings extends FilamentPage
                             ->required()
                             ->maxLength(255)
                             ->helperText('Text after the number (e.g., "parties selected...")'),
-                        \Filament\Schemas\Components\Grid::make(2)
+                        Grid::make(2)
                             ->schema([
                                 Forms\Components\TextInput::make('content.mapper.cta_text')
                                     ->label('CTA Button Text')
@@ -343,7 +381,7 @@ class HomepageSettings extends FilamentPage
                             ]),
                     ]),
 
-                \Filament\Schemas\Components\Section::make('Steps Section')
+                Section::make('Steps Section')
                     ->schema([
                         Forms\Components\TextInput::make('content.steps.eyebrow')
                             ->label('Eyebrow Text')
@@ -359,7 +397,7 @@ class HomepageSettings extends FilamentPage
                             ->required()
                             ->rows(2)
                             ->maxLength(500),
-                        \Filament\Schemas\Components\Grid::make(2)
+                        Grid::make(2)
                             ->schema([
                                 Forms\Components\TextInput::make('content.steps.button_text')
                                     ->label('Button Text')
@@ -374,7 +412,7 @@ class HomepageSettings extends FilamentPage
                         Forms\Components\Repeater::make('content.steps.steps')
                             ->label('Steps')
                             ->schema([
-                                \Filament\Schemas\Components\Grid::make(2)
+                                Grid::make(2)
                                     ->schema([
                                         Forms\Components\TextInput::make('number')
                                             ->label('Number')
@@ -397,9 +435,9 @@ class HomepageSettings extends FilamentPage
                             ->reorderable(),
                     ]),
 
-                \Filament\Schemas\Components\Section::make('Bounds Section')
+                Section::make('Bounds Section')
                     ->schema([
-                        \Filament\Schemas\Components\Grid::make(2)
+                        Grid::make(2)
                             ->schema([
                                 Forms\Components\TextInput::make('content.bounds.do.label')
                                     ->label('"We Do" Label')
@@ -432,7 +470,7 @@ class HomepageSettings extends FilamentPage
                             ]),
                     ]),
 
-                \Filament\Schemas\Components\Section::make('Standards Section')
+                Section::make('Standards Section')
                     ->schema([
                         Forms\Components\TextInput::make('content.standards.title')
                             ->label('Title')
@@ -465,7 +503,7 @@ class HomepageSettings extends FilamentPage
                             ->reorderable(),
                     ]),
 
-                \Filament\Schemas\Components\Section::make('Where Section')
+                Section::make('Where Section')
                     ->schema([
                         Forms\Components\TextInput::make('content.where.eyebrow')
                             ->label('Eyebrow Text')
@@ -498,7 +536,7 @@ class HomepageSettings extends FilamentPage
                             ->addActionLabel('Add Figure'),
                     ]),
 
-                \Filament\Schemas\Components\Section::make('Lead Section')
+                Section::make('Lead Section')
                     ->schema([
                         Forms\Components\TextInput::make('content.lead.eyebrow')
                             ->label('Eyebrow Text')
@@ -514,7 +552,7 @@ class HomepageSettings extends FilamentPage
                             ->required()
                             ->rows(3)
                             ->maxLength(1000),
-                        \Filament\Schemas\Components\Grid::make(2)
+                        Grid::make(2)
                             ->schema([
                                 Forms\Components\TextInput::make('content.lead.button_primary.text')
                                     ->label('Primary Button Text')
@@ -537,7 +575,7 @@ class HomepageSettings extends FilamentPage
                             ]),
                     ]),
 
-                \Filament\Schemas\Components\Section::make('Tiers Section')
+                Section::make('Tiers Section')
                     ->schema([
                         Forms\Components\TextInput::make('content.tiers.eyebrow')
                             ->label('Eyebrow Text')
@@ -553,7 +591,7 @@ class HomepageSettings extends FilamentPage
                             ->required()
                             ->rows(3)
                             ->maxLength(1000),
-                        \Filament\Schemas\Components\Grid::make(2)
+                        Grid::make(2)
                             ->schema([
                                 Forms\Components\TextInput::make('content.tiers.link_text')
                                     ->label('Link Text')
@@ -567,7 +605,7 @@ class HomepageSettings extends FilamentPage
                             ]),
                     ]),
 
-                \Filament\Schemas\Components\Section::make('Questions Section')
+                Section::make('Questions Section')
                     ->schema([
                         Forms\Components\TextInput::make('content.questions.eyebrow')
                             ->label('Eyebrow Text')
@@ -585,7 +623,7 @@ class HomepageSettings extends FilamentPage
                             ->maxLength(500),
                     ]),
 
-                \Filament\Schemas\Components\Section::make('Contact Block Section')
+                Section::make('Contact Block Section')
                     ->schema([
                         Forms\Components\TextInput::make('content.contact.eyebrow')
                             ->label('Eyebrow Text')
@@ -600,7 +638,7 @@ class HomepageSettings extends FilamentPage
                             ->required()
                             ->rows(3)
                             ->maxLength(1000),
-                        \Filament\Schemas\Components\Grid::make(2)
+                        Grid::make(2)
                             ->schema([
                                 Forms\Components\TextInput::make('content.contact.office_bath.label')
                                     ->label('Bath Office Label')
@@ -624,6 +662,16 @@ class HomepageSettings extends FilamentPage
                                     ->maxLength(50),
                             ]),
                     ]),
+                ])
+                    ->livewireSubmitHandler('save')
+                    ->footer([
+                        SchemaActions::make([
+                            Action::make('save')
+                                ->label('Save Content')
+                                ->submit('save')
+                                ->keyBindings(['mod+s']),
+                        ]),
+                    ]),
             ])
             ->statePath('data');
     }
@@ -631,20 +679,34 @@ class HomepageSettings extends FilamentPage
     public function save(): void
     {
         $data = $this->form->getState();
-        
-        $page = Page::where('slug', 'home')->first();
-        
+
+        $page = $this->getRecord();
+
         if ($page) {
             $page->update([
-                'title' => $data['title'],
                 'meta_title' => $data['meta_title'],
                 'meta_description' => $data['meta_description'],
+                'meta_keywords' => $data['meta_keywords'] ?? null,
+                'og_title' => $data['og_title'] ?? null,
+                'og_description' => $data['og_description'] ?? null,
+                'og_image' => $data['og_image'] ?? null,
                 'content' => $data['content'],
             ]);
-            
-            $this->notify('success', 'Homepage settings saved successfully.');
+
+            Notification::make()
+                ->success()
+                ->title('Homepage content saved successfully')
+                ->send();
         } else {
-            $this->notify('danger', 'Homepage page not found.');
+            Notification::make()
+                ->danger()
+                ->title('Homepage page not found')
+                ->send();
         }
+    }
+
+    public function getRecord(): ?Page
+    {
+        return Page::where('slug', 'home')->first();
     }
 }

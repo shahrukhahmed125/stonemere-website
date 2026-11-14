@@ -18,22 +18,14 @@
 <meta property="og:title" content="@yield('og_title', $settings_meta_title)">
 <meta property="og:description" content="@yield('og_description', $settings_meta_description)">
 <meta property="og:url" content="@yield('og_url', url()->current())">
-@if($settings_og_image)
-<meta property="og:image" content="{{ $settings_og_image }}">
-@else
-<meta property="og:image" content="https://www.stonemeremanagement.com/images/og-image.jpg">
-@endif
+<meta property="og:image" content="@yield('og_image', $settings_og_image ?: 'https://www.stonemeremanagement.com/images/og-image.jpg')">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="{{ $settings_company_name }}, Bath">
 <meta name="twitter:card" content="@yield('twitter_card', 'summary_large_image')">
 <meta name="twitter:title" content="@yield('twitter_title', $settings_meta_title)">
 <meta name="twitter:description" content="@yield('twitter_description', $settings_meta_description)">
-@if($settings_twitter_image)
-<meta name="twitter:image" content="{{ $settings_twitter_image }}">
-@else
-<meta name="twitter:image" content="https://www.stonemeremanagement.com/images/og-image.jpg">
-@endif
+<meta name="twitter:image" content="@yield('twitter_image', $settings_twitter_image ?: 'https://www.stonemeremanagement.com/images/og-image.jpg')">
 <link rel="icon" href="favicon.ico" sizes="48x48">
 <link rel="icon" href="{{ $settings_logos['favicon'] ?? asset('assets/images/favicon.svg') }}" type="image/svg+xml">
 <link rel="icon" href="{{ asset('assets/images/favicon-32.png') }}" type="image/png" sizes="32x32">

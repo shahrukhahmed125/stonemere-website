@@ -1,6 +1,18 @@
 @extends('layouts.app')
 @section('title', $page?->meta_title ?? 'Stonemere Life Management | Practical coordination for care providers, solicitors & health professionals in Bath')
 @section('meta_description', $page?->meta_description ?? 'One named contact who coordinates the practical side of a client’s life in Bath: family liaison, care liaison, property and urgent cases.')
+@if($page?->meta_keywords)
+@section('meta_keywords', $page->meta_keywords)
+@endif
+@if($page?->og_title)
+@section('og_title', $page->og_title)
+@endif
+@if($page?->og_description)
+@section('og_description', $page->og_description)
+@endif
+@if($page?->og_image)
+@section('og_image', \App\Helpers\ImageUrlHelper::resolve($page->og_image))
+@endif
 
 @section('css')
 
