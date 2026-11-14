@@ -115,11 +115,18 @@ class WebsiteController extends Controller
         } catch (\Exception $e) {
             $serviceAreas = collect();
         }
-        
+
+        try {
+            $servicesContent = \App\Models\ServicesContent::current();
+        } catch (\Exception $e) {
+            $servicesContent = null;
+        }
+
         return view('pages.services', [
             'page' => $page,
             'content' => $page?->content ?? [],
             'serviceAreas' => $serviceAreas,
+            'servicesContent' => $servicesContent,
         ]);
     }
     
