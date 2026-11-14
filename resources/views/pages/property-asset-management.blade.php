@@ -30,7 +30,7 @@
       <nav class="crumbs" aria-label="Breadcrumb"><ol role="list"><li><a href="{{ route('home') }}">Home</a></li><li><a href="{{ route('services') }}">Services</a></li><li><span aria-current="page">Service area {{ str_pad($serviceArea?->number ?? 3, 2, '0', STR_PAD_LEFT) }}</span></li></ol></nav>
       <p class="eyebrow eyebrow--light">Service area {{ str_pad($serviceArea?->number ?? 3, 2, '0', STR_PAD_LEFT) }}</p>
       <h1 id="page-title" class="phero__title" data-split>@safeHtml($serviceArea?->name ?? 'Property &amp; Asset <em>Management</em>')</h1>
-      <p class="phero__lead" data-reveal>{{ $serviceArea?->page_content['lead'] ?? $serviceArea?->short_description ?? 'Homes and possessions looked after, prepared and, when the time comes, cleared or sold, with executors, attorneys and families kept informed.' }}</p>
+      <p class="phero__lead" data-reveal>{{ $serviceArea?->hero_lead ?? $serviceArea?->short_description ?? 'Homes and possessions looked after, prepared and, when the time comes, cleared or sold, with executors, attorneys and families kept informed.' }}</p>
       <div class="actions" data-reveal><a class="btn btn--gold" href="https://wa.me/447891341414?text=Hello%20Stonemere%2C%20I%20would%20like%20to%20ask%20about%20Property%20%26%20Asset%20Management." target="_blank" rel="noopener" data-magnetic><svg class="i" aria-hidden="true" focusable="false"><use href="#i-whatsapp"/></svg><span class="roll" data-text="Ask about this area">Ask about this area</span></a><a class="btn btn--line-light" href="tel:+441225338436" data-magnetic><svg class="i" aria-hidden="true" focusable="false"><use href="#i-phone"/></svg><span class="roll" data-text="Call 01225 338436">Call 01225 338436</span></a></div>
     </div>
     <figure class="phero__art" data-reveal="mask">
@@ -90,10 +90,10 @@
   <div class="wrap questions__grid">
     <div class="questions__head"><p class="eyebrow">Questions</p><h2 id="afaq-title" data-split>Good to <em>know</em></h2></div>
     <div class="faq" data-faq>
-      @foreach($serviceArea?->page_content['faqs'] ?? [] as $index => $faq)
+      @foreach($serviceArea?->faqs ?? [] as $index => $faq)
       <div class="faq__item">
-        <h3 class="faq__q"><button type="button" aria-expanded="false" aria-controls="afaq-a{{ $index }}" id="afaq-q{{ $index }}">{{ $faq['question'] ?? '' }}<span class="faq__icon" aria-hidden="true"></span></button></h3>
-        <div class="faq__a" id="afaq-a{{ $index }}" role="region" aria-labelledby="afaq-q{{ $index }}"><div class="faq__inner"><p>@safeHtml($faq['answer'] ?? '')</p></div></div>
+        <h3 class="faq__q"><button type="button" aria-expanded="false" aria-controls="afaq-a{{ $index }}" id="afaq-q{{ $index }}">{{ $faq->question ?? '' }}<span class="faq__icon" aria-hidden="true"></span></button></h3>
+        <div class="faq__a" id="afaq-a{{ $index }}" role="region" aria-labelledby="afaq-q{{ $index }}"><div class="faq__inner"><p>@safeHtml($faq->answer ?? '')</p></div></div>
       </div>
       @endforeach
 </div>

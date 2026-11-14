@@ -30,7 +30,7 @@
       <nav class="crumbs" aria-label="Breadcrumb"><ol role="list"><li><a href="{{ route('home') }}">Home</a></li><li><a href="{{ route('services') }}">Services</a></li><li><span aria-current="page">Service area {{ str_pad($serviceArea?->number ?? 4, 2, '0', STR_PAD_LEFT) }}</span></li></ol></nav>
       <p class="eyebrow eyebrow--light">Service area {{ str_pad($serviceArea?->number ?? 4, 2, '0', STR_PAD_LEFT) }}</p>
       <h1 id="page-title" class="phero__title" data-split>@safeHtml($serviceArea?->name ?? 'Urgent &amp; Complex <em>Case Support</em>')</h1>
-      <p class="phero__lead" data-reveal>{{ $serviceArea?->page_content['lead'] ?? $serviceArea?->short_description ?? 'A calm, capable response when something happens suddenly, or when a case needs more coordination than one organisation can give.' }}</p>
+      <p class="phero__lead" data-reveal>{{ $serviceArea?->hero_lead ?? $serviceArea?->short_description ?? 'A calm, capable response when something happens suddenly, or when a case needs more coordination than one organisation can give.' }}</p>
       <div class="actions" data-reveal><a class="btn btn--gold" href="https://wa.me/447891341414?text=Hello%20Stonemere%2C%20I%20would%20like%20to%20ask%20about%20Urgent%20%26%20Complex%20Case%20Support." target="_blank" rel="noopener" data-magnetic><svg class="i" aria-hidden="true" focusable="false"><use href="#i-whatsapp"/></svg><span class="roll" data-text="Ask about this area">Ask about this area</span></a><a class="btn btn--line-light" href="tel:+441225338436" data-magnetic><svg class="i" aria-hidden="true" focusable="false"><use href="#i-phone"/></svg><span class="roll" data-text="Call 01225 338436">Call 01225 338436</span></a></div>
     </div>
     <figure class="phero__art" data-reveal="mask">
@@ -61,8 +61,8 @@
       <h2 id="cf-title" data-split>What happens <em>when you call</em></h2>
     </div>
     <ol class="callflow__list" role="list">
-      @foreach($serviceArea?->page_content['callflow'] ?? [] as $index => $step)
-      <li data-reveal><span class="callflow__n">{{ $index + 1 }}</span><h3>{{ $step['title'] ?? '' }}</h3><p>@safeHtml($step['description'] ?? '')</p></li>
+      @foreach($serviceArea?->callFlowItems ?? [] as $index => $step)
+      <li data-reveal><span class="callflow__n">{{ $index + 1 }}</span><h3>{{ $step->title ?? '' }}</h3><p>@safeHtml($step->description ?? '')</p></li>
       @endforeach
     </ol>
     <p class="callflow__note"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-phone"/></svg>If someone is in immediate danger, call 999 first.</p>
@@ -89,10 +89,10 @@
   <div class="wrap questions__grid">
     <div class="questions__head"><p class="eyebrow">Questions</p><h2 id="afaq-title" data-split>Good to <em>know</em></h2></div>
     <div class="faq" data-faq>
-      @foreach($serviceArea?->page_content['faqs'] ?? [] as $index => $faq)
+      @foreach($serviceArea?->faqs ?? [] as $index => $faq)
       <div class="faq__item">
-        <h3 class="faq__q"><button type="button" aria-expanded="false" aria-controls="afaq-a{{ $index }}" id="afaq-q{{ $index }}">{{ $faq['question'] ?? '' }}<span class="faq__icon" aria-hidden="true"></span></button></h3>
-        <div class="faq__a" id="afaq-a{{ $index }}" role="region" aria-labelledby="afaq-q{{ $index }}"><div class="faq__inner"><p>@safeHtml($faq['answer'] ?? '')</p></div></div>
+        <h3 class="faq__q"><button type="button" aria-expanded="false" aria-controls="afaq-a{{ $index }}" id="afaq-q{{ $index }}">{{ $faq->question ?? '' }}<span class="faq__icon" aria-hidden="true"></span></button></h3>
+        <div class="faq__a" id="afaq-a{{ $index }}" role="region" aria-labelledby="afaq-q{{ $index }}"><div class="faq__inner"><p>@safeHtml($faq->answer ?? '')</p></div></div>
       </div>
       @endforeach
 </div>

@@ -14,14 +14,13 @@ class ServiceArea extends Model
         'slug',
         'number',
         'short_description',
+        'hero_lead',
         'hero_image',
-        'page_content',
         'sort_order',
         'is_published',
     ];
 
     protected $casts = [
-        'page_content' => 'array',
         'is_published' => 'boolean',
     ];
 
@@ -55,6 +54,22 @@ class ServiceArea extends Model
     public function checkItems()
     {
         return $this->hasMany(VacantPropertyCheckItem::class);
+    }
+
+    /**
+     * Get the FAQ items for the service area.
+     */
+    public function faqs()
+    {
+        return $this->hasMany(ServiceAreaFaqItem::class)->ordered();
+    }
+
+    /**
+     * Get the call flow items for the service area.
+     */
+    public function callFlowItems()
+    {
+        return $this->hasMany(ServiceAreaCallFlowItem::class)->ordered();
     }
 
     /**

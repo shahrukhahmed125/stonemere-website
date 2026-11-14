@@ -162,7 +162,7 @@ class WebsiteController extends Controller
     {
         try {
             return \App\Models\ServiceArea::where('slug', $slug)
-                ->with(['services' => fn ($q) => $q->published()->ordered(), 'scenarios' => fn ($q) => $q->ordered(), 'timelineItems' => fn ($q) => $q->ordered(), 'checkItems' => fn ($q) => $q->ordered()])
+                ->with(['services' => fn ($q) => $q->published()->ordered(), 'scenarios' => fn ($q) => $q->ordered(), 'timelineItems' => fn ($q) => $q->ordered(), 'checkItems' => fn ($q) => $q->ordered(), 'faqs' => fn ($q) => $q->ordered(), 'callFlowItems' => fn ($q) => $q->ordered()])
                 ->first();
         } catch (\Exception $e) {
             return null;

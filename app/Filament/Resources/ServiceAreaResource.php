@@ -12,6 +12,8 @@ use App\Filament\Resources\ServiceAreaResource\RelationManagers\ServicesRelation
 use App\Filament\Resources\ServiceAreaResource\RelationManagers\ServiceScenariosRelationManager;
 use App\Filament\Resources\ServiceAreaResource\RelationManagers\TimelineItemsRelationManager;
 use App\Filament\Resources\ServiceAreaResource\RelationManagers\CheckItemsRelationManager;
+use App\Filament\Resources\ServiceAreaResource\RelationManagers\FaqItemsRelationManager;
+use App\Filament\Resources\ServiceAreaResource\RelationManagers\CallFlowItemsRelationManager;
 
 class ServiceAreaResource extends Resource
 {
@@ -65,12 +67,12 @@ class ServiceAreaResource extends Resource
 
                 \Filament\Schemas\Components\Section::make('Page Content')
                     ->schema([
-                        Forms\Components\Textarea::make('page_content_json')
-                            ->label('Page Content (JSON)')
-                            ->rows(14)
+                        Forms\Components\Textarea::make('hero_lead')
+                            ->label('Hero Lead')
+                            ->rows(3)
+                            ->maxLength(1000)
                             ->columnSpanFull()
-                            ->dehydrated(false)
-                            ->helperText('JSON structure powering this page (lead, faqs, callflow). Edit carefully — invalid JSON will be rejected on save.'),
+                            ->helperText('Intro paragraph shown under the page heading'),
                     ]),
             ]);
     }
@@ -135,6 +137,8 @@ class ServiceAreaResource extends Resource
             ServiceScenariosRelationManager::class,
             TimelineItemsRelationManager::class,
             CheckItemsRelationManager::class,
+            FaqItemsRelationManager::class,
+            CallFlowItemsRelationManager::class,
         ];
     }
 
