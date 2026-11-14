@@ -1,5 +1,17 @@
 @extends('layouts.app')
-@section('title','Care &amp; Professional Liaison, Hospital Discharge Support Bath | Stonemere')
+@section('title', $page?->meta_title ?: 'Care & Professional Liaison, Hospital Discharge Support Bath | Stonemere')
+@if($page?->meta_description)
+@section('meta_description', $page->meta_description)
+@endif
+@if($page?->canonical_url)
+@section('canonical_url', $page->canonical_url)
+@endif
+@if($page?->meta_description)
+@section('meta_description', $page->meta_description)
+@endif
+@if($page?->canonical_url)
+@section('canonical_url', $page->canonical_url)
+@endif
 
 @section('css')
 
@@ -15,14 +27,14 @@
   </div>
   <div class="wrap phero__grid">
     <div class="phero__text">
-      <nav class="crumbs" aria-label="Breadcrumb"><ol role="list"><li><a href="index.html">Home</a></li><li><a href="services.html">Services</a></li><li><span aria-current="page">Service area 02</span></li></ol></nav>
-      <p class="eyebrow eyebrow--light">Service area 02</p>
-      <h1 id="page-title" class="phero__title" data-split>Care &amp; Professional <em>Liaison</em></h1>
-      <p class="phero__lead" data-reveal>The coordinating link between the client, their family and the professionals around them, so nothing falls between organisations.</p>
+      <nav class="crumbs" aria-label="Breadcrumb"><ol role="list"><li><a href="{{ route('home') }}">Home</a></li><li><a href="{{ route('services') }}">Services</a></li><li><span aria-current="page">Service area {{ str_pad($serviceArea?->number ?? 2, 2, '0', STR_PAD_LEFT) }}</span></li></ol></nav>
+      <p class="eyebrow eyebrow--light">Service area {{ str_pad($serviceArea?->number ?? 2, 2, '0', STR_PAD_LEFT) }}</p>
+      <h1 id="page-title" class="phero__title" data-split>@safeHtml($serviceArea?->name ?? 'Care &amp; Professional <em>Liaison</em>')</h1>
+      <p class="phero__lead" data-reveal>{{ $serviceArea?->page_content['lead'] ?? $serviceArea?->short_description ?? 'The coordinating link between the client, their family and the professionals around them, so nothing falls between organisations.' }}</p>
       <div class="actions" data-reveal><a class="btn btn--gold" href="https://wa.me/447891341414?text=Hello%20Stonemere%2C%20I%20would%20like%20to%20ask%20about%20Care%20%26%20Professional%20Liaison." target="_blank" rel="noopener" data-magnetic><svg class="i" aria-hidden="true" focusable="false"><use href="#i-whatsapp"/></svg><span class="roll" data-text="Ask about this area">Ask about this area</span></a><a class="btn btn--line-light" href="tel:+441225338436" data-magnetic><svg class="i" aria-hidden="true" focusable="false"><use href="#i-phone"/></svg><span class="roll" data-text="Call 01225 338436">Call 01225 338436</span></a></div>
     </div>
     <figure class="phero__art" data-reveal="mask">
-      <img src="{{ asset('assets/images/art/area-care.svg') }}" width="800" height="1000" alt="Illustration for Care &amp; Professional Liaison, in gold line on navy" fetchpriority="high">
+      <img src="{{ \App\Helpers\ImageUrlHelper::resolve($serviceArea?->hero_image ?? 'assets/images/art/area-care.svg') }}" width="800" height="1000" alt="Illustration for {{ $serviceArea?->name ?? 'Care & Professional Liaison' }}, in gold line on navy" fetchpriority="high">
     </figure>
   </div>
 </section>
@@ -31,14 +43,13 @@
   <div class="wrap svc__grid">
     <div class="svc__head">
       <p class="eyebrow">What this covers</p>
-      <h2 id="svc-title" data-split>4 services, <em>one contact</em></h2>
+      <h2 id="svc-title" data-split>{{ $serviceArea?->services?->count() ?? 4 }} services, <em>one contact</em></h2>
       <p>Each one can be arranged on its own or as part of ongoing support.</p>
     </div>
     <ol class="svc__list" role="list">
-      <li class="svc__item" data-reveal><span class="svc__n">01</span><div><h3>Case management</h3><p>Ongoing coordination of a client&rsquo;s practical affairs, with one person holding the whole picture.</p></div></li>
-      <li class="svc__item" data-reveal><span class="svc__n">02</span><div><h3>Health and care coordination</h3><p>Keeping appointments, services and information joined up between health teams, care providers and family.</p></div></li>
-      <li class="svc__item" data-reveal><span class="svc__n">03</span><div><h3>Liaison with domiciliary care providers</h3><p>A practical partner for the care company: we pick up what sits outside the care plan and keep communication flowing.</p></div></li>
-      <li class="svc__item" data-reveal><span class="svc__n">04</span><div><h3>Attendance at appointments</h3><p>We attend hospital, medical, solicitor and other professional appointments with or on behalf of the client, as agreed.</p></div></li>
+      @foreach($serviceArea?->services ?? [] as $index => $service)
+      <li class="svc__item" data-reveal><span class="svc__n">{{ str_pad($index + 1, 2, '0', STR_PAD_LEFT) }}</span><div><h3>@safeHtml($service->title)</h3><p>{{ $service->description }}</p></div></li>
+      @endforeach
     </ol>
   </div>
 </section>
@@ -50,14 +61,14 @@
       <h2 id="tl-title" data-split>Coming home, <em>properly prepared</em></h2>
     </div>
     <div class="tabs" role="tablist" aria-label="Hospital discharge stages">
-      <button class="tab" role="tab" id="tab-before" aria-controls="panel-before" aria-selected="true">Before discharge</button>
-      <button class="tab" role="tab" id="tab-day" aria-controls="panel-day" aria-selected="false" tabindex="-1">On the day</button>
-      <button class="tab" role="tab" id="tab-after" aria-controls="panel-after" aria-selected="false" tabindex="-1">The weeks after</button>
+      @foreach($serviceArea?->timelineItems ?? [] as $index => $tab)
+      <button class="tab" role="tab" id="{{ $tab->tab_id ?? 'tab-'.$index }}" aria-controls="panel-{{ $index }}" aria-selected="{{ $index === 0 ? 'true' : 'false' }}"{{ $index > 0 ? ' tabindex="-1"' : '' }}>{{ $tab->tab_label }}</button>
+      @endforeach
       <span class="tabs__ink" aria-hidden="true"></span>
     </div>
-    <div class="tabpanel" role="tabpanel" id="panel-before" aria-labelledby="tab-before" tabindex="0"><ul class="ticks ticks--cols" role="list"><li><svg class="i" aria-hidden="true" focusable="false"><use href="#i-check"/></svg>Home checked, warm and ready</li><li><svg class="i" aria-hidden="true" focusable="false"><use href="#i-check"/></svg>Shopping and essential supplies in</li><li><svg class="i" aria-hidden="true" focusable="false"><use href="#i-check"/></svg>Family and services told what is happening</li><li><svg class="i" aria-hidden="true" focusable="false"><use href="#i-check"/></svg>Transport arranged</li></ul></div>
-    <div class="tabpanel" role="tabpanel" id="panel-day" aria-labelledby="tab-day" tabindex="0" hidden><ul class="ticks ticks--cols" role="list"><li><svg class="i" aria-hidden="true" focusable="false"><use href="#i-check"/></svg>Settling in at home</li><li><svg class="i" aria-hidden="true" focusable="false"><use href="#i-check"/></svg>Prescriptions and paperwork followed up</li><li><svg class="i" aria-hidden="true" focusable="false"><use href="#i-check"/></svg>Care provider and family kept in step</li><li><svg class="i" aria-hidden="true" focusable="false"><use href="#i-check"/></svg>A named contact if anything goes wrong</li></ul></div>
-    <div class="tabpanel" role="tabpanel" id="panel-after" aria-labelledby="tab-after" tabindex="0" hidden><ul class="ticks ticks--cols" role="list"><li><svg class="i" aria-hidden="true" focusable="false"><use href="#i-check"/></svg>Follow-up appointments booked and attended</li><li><svg class="i" aria-hidden="true" focusable="false"><use href="#i-check"/></svg>Welfare visits as agreed</li><li><svg class="i" aria-hidden="true" focusable="false"><use href="#i-check"/></svg>Correspondence and admin dealt with</li><li><svg class="i" aria-hidden="true" focusable="false"><use href="#i-check"/></svg>Updates to family and referrer</li></ul></div>
+    @foreach($serviceArea?->timelineItems ?? [] as $index => $tab)
+    <div class="tabpanel" role="tabpanel" id="panel-{{ $index }}" aria-labelledby="{{ $tab->tab_id ?? 'tab-'.$index }}" tabindex="0"{{ $index > 0 ? ' hidden' : '' }}><ul class="ticks ticks--cols" role="list">@foreach($tab->content ?? [] as $tick)<li><svg class="i" aria-hidden="true" focusable="false"><use href="#i-check"/></svg>{{ $tick }}</li>@endforeach</ul></div>
+    @endforeach
   </div>
 </section>
 
@@ -66,14 +77,13 @@
     <p class="eyebrow">Typical situations</p>
     <h2 id="sits-title" class="sits__title" data-split>When people <em>call us</em></h2>
     <div class="sits__grid">
-      <article class="sit" data-reveal data-tilt>
-        <figure class="sit__art"><img src="{{ asset('assets/images/art/sit-hospital.svg') }}" width="640" height="480" alt="" loading="lazy"></figure>
-        <h3>Coming home from hospital</h3><p>The home prepared, transport and supplies arranged, and services coordinated around the discharge.</p>
+      @php $scenarioImages = ['assets/images/art/sit-hospital.svg', 'assets/images/art/sit-distance.svg']; @endphp
+      @foreach(($serviceArea?->scenarios ?? collect()) as $index => $scenario)
+      <article class="sit {{ $index % 2 === 1 ? 'sit--offset' : '' }}" data-reveal data-tilt>
+        <figure class="sit__art"><img src="{{ asset($scenarioImages[$index] ?? 'assets/images/art/sit-hospital.svg') }}" width="640" height="480" alt="" loading="lazy"></figure>
+        <h3>@safeHtml($scenario->title)</h3><p>{{ $scenario->description }}</p>
       </article>
-      <article class="sit sit--offset" data-reveal data-tilt>
-        <figure class="sit__art"><img src="{{ asset('assets/images/art/sit-distance.svg') }}" width="640" height="480" alt="" loading="lazy"></figure>
-        <h3>Several services and no one joining them up</h3><p>One person who keeps the GP, the carers, the family and the client working from the same page.</p>
-      </article>
+      @endforeach
     </div>
   </div>
 </section>
@@ -82,19 +92,17 @@
   <div class="wrap questions__grid">
     <div class="questions__head"><p class="eyebrow">Questions</p><h2 id="afaq-title" data-split>Good to <em>know</em></h2></div>
     <div class="faq" data-faq>
-  <div class="faq__item">
-    <h3 class="faq__q"><button type="button" aria-expanded="false" aria-controls="afaq-a0" id="afaq-q0">Do you work with NHS discharge teams?<span class="faq__icon" aria-hidden="true"></span></button></h3>
-    <div class="faq__a" id="afaq-a0" role="region" aria-labelledby="afaq-q0"><div class="faq__inner"><p>We work alongside whichever health and care professionals are involved in a client&rsquo;s discharge, coordinating the practical side that sits outside clinical care.</p></div></div>
-  </div>
-  <div class="faq__item">
-    <h3 class="faq__q"><button type="button" aria-expanded="false" aria-controls="afaq-a1" id="afaq-q1">Will you attend a solicitor&rsquo;s appointment with the client?<span class="faq__icon" aria-hidden="true"></span></button></h3>
-    <div class="faq__a" id="afaq-a1" role="region" aria-labelledby="afaq-q1"><div class="faq__inner"><p>Yes. Attendance at solicitor and other professional appointments is part of this service area.</p></div></div>
-  </div>
+      @foreach($serviceArea?->page_content['faqs'] ?? [] as $index => $faq)
+      <div class="faq__item">
+        <h3 class="faq__q"><button type="button" aria-expanded="false" aria-controls="afaq-a{{ $index }}" id="afaq-q{{ $index }}">{{ $faq['question'] ?? '' }}<span class="faq__icon" aria-hidden="true"></span></button></h3>
+        <div class="faq__a" id="afaq-a{{ $index }}" role="region" aria-labelledby="afaq-q{{ $index }}"><div class="faq__inner"><p>@safeHtml($faq['answer'] ?? '')</p></div></div>
+      </div>
+      @endforeach
 </div>
   </div>
 </section>
 
-<a class="next-area" href="property-asset-management.html" data-cursor="Next">
+<a class="next-area" href="{{ route('property-asset-management') }}" data-cursor="Next">
   <span class="wrap next-area__inner"><span class="next-area__label">Next service area</span><span class="next-area__title">Property &amp; Asset Management</span><svg class="i" aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg></span>
 </a>
 

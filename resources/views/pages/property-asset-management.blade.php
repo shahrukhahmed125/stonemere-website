@@ -1,5 +1,17 @@
 @extends('layouts.app')
-@section('title','Property & Asset Management, Vacant Property Checks Bath | Stonemere')
+@section('title', $page?->meta_title ?: 'Property & Asset Management, Vacant Property Checks Bath | Stonemere')
+@if($page?->meta_description)
+@section('meta_description', $page->meta_description)
+@endif
+@if($page?->canonical_url)
+@section('canonical_url', $page->canonical_url)
+@endif
+@if($page?->meta_description)
+@section('meta_description', $page->meta_description)
+@endif
+@if($page?->canonical_url)
+@section('canonical_url', $page->canonical_url)
+@endif
 
 @section('css')
 
@@ -15,14 +27,14 @@
   </div>
   <div class="wrap phero__grid">
     <div class="phero__text">
-      <nav class="crumbs" aria-label="Breadcrumb"><ol role="list"><li><a href="index.html">Home</a></li><li><a href="services.html">Services</a></li><li><span aria-current="page">Service area 03</span></li></ol></nav>
-      <p class="eyebrow eyebrow--light">Service area 03</p>
-      <h1 id="page-title" class="phero__title" data-split>Property &amp; Asset <em>Management</em></h1>
-      <p class="phero__lead" data-reveal>Homes and possessions looked after, prepared and, when the time comes, cleared or sold, with executors, attorneys and families kept informed.</p>
+      <nav class="crumbs" aria-label="Breadcrumb"><ol role="list"><li><a href="{{ route('home') }}">Home</a></li><li><a href="{{ route('services') }}">Services</a></li><li><span aria-current="page">Service area {{ str_pad($serviceArea?->number ?? 3, 2, '0', STR_PAD_LEFT) }}</span></li></ol></nav>
+      <p class="eyebrow eyebrow--light">Service area {{ str_pad($serviceArea?->number ?? 3, 2, '0', STR_PAD_LEFT) }}</p>
+      <h1 id="page-title" class="phero__title" data-split>@safeHtml($serviceArea?->name ?? 'Property &amp; Asset <em>Management</em>')</h1>
+      <p class="phero__lead" data-reveal>{{ $serviceArea?->page_content['lead'] ?? $serviceArea?->short_description ?? 'Homes and possessions looked after, prepared and, when the time comes, cleared or sold, with executors, attorneys and families kept informed.' }}</p>
       <div class="actions" data-reveal><a class="btn btn--gold" href="https://wa.me/447891341414?text=Hello%20Stonemere%2C%20I%20would%20like%20to%20ask%20about%20Property%20%26%20Asset%20Management." target="_blank" rel="noopener" data-magnetic><svg class="i" aria-hidden="true" focusable="false"><use href="#i-whatsapp"/></svg><span class="roll" data-text="Ask about this area">Ask about this area</span></a><a class="btn btn--line-light" href="tel:+441225338436" data-magnetic><svg class="i" aria-hidden="true" focusable="false"><use href="#i-phone"/></svg><span class="roll" data-text="Call 01225 338436">Call 01225 338436</span></a></div>
     </div>
     <figure class="phero__art" data-reveal="mask">
-      <img src="{{ asset('assets/images/art/area-property.svg') }}" width="800" height="1000" alt="Illustration for Property &amp; Asset Management, in gold line on navy" fetchpriority="high">
+      <img src="{{ \App\Helpers\ImageUrlHelper::resolve($serviceArea?->hero_image ?? 'assets/images/art/area-property.svg') }}" width="800" height="1000" alt="Illustration for {{ $serviceArea?->name ?? 'Property & Asset Management' }}, in gold line on navy" fetchpriority="high">
     </figure>
   </div>
 </section>
@@ -31,17 +43,13 @@
   <div class="wrap svc__grid">
     <div class="svc__head">
       <p class="eyebrow">What this covers</p>
-      <h2 id="svc-title" data-split>7 services, <em>one contact</em></h2>
+      <h2 id="svc-title" data-split>{{ $serviceArea?->services?->count() ?? 7 }} services, <em>one contact</em></h2>
       <p>Each one can be arranged on its own or as part of ongoing support.</p>
     </div>
     <ol class="svc__list" role="list">
-      <li class="svc__item" data-reveal><span class="svc__n">01</span><div><h3>Property oversight</h3><p>Someone dependable keeping an eye on a client&rsquo;s property and dealing with what comes up.</p></div></li>
-      <li class="svc__item" data-reveal><span class="svc__n">02</span><div><h3>Vacant property checks</h3><p>Regular visits to an empty property, at a frequency agreed with you, with anything of concern reported and acted on.</p></div></li>
-      <li class="svc__item" data-reveal><span class="svc__n">03</span><div><h3>Contractor coordination</h3><p>Trades and contractors found, given access, supervised and checked.</p></div></li>
-      <li class="svc__item" data-reveal><span class="svc__n">04</span><div><h3>Downsizing</h3><p>A move to a smaller home planned and coordinated at the client&rsquo;s pace.</p></div></li>
-      <li class="svc__item" data-reveal><span class="svc__n">05</span><div><h3>House clearance</h3><p>Full or partial clearances handled sensitively, with items kept, distributed or disposed of as instructed.</p></div></li>
-      <li class="svc__item" data-reveal><span class="svc__n">06</span><div><h3>Storage and possessions management</h3><p>Belongings catalogued, stored and looked after until decisions are made.</p></div></li>
-      <li class="svc__item" data-reveal><span class="svc__n">07</span><div><h3>Property or asset disposal</h3><p>Coordination of the practical steps when a property, vehicle or other asset is sold or disposed of.</p></div></li>
+      @foreach($serviceArea?->services ?? [] as $index => $service)
+      <li class="svc__item" data-reveal><span class="svc__n">{{ str_pad($index + 1, 2, '0', STR_PAD_LEFT) }}</span><div><h3>@safeHtml($service->title)</h3><p>{{ $service->description }}</p></div></li>
+      @endforeach
     </ol>
   </div>
 </section>
@@ -54,7 +62,9 @@
       <p>You agree the scope and frequency with us. Typical items are below; select the ones you need and send them to us.</p>
     </div>
     <form class="checks__list" data-checklist aria-label="Vacant property check items">
-      <label class="checkrow"><input type="checkbox" name="check" value="Security: doors, windows and locks" checked><span class="checkrow__box" aria-hidden="true"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-check"/></svg></span><span>Security: doors, windows and locks</span></label><label class="checkrow"><input type="checkbox" name="check" value="Post collected and dealt with" checked><span class="checkrow__box" aria-hidden="true"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-check"/></svg></span><span>Post collected and dealt with</span></label><label class="checkrow"><input type="checkbox" name="check" value="Heating, water and signs of leaks" checked><span class="checkrow__box" aria-hidden="true"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-check"/></svg></span><span>Heating, water and signs of leaks</span></label><label class="checkrow"><input type="checkbox" name="check" value="Access for contractors and agents"><span class="checkrow__box" aria-hidden="true"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-check"/></svg></span><span>Access for contractors and agents</span></label><label class="checkrow"><input type="checkbox" name="check" value="Condition noted and reported back"><span class="checkrow__box" aria-hidden="true"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-check"/></svg></span><span>Condition noted and reported back</span></label><label class="checkrow"><input type="checkbox" name="check" value="Anything urgent acted on"><span class="checkrow__box" aria-hidden="true"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-check"/></svg></span><span>Anything urgent acted on</span></label>
+      @foreach($serviceArea?->checkItems ?? [] as $item)
+      <label class="checkrow"><input type="checkbox" name="check" value="{{ $item->item_text }}" {{ $item->is_default_checked ? 'checked' : '' }}><span class="checkrow__box" aria-hidden="true"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-check"/></svg></span><span>{{ $item->item_text }}</span></label>
+      @endforeach
       <a class="btn btn--navy" data-checklist-cta href="#" target="_blank" rel="noopener" data-magnetic><svg class="i" aria-hidden="true" focusable="false"><use href="#i-whatsapp"/></svg><span class="roll" data-text="Ask about property checks">Ask about property checks</span></a>
     </form>
   </div>
@@ -65,14 +75,13 @@
     <p class="eyebrow">Typical situations</p>
     <h2 id="sits-title" class="sits__title" data-split>When people <em>call us</em></h2>
     <div class="sits__grid">
-      <article class="sit" data-reveal data-tilt>
-        <figure class="sit__art"><img src="{{ asset('assets/images/art/sit-property.svg') }}" width="640" height="480" alt="" loading="lazy"></figure>
-        <h3>An empty house during probate</h3><p>Checks, contractors, possessions and clearance coordinated in line with the executor&rsquo;s instructions.</p>
+      @php $scenarioImages = ['assets/images/art/sit-property.svg', 'assets/images/art/sit-hospital.svg']; @endphp
+      @foreach(($serviceArea?->scenarios ?? collect()) as $index => $scenario)
+      <article class="sit {{ $index % 2 === 1 ? 'sit--offset' : '' }}" data-reveal data-tilt>
+        <figure class="sit__art"><img src="{{ asset($scenarioImages[$index] ?? 'assets/images/art/sit-property.svg') }}" width="640" height="480" alt="" loading="lazy"></figure>
+        <h3>@safeHtml($scenario->title)</h3><p>{{ $scenario->description }}</p>
       </article>
-      <article class="sit sit--offset" data-reveal data-tilt>
-        <figure class="sit__art"><img src="{{ asset('assets/images/art/sit-hospital.svg') }}" width="640" height="480" alt="" loading="lazy"></figure>
-        <h3>A move into residential care</h3><p>The old home looked after, belongings sorted and the property prepared for its next step.</p>
-      </article>
+      @endforeach
     </div>
   </div>
 </section>
@@ -81,19 +90,17 @@
   <div class="wrap questions__grid">
     <div class="questions__head"><p class="eyebrow">Questions</p><h2 id="afaq-title" data-split>Good to <em>know</em></h2></div>
     <div class="faq" data-faq>
-  <div class="faq__item">
-    <h3 class="faq__q"><button type="button" aria-expanded="false" aria-controls="afaq-a0" id="afaq-q0">Can you work to an executor&rsquo;s or deputy&rsquo;s instructions?<span class="faq__icon" aria-hidden="true"></span></button></h3>
-    <div class="faq__a" id="afaq-a0" role="region" aria-labelledby="afaq-q0"><div class="faq__inner"><p>Yes. We act on the instructions of whoever is responsible for the client&rsquo;s affairs and refer decisions back to them.</p></div></div>
-  </div>
-  <div class="faq__item">
-    <h3 class="faq__q"><button type="button" aria-expanded="false" aria-controls="afaq-a1" id="afaq-q1">Do you carry out clearances yourselves?<span class="faq__icon" aria-hidden="true"></span></button></h3>
-    <div class="faq__a" id="afaq-a1" role="region" aria-labelledby="afaq-q1"><div class="faq__inner"><p>We coordinate clearances: sorting, deciding what is kept, distributed or disposed of, and arranging the right people to do the work.</p></div></div>
-  </div>
+      @foreach($serviceArea?->page_content['faqs'] ?? [] as $index => $faq)
+      <div class="faq__item">
+        <h3 class="faq__q"><button type="button" aria-expanded="false" aria-controls="afaq-a{{ $index }}" id="afaq-q{{ $index }}">{{ $faq['question'] ?? '' }}<span class="faq__icon" aria-hidden="true"></span></button></h3>
+        <div class="faq__a" id="afaq-a{{ $index }}" role="region" aria-labelledby="afaq-q{{ $index }}"><div class="faq__inner"><p>@safeHtml($faq['answer'] ?? '')</p></div></div>
+      </div>
+      @endforeach
 </div>
   </div>
 </section>
 
-<a class="next-area" href="urgent-complex-cases.html" data-cursor="Next">
+<a class="next-area" href="{{ route('urgent-complex-cases') }}" data-cursor="Next">
   <span class="wrap next-area__inner"><span class="next-area__label">Next service area</span><span class="next-area__title">Urgent &amp; Complex Case Support</span><svg class="i" aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg></span>
 </a>
 

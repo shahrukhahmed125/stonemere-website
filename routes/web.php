@@ -2,11 +2,13 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\WebsiteController;
+use App\Http\Controllers\ContactController;
 
 
 Route::get('/', [WebsiteController::class, 'home'])->name('home');
 Route::get('/about', [WebsiteController::class, 'about'])->name('about');
 Route::get('/contact', [WebsiteController::class, 'contact'])->name('contact');
+Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 Route::get('/team', [WebsiteController::class, 'team'])->name('team');
 Route::get('/professionals', [WebsiteController::class, 'professionals'])->name('professionals');
 Route::get('/services', [WebsiteController::class, 'services'])->name('services');

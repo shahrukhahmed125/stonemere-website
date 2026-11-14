@@ -1,0 +1,44 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('site_settings', function (Blueprint $table) {
+            $table->id();
+            $table->string('company_name')->default('Stonemere Life Management');
+            $table->string('tagline')->nullable();
+            $table->string('logo_light')->nullable();
+            $table->string('logo_dark')->nullable();
+            $table->string('logo_stacked')->nullable();
+            $table->string('logo_stacked_reverse')->nullable();
+            $table->string('favicon')->nullable();
+            $table->string('phone')->default('01225 338436');
+            $table->string('whatsapp')->default('07891 341414');
+            $table->string('email')->nullable();
+            $table->string('address')->default('Bath, Somerset');
+            $table->string('business_hours')->nullable();
+            $table->json('social_media')->nullable();
+            $table->string('default_meta_title')->nullable();
+            $table->text('default_meta_description')->nullable();
+            $table->string('default_og_image')->nullable();
+            $table->string('default_twitter_image')->nullable();
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('site_settings');
+    }
+};

@@ -1,11 +1,31 @@
 @extends('layouts.app')
-@section('title','Stonemere Life Management | Practical coordination for care providers, solicitors &amp; health professionals in Bath')
+@section('title', $page?->meta_title ?? 'Stonemere Life Management | Practical coordination for care providers, solicitors & health professionals in Bath')
+@section('meta_description', $page?->meta_description ?? 'One named contact who coordinates the practical side of a client’s life in Bath: family liaison, care liaison, property and urgent cases.')
 
 @section('css')
 
 @endsection
 
 @section('content')
+
+@php
+$content = $content ?? [];
+$hero = $content['hero'] ?? [];
+$strap = $content['strap'] ?? [];
+$statement = $content['statement'] ?? [];
+$keystone = $content['keystone'] ?? [];
+$track = $content['track'] ?? [];
+$refer = $content['refer'] ?? [];
+$mapper = $content['mapper'] ?? [];
+$steps = $content['steps'] ?? [];
+$bounds = $content['bounds'] ?? [];
+$standards = $content['standards'] ?? [];
+$where = $content['where'] ?? [];
+$lead = $content['lead'] ?? [];
+$tiers = $content['tiers'] ?? [];
+$questions = $content['questions'] ?? [];
+$contact = $content['contact'] ?? [];
+@endphp
 
 <main id="main" tabindex="-1">
 
@@ -23,11 +43,11 @@
       <p class="hero__word">Stonemere</p>
       <p class="hero__sub"><span>Life Management</span></p>
     </div>
-    <h1 id="hero-title" class="hero__title" data-split>The practical side of your client&rsquo;s life, <em>coordinated</em></h1>
-    <p class="hero__lead" data-reveal>One named contact for care providers, solicitors and healthcare professionals in Bath. We work alongside you, so the matters outside your service are followed through and nothing is missed.</p>
+    <h1 id="hero-title" class="hero__title" data-split>@safeHtml($hero['title'] ?? 'The practical side of your client&rsquo;s life, <em>coordinated</em>')</h1>
+    <p class="hero__lead" data-reveal>{{ $hero['lead'] ?? 'One named contact for care providers, solicitors and healthcare professionals in Bath. We work alongside you, so the matters outside your service are followed through and nothing is missed.' }}</p>
     <div class="actions actions--center" data-reveal>
-      <a class="btn btn--gold" href="https://wa.me/447891341414?text=Hello%20Stonemere%2C%20I%20would%20like%20to%20refer%20a%20client." target="_blank" rel="noopener" data-magnetic><svg class="i" aria-hidden="true" focusable="false"><use href="#i-whatsapp"/></svg><span class="roll" data-text="Refer a client">Refer a client</span></a>
-      <a class="btn btn--line-light" href="tel:+441225338436" data-magnetic><svg class="i" aria-hidden="true" focusable="false"><use href="#i-phone"/></svg><span class="roll" data-text="Call 01225 338436">Call 01225 338436</span></a>
+      <a class="btn btn--gold" href="{{ $hero['cta_primary']['url'] ?? 'https://wa.me/447891341414?text=Hello%20Stonemere%2C%20I%20would%20like%20to%20refer%20a%20client.' }}" target="_blank" rel="noopener" data-magnetic><svg class="i" aria-hidden="true" focusable="false"><use href="#i-whatsapp"/></svg><span class="roll" data-text="{{ $hero['cta_primary']['text'] ?? 'Refer a client' }}">{{ $hero['cta_primary']['text'] ?? 'Refer a client' }}</span></a>
+      <a class="btn btn--line-light" href="{{ $hero['cta_secondary']['url'] ?? 'tel:+441225338436' }}" data-magnetic><svg class="i" aria-hidden="true" focusable="false"><use href="#i-phone"/></svg><span class="roll" data-text="{{ $hero['cta_secondary']['text'] ?? 'Call 01225 338436' }}">{{ $hero['cta_secondary']['text'] ?? 'Call 01225 338436' }}</span></a>
     </div>
   </div>
   <a class="hero__scroll" href="#statement" aria-label="Scroll to the next section"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-arrow-down"/></svg></a>
@@ -35,19 +55,23 @@
 
 <div class="strap" role="note" aria-label="Who we work with">
   <div class="strap__track" data-marquee>
-    <p>Working alongside domiciliary care companies <span aria-hidden="true">&#9670;</span> solicitors <span aria-hidden="true">&#9670;</span> healthcare professionals <span aria-hidden="true">&#9670;</span> property professionals <span aria-hidden="true">&#9670;</span> and the families they support <span aria-hidden="true">&#9670;</span> across Bath &amp; North East Somerset <span aria-hidden="true">&#9670;</span>&nbsp;</p>
-    <p aria-hidden="true">Working alongside domiciliary care companies <span>&#9670;</span> solicitors <span>&#9670;</span> healthcare professionals <span>&#9670;</span> property professionals <span>&#9670;</span> and the families they support <span>&#9670;</span> across Bath &amp; North East Somerset <span>&#9670;</span>&nbsp;</p>
+    <p>{!! str_replace(' ◆ ', ' <span aria-hidden="true">&#9670;</span> ', e($strap['text'] ?? 'Working alongside domiciliary care companies ◆ solicitors ◆ healthcare professionals ◆ property professionals ◆ and the families they support ◆ across Bath & North East Somerset ◆')) !!}&nbsp;</p>
+    <p aria-hidden="true">{!! str_replace(' ◆ ', ' <span>&#9670;</span> ', e($strap['text'] ?? 'Working alongside domiciliary care companies ◆ solicitors ◆ healthcare professionals ◆ property professionals ◆ and the families they support ◆ across Bath & North East Somerset ◆')) !!}&nbsp;</p>
   </div>
 </div>
 
 <section class="statement" id="statement" aria-labelledby="statement-title">
   <div class="wrap statement__grid">
-    <p class="eyebrow">Who we are</p>
-    <h2 id="statement-title" class="statement__text" data-split="words">When a client needs more than your service covers, someone has to pick up the rest. <em>That is what we do.</em></h2>
+    <p class="eyebrow">{{ $statement['eyebrow'] ?? 'Who we are' }}</p>
+    <h2 id="statement-title" class="statement__text" data-split="words">@safeHtml($statement['title'] ?? 'When a client needs more than your service covers, someone has to pick up the rest. <em>That is what we do.</em>')</h2>
     <div class="statement__body" data-reveal>
-      <p>Stonemere Life Management provides professional support to businesses and organisations whose clients, residents or families need practical coordination beyond their core service.</p>
-      <p>We manage appointments, family liaison, property matters, welfare visits and complex day-to-day issues, giving you one reliable point of contact. We are not a care agency, and we are not simply a concierge.</p>
-      <a class="tlink" href="about.html">What life management means<svg class="i" aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg></a>
+      @foreach($statement['paragraphs'] ?? [
+          'Stonemere Life Management provides professional support to businesses and organisations whose clients, residents or families need practical coordination beyond their core service.',
+          'We manage appointments, family liaison, property matters, welfare visits and complex day-to-day issues, giving you one reliable point of contact. We are not a care agency, and we are not simply a concierge.'
+      ] as $paragraph)
+      <p>{{ $paragraph }}</p>
+      @endforeach
+      <a class="tlink" href="{{ $statement['link_url'] ?? '/about' }}">{{ $statement['link_text'] ?? 'What life management means' }}<svg class="i" aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg></a>
     </div>
   </div>
 </section>
@@ -56,12 +80,16 @@
   <div class="keystone__stage">
     <div class="wrap keystone__grid">
       <div class="keystone__copy">
-        <p class="eyebrow eyebrow--light">Life management</p>
-        <h2 id="keystone-title" class="keystone__title">How an arch holds</h2>
+        <p class="eyebrow eyebrow--light">{{ $keystone['eyebrow'] ?? 'Life management' }}</p>
+        <h2 id="keystone-title" class="keystone__title">{{ $keystone['title'] ?? 'How an arch holds' }}</h2>
         <ol class="keystone__caps" role="list">
-          <li class="keystone__cap" data-step="0"><strong>Everyone holds a piece.</strong> The family, the carers, the GP, the solicitor, the property and the trades each carry part of a client&rsquo;s life.</li>
-          <li class="keystone__cap" data-step="1"><strong>Without a keystone, nothing holds.</strong> Matters fall between organisations, messages go unanswered, and nobody owns the whole picture.</li>
-          <li class="keystone__cap" data-step="2"><strong>One point of contact. Everything holds.</strong> Stonemere sits at the top of the arch, coordinating every party and following each matter through.</li>
+          @foreach($keystone['captions'] ?? [
+              ['text' => '<strong>Everyone holds a piece.</strong> The family, the carers, the GP, the solicitor, the property and the trades each carry part of a client&rsquo;s life.'],
+              ['text' => '<strong>Without a keystone, nothing holds.</strong> Matters fall between organisations, messages go unanswered, and nobody owns the whole picture.'],
+              ['text' => '<strong>One point of contact. Everything holds.</strong> Stonemere sits at the top of the arch, coordinating every party and following each matter through.']
+          ] as $index => $caption)
+          <li class="keystone__cap" data-step="{{ $index }}">@safeHtml($caption['text'] ?? '')</li>
+          @endforeach
         </ol>
       </div>
       <div class="keystone__art"><svg class="keystone__svg" viewBox="40 150 920 490" role="img" aria-labelledby="ks-svg-title">
@@ -103,51 +131,27 @@
   <div class="track__sticky">
     <div class="track__rail">
       <div class="track__intro">
-        <p class="eyebrow">Our services</p>
-        <h2 id="track-title" data-split>Four areas, <em>one named contact</em></h2>
-        <p>Every area is coordinated by the same person, who knows the client, the family and the professionals involved.</p>
-        <a class="tlink" href="services.html">All services<svg class="i" aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg></a>
+        <p class="eyebrow">{{ $track['eyebrow'] ?? 'Our services' }}</p>
+        <h2 id="track-title" data-split>@safeHtml($track['title'] ?? 'Four areas, <em>one named contact</em>')</h2>
+        <p>{{ $track['description'] ?? 'Every area is coordinated by the same person, who knows the client, the family and the professionals involved.' }}</p>
+        <a class="tlink" href="{{ $track['link_url'] ?? '/services' }}">{{ $track['link_text'] ?? 'All services' }}<svg class="i" aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg></a>
       </div>
+      @foreach($track['cards'] ?? [] as $index => $card)
       <article class="track__panel" data-tilt>
-        <a class="track__link" href="family-client-support.html" data-cursor="Explore">
-          <span class="track__num" aria-hidden="true">01</span>
-          <figure class="track__art"><img src="{{ asset('assets/images/art/area-family.svg') }}" width="800" height="1000" alt="" loading="lazy" data-parallax-inner></figure>
-          <h3 class="track__title">Family &amp; Client Support</h3>
-          <p class="track__line">Practical help for clients and their families, through the routine and the hardest moments.</p>
-          <ul class="track__list" role="list"><li>Family liaison and representation</li><li>Home and welfare visits</li><li>Appointment accompaniment</li><li>End-of-life and post-death coordination</li></ul>
+        <a class="track__link" href="{{ $card['url'] ?? '#' }}" data-cursor="Explore">
+          <span class="track__num" aria-hidden="true">{{ $card['number'] ?? str_pad($index + 1, 2, '0', STR_PAD_LEFT) }}</span>
+          <figure class="track__art"><img src="{{ \App\Helpers\ImageUrlHelper::resolve($card['image'] ?? 'assets/images/art/area-family.svg') }}" width="800" height="1000" alt="" loading="lazy" data-parallax-inner></figure>
+          <h3 class="track__title">@safeHtml($card['title'] ?? '')</h3>
+          <p class="track__line">{{ $card['line'] ?? '' }}</p>
+          <ul class="track__list" role="list">
+            @foreach($card['items'] ?? [] as $item)
+            <li>{{ is_array($item) ? ($item['text'] ?? '') : $item }}</li>
+            @endforeach
+          </ul>
           <span class="tlink" aria-hidden="true">Explore<svg class="i" aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg></span>
         </a>
       </article>
-      <article class="track__panel" data-tilt>
-        <a class="track__link" href="care-professional-liaison.html" data-cursor="Explore">
-          <span class="track__num" aria-hidden="true">02</span>
-          <figure class="track__art"><img src="{{ asset('assets/images/art/area-care.svg') }}" width="800" height="1000" alt="" loading="lazy" data-parallax-inner></figure>
-          <h3 class="track__title">Care &amp; Professional Liaison</h3>
-          <p class="track__line">The coordinating link between the client, the family and the professionals around them.</p>
-          <ul class="track__list" role="list"><li>Case management</li><li>Health and care coordination</li><li>Liaison with domiciliary care providers</li><li>Attendance at hospital, medical and solicitor appointments</li></ul>
-          <span class="tlink" aria-hidden="true">Explore<svg class="i" aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg></span>
-        </a>
-      </article>
-      <article class="track__panel" data-tilt>
-        <a class="track__link" href="property-asset-management.html" data-cursor="Explore">
-          <span class="track__num" aria-hidden="true">03</span>
-          <figure class="track__art"><img src="{{ asset('assets/images/art/area-property.svg') }}" width="800" height="1000" alt="" loading="lazy" data-parallax-inner></figure>
-          <h3 class="track__title">Property &amp; Asset Management</h3>
-          <p class="track__line">Homes and possessions looked after, prepared and, when the time comes, cleared or sold.</p>
-          <ul class="track__list" role="list"><li>Property oversight and vacant property checks</li><li>Contractor coordination</li><li>Downsizing, clearance and storage</li><li>Property or asset disposal</li></ul>
-          <span class="tlink" aria-hidden="true">Explore<svg class="i" aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg></span>
-        </a>
-      </article>
-      <article class="track__panel" data-tilt>
-        <a class="track__link" href="urgent-complex-cases.html" data-cursor="Explore">
-          <span class="track__num" aria-hidden="true">04</span>
-          <figure class="track__art"><img src="{{ asset('assets/images/art/area-urgent.svg') }}" width="800" height="1000" alt="" loading="lazy" data-parallax-inner></figure>
-          <h3 class="track__title">Urgent &amp; Complex Case Support</h3>
-          <p class="track__line">A calm, capable response when something happens suddenly or a case becomes complicated.</p>
-          <ul class="track__list" role="list"><li>Same-day support</li><li>Out-of-hours assistance</li><li>Crisis coordination</li><li>Complex cases across several parties</li></ul>
-          <span class="tlink" aria-hidden="true">Explore<svg class="i" aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg></span>
-        </a>
-      </article>
+      @endforeach
     </div>
   </div>
   <div class="track__bar" aria-hidden="true"><span></span></div>
@@ -156,47 +160,32 @@
 <section class="refer" aria-labelledby="refer-title">
   <div class="wrap">
     <div class="refer__head">
-      <p class="eyebrow">Who refers to us</p>
-      <h2 id="refer-title" data-split>Each profession hands over <em>something different</em></h2>
+      <p class="eyebrow">{{ $refer['eyebrow'] ?? 'Who refers to us' }}</p>
+      <h2 id="refer-title" data-split>@safeHtml($refer['title'] ?? 'Each profession hands over <em>something different</em>')</h2>
     </div>
     <ul class="rows" role="list" data-rows>
-      <li class="row" data-preview="{{ asset('assets/images/art/prof-care.svg') }}">
-        <button class="row__head" type="button" aria-expanded="false" aria-controls="row-care" data-cursor="Open">
-          <span class="row__num">01</span><span class="row__title">Domiciliary care companies</span><span class="row__icon" aria-hidden="true"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg></span>
+      @foreach($refer['cards'] ?? [] as $index => $card)
+      @php $rowId = 'row-' . ($card['audience_slug'] ?? 'card' . $index); @endphp
+      <li class="row" data-preview="{{ \App\Helpers\ImageUrlHelper::resolve($card['preview_image'] ?? 'assets/images/art/prof-care.svg') }}">
+        <button class="row__head" type="button" aria-expanded="false" aria-controls="{{ $rowId }}" data-cursor="Open">
+          <span class="row__num">{{ $card['number'] ?? str_pad($index + 1, 2, '0', STR_PAD_LEFT) }}</span><span class="row__title">{{ $card['title'] ?? '' }}</span><span class="row__icon" aria-hidden="true"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg></span>
         </button>
-        <div class="row__body" id="row-care"><div class="row__inner"><p>Your carers notice problems that sit outside the care plan: unopened post, a boiler that has failed, a family that can't be reached. Hand those to us and keep your team on care.</p><a class="tlink" href="professionals.html#care-providers">What we take on<svg class="i" aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg></a></div></div>
+        <div class="row__body" id="{{ $rowId }}"><div class="row__inner"><p>{{ $card['body'] ?? '' }}</p><a class="tlink" href="{{ $card['link_url'] ?? '#' }}">{{ $card['link_text'] ?? 'What we take on' }}<svg class="i" aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg></a></div></div>
       </li>
-      <li class="row" data-preview="{{ asset('assets/images/art/prof-solicitor.svg') }}">
-        <button class="row__head" type="button" aria-expanded="false" aria-controls="row-solicitor" data-cursor="Open">
-          <span class="row__num">02</span><span class="row__title">Solicitors &amp; executors</span><span class="row__icon" aria-hidden="true"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg></span>
-        </button>
-        <div class="row__body" id="row-solicitor"><div class="row__inner"><p>Vacant property checks, contractor coordination, possessions, clearance and disposal, plus attendance at appointments, so a probate, deputyship or attorney matter keeps moving.</p><a class="tlink" href="professionals.html#solicitors">What we take on<svg class="i" aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg></a></div></div>
-      </li>
-      <li class="row" data-preview="{{ asset('assets/images/art/prof-health.svg') }}">
-        <button class="row__head" type="button" aria-expanded="false" aria-controls="row-health" data-cursor="Open">
-          <span class="row__num">03</span><span class="row__title">Healthcare professionals</span><span class="row__icon" aria-hidden="true"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg></span>
-        </button>
-        <div class="row__body" id="row-health"><div class="row__inner"><p>Hospital discharge teams, GPs and community clinicians: we coordinate the practical side of going home and staying well at home, alongside the services already in place.</p><a class="tlink" href="professionals.html#healthcare">What we take on<svg class="i" aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg></a></div></div>
-      </li>
-      <li class="row" data-preview="{{ asset('assets/images/art/prof-property.svg') }}">
-        <button class="row__head" type="button" aria-expanded="false" aria-controls="row-property" data-cursor="Open">
-          <span class="row__num">04</span><span class="row__title">Property professionals</span><span class="row__icon" aria-hidden="true"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg></span>
-        </button>
-        <div class="row__body" id="row-property"><div class="row__inner"><p>Oversight of empty or changing properties, access for trades and agents, and coordination with the family and the client's representatives.</p><a class="tlink" href="professionals.html#property">What we take on<svg class="i" aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg></a></div></div>
-      </li>
+      @endforeach
     </ul>
   </div>
-  <div class="rows__preview" aria-hidden="true"><img src="{{ asset('assets/images/art/prof-care.svg') }}" alt="" width="640" height="480"></div>
+  <div class="rows__preview" aria-hidden="true"><img src="{{ \App\Helpers\ImageUrlHelper::resolve($refer['cards'][0]['preview_image'] ?? 'assets/images/art/prof-care.svg') }}" alt="" width="640" height="480"></div>
 </section>
 
 <section class="mapper" aria-labelledby="mapper-title" data-mapper>
   <div class="wrap mapper__grid">
     <div class="mapper__copy">
-      <p class="eyebrow eyebrow--light">Try it</p>
-      <h2 id="mapper-title" data-split>Who is involved in <em>this case?</em></h2>
-      <p>Select everyone your client deals with. However many there are, you and the family speak to one person.</p>
-      <p class="mapper__count" aria-live="polite"><span class="mapper__n" data-mapper-n>0</span> <span data-mapper-label>parties selected. Choose the people and organisations involved.</span></p>
-      <a class="btn btn--gold" data-mapper-cta href="https://wa.me/447891341414?text=Hello%20Stonemere%2C%20I%20would%20like%20to%20talk%20about%20a%20case." target="_blank" rel="noopener" data-magnetic><svg class="i" aria-hidden="true" focusable="false"><use href="#i-whatsapp"/></svg><span class="roll" data-text="Send this case to Stonemere">Send this case to Stonemere</span></a>
+      <p class="eyebrow eyebrow--light">{{ $mapper['eyebrow'] ?? 'Try it' }}</p>
+      <h2 id="mapper-title" data-split>@safeHtml($mapper['title'] ?? 'Who is involved in <em>this case?</em>')</h2>
+      <p>{{ $mapper['description'] ?? 'Select everyone your client deals with. However many there are, you and the family speak to one person.' }}</p>
+      <p class="mapper__count" aria-live="polite"><span class="mapper__n" data-mapper-n>0</span> <span data-mapper-label>{{ $mapper['count_text'] ?? 'parties selected. Choose the people and organisations involved.' }}</span></p>
+      <a class="btn btn--gold" data-mapper-cta href="{{ $mapper['cta_url'] ?? 'https://wa.me/447891341414?text=Hello%20Stonemere%2C%20I%20would%20like%20to%20talk%20about%20a%20case.' }}" target="_blank" rel="noopener" data-magnetic><svg class="i" aria-hidden="true" focusable="false"><use href="#i-whatsapp"/></svg><span class="roll" data-text="{{ $mapper['cta_text'] ?? 'Send this case to Stonemere' }}">{{ $mapper['cta_text'] ?? 'Send this case to Stonemere' }}</span></a>
     </div>
     <div class="mapper__stage">
       <svg class="mapper__lines" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
@@ -223,18 +212,22 @@
 <section class="steps" aria-labelledby="steps-title">
   <div class="wrap steps__grid">
     <div class="steps__head">
-      <p class="eyebrow">How a referral works</p>
-      <h2 id="steps-title" data-split>Four plain steps, <em>no paperwork to start</em></h2>
-      <p>Your first message doesn&rsquo;t need the client&rsquo;s full name or medical details. We take those safely once we have spoken.</p>
-      <a class="btn btn--navy" href="professionals.html#referral" data-magnetic><span class="roll" data-text="Build a referral">Build a referral</span><svg class="i" aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg></a>
+      <p class="eyebrow">{{ $steps['eyebrow'] ?? 'How a referral works' }}</p>
+      <h2 id="steps-title" data-split>@safeHtml($steps['title'] ?? 'Four plain steps, <em>no paperwork to start</em>')</h2>
+      <p>{{ $steps['description'] ?? 'Your first message doesn&rsquo;t need the client&rsquo;s full name or medical details. We take those safely once we have spoken.' }}</p>
+      <a class="btn btn--navy" href="{{ $steps['button_url'] ?? '/professionals#referral' }}" data-magnetic><span class="roll" data-text="{{ $steps['button_text'] ?? 'Build a referral' }}">{{ $steps['button_text'] ?? 'Build a referral' }}</span><svg class="i" aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg></a>
     </div>
     <div class="steps__wrap" data-draw>
       <svg class="steps__line" viewBox="0 0 2 100" preserveAspectRatio="none" aria-hidden="true"><line x1="1" y1="0" x2="1" y2="100" pathLength="1"/></svg>
       <ol class="steps__list" role="list">
-      <li data-reveal><span class="steps__n">01</span><h3>Message or call</h3><p>WhatsApp us or call 01225 338436. Tell us who you are and, in outline, what the client needs.</p></li>
-      <li data-reveal><span class="steps__n">02</span><h3>Agree the scope in writing</h3><p>We talk it through, confirm what we will take on and how it will be paid for, and put it in writing before anything starts.</p></li>
-      <li data-reveal><span class="steps__n">03</span><h3>One named contact takes it on</h3><p>The same person coordinates every matter, liaises with everyone involved and follows each one through.</p></li>
-      <li data-reveal><span class="steps__n">04</span><h3>You stay informed</h3><p>We keep you and the family updated, with the client&rsquo;s consent, so you always know where things stand.</p></li>
+      @foreach($steps['steps'] ?? [
+          ['number' => '01', 'title' => 'Message or call', 'text' => 'WhatsApp us or call 01225 338436. Tell us who you are and, in outline, what the client needs.'],
+          ['number' => '02', 'title' => 'Agree the scope in writing', 'text' => 'We talk it through, confirm what we will take on and how it will be paid for, and put it in writing before anything starts.'],
+          ['number' => '03', 'title' => 'One named contact takes it on', 'text' => 'The same person coordinates every matter, liaises with everyone involved and follows each one through.'],
+          ['number' => '04', 'title' => 'You stay informed', 'text' => 'We keep you and the family updated, with the client&rsquo;s consent, so you always know where things stand.']
+      ] as $step)
+      <li data-reveal><span class="steps__n">{{ $step['number'] ?? '' }}</span><h3>{{ $step['title'] ?? '' }}</h3><p>{{ $step['text'] ?? '' }}</p></li>
+      @endforeach
     </ol>
     </div>
   </div>
@@ -244,28 +237,32 @@
   <h2 id="bounds-title" class="sr">What we do and what we don't</h2>
   <div class="bounds__half bounds__half--do" data-reveal="wipe">
     <div class="bounds__inner">
-      <p class="bounds__label"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-check"/></svg>We do</p>
-      <p class="bounds__big">Coordinate, liaise, attend, organise, arrange and follow through.</p>
-      <p>Practical coordination, communication, representation at appointments, property and possessions, logistics and problem-solving, carried through to completion.</p>
+      <p class="bounds__label"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-check"/></svg>{{ $bounds['do']['label'] ?? 'We do' }}</p>
+      <p class="bounds__big">{{ $bounds['do']['big_text'] ?? 'Coordinate, liaise, attend, organise, arrange and follow through.' }}</p>
+      <p>{{ $bounds['do']['description'] ?? 'Practical coordination, communication, representation at appointments, property and possessions, logistics and problem-solving, carried through to completion.' }}</p>
     </div>
   </div>
   <div class="bounds__half bounds__half--dont" data-reveal="wipe">
     <div class="bounds__inner">
-      <p class="bounds__label"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-x"/></svg>We never</p>
-      <p class="bounds__big">Replace the professionals already involved.</p>
-      <p>We do not provide medical treatment, nursing, regulated personal care, legal advice or financial advice. When those are needed, we make sure the right people are involved and we work alongside them.</p>
+      <p class="bounds__label"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-x"/></svg>{{ $bounds['dont']['label'] ?? 'We never' }}</p>
+      <p class="bounds__big">{{ $bounds['dont']['big_text'] ?? 'Replace the professionals already involved.' }}</p>
+      <p>{{ $bounds['dont']['description'] ?? 'We do not provide medical treatment, nursing, regulated personal care, legal advice or financial advice. When those are needed, we make sure the right people are involved and we work alongside them.' }}</p>
     </div>
   </div>
 </section>
 
 <section class="standards" aria-labelledby="standards-title">
   <div class="wrap">
-    <h2 id="standards-title" class="standards__title" data-reveal>The standards behind every case</h2>
+    <h2 id="standards-title" class="standards__title" data-reveal>{{ $standards['title'] ?? 'The standards behind every case' }}</h2>
     <ul class="standards__list" role="list">
-      <li data-reveal><svg class="i" aria-hidden="true" focusable="false"><use href="#i-shield"/></svg><span><strong>Enhanced DBS-checked</strong>to the standard expected for work with vulnerable adults</span></li>
-      <li data-reveal><svg class="i" aria-hidden="true" focusable="false"><use href="#i-lock"/></svg><span><strong>Confidential</strong>information shared only with consent or where the law requires it</span></li>
-      <li data-reveal><svg class="i" aria-hidden="true" focusable="false"><use href="#i-scale"/></svg><span><strong>Clear boundaries</strong>agreed in writing, alongside other professionals, never instead of them</span></li>
-      <li data-reveal><svg class="i" aria-hidden="true" focusable="false"><use href="#i-user"/></svg><span><strong>One named contact</strong>for the client, the family and every referrer</span></li>
+      @foreach($standards['items'] ?? [
+          ['icon' => 'shield', 'strong' => 'Enhanced DBS-checked', 'text' => 'to the standard expected for work with vulnerable adults'],
+          ['icon' => 'lock', 'strong' => 'Confidential', 'text' => 'information shared only with consent or where the law requires it'],
+          ['icon' => 'scale', 'strong' => 'Clear boundaries', 'text' => 'agreed in writing, alongside other professionals, never instead of them'],
+          ['icon' => 'user', 'strong' => 'One named contact', 'text' => 'for the client, the family and every referrer']
+      ] as $item)
+      <li data-reveal><svg class="i" aria-hidden="true" focusable="false"><use href="#i-{{ $item['icon'] ?? 'shield' }}"/></svg><span><strong>{{ $item['strong'] ?? '' }}</strong>{{ $item['text'] ?? '' }}</span></li>
+      @endforeach
     </ul>
   </div>
 </section>
@@ -273,13 +270,17 @@
 <section class="where" aria-labelledby="where-title">
   <div class="wrap where__grid">
     <div class="where__copy">
-      <p class="eyebrow">Where we work</p>
-      <h2 id="where-title" data-split>Bath first, <em>then the wider county</em></h2>
-      <p>We concentrate on clients within about five miles of Bath, serve the wider Bath &amp; North East Somerset area, and coordinate matters further afield when an existing client or their family needs it.</p>
+      <p class="eyebrow">{{ $where['eyebrow'] ?? 'Where we work' }}</p>
+      <h2 id="where-title" data-split>@safeHtml($where['title'] ?? 'Bath first, <em>then the wider county</em>')</h2>
+      <p>{{ $where['description'] ?? 'We concentrate on clients within about five miles of Bath, serve the wider Bath & North East Somerset area, and coordinate matters further afield when an existing client or their family needs it.' }}</p>
       <dl class="figures">
-        <div><dt>Mile radius around Bath, our first focus</dt><dd data-count="5">5</dd></div>
-        <div><dt>Service areas</dt><dd data-count="4">4</dd></div>
-        <div><dt>Named contact per client</dt><dd data-count="1">1</dd></div>
+        @foreach($where['figures'] ?? [
+            ['label' => 'Mile radius around Bath, our first focus', 'value' => '5'],
+            ['label' => 'Service areas', 'value' => '4'],
+            ['label' => 'Named contact per client', 'value' => '1']
+        ] as $figure)
+        <div><dt>{{ $figure['label'] ?? '' }}</dt><dd data-count="{{ $figure['value'] ?? 0 }}">{{ $figure['value'] ?? '' }}</dd></div>
+        @endforeach
       </dl>
     </div>
     <figure class="where__map" data-draw>
@@ -305,12 +306,12 @@
       <img src="{{ asset('assets/images/art/page-team.svg') }}" width="800" height="1000" alt="Illustration of two people talking, in gold line on navy" loading="lazy">
     </figure>
     <div class="lead__copy">
-      <p class="eyebrow">Our team</p>
-      <h2 id="lead-title" data-split>Led by <em>Paul Harrison</em></h2>
-      <p class="lead__lede" data-reveal>Stonemere is led by Paul. When you refer a client, you know exactly who is responsible for the case and how to reach them.</p>
+      <p class="eyebrow">{{ $lead['eyebrow'] ?? 'Our team' }}</p>
+      <h2 id="lead-title" data-split>@safeHtml($lead['title'] ?? 'Led by <em>Paul Harrison</em>')</h2>
+      <p class="lead__lede" data-reveal>{{ $lead['description'] ?? 'Stonemere is led by Paul. When you refer a client, you know exactly who is responsible for the case and how to reach them.' }}</p>
       <div class="actions" data-reveal>
-        <a class="btn btn--navy" href="team.html" data-magnetic><span class="roll" data-text="Meet the team">Meet the team</span><svg class="i" aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg></a>
-        <a class="btn btn--line" href="https://wa.me/447891341414?text=Hello%20Paul%2C%20I%20would%20like%20to%20talk%20about%20Stonemere%27s%20support." target="_blank" rel="noopener" data-magnetic><svg class="i" aria-hidden="true" focusable="false"><use href="#i-whatsapp"/></svg><span class="roll" data-text="Message Paul">Message Paul</span></a>
+        <a class="btn btn--navy" href="{{ $lead['button_primary']['url'] ?? '/team' }}" data-magnetic><span class="roll" data-text="{{ $lead['button_primary']['text'] ?? 'Meet the team' }}">{{ $lead['button_primary']['text'] ?? 'Meet the team' }}</span><svg class="i" aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg></a>
+        <a class="btn btn--line" href="{{ $lead['button_secondary']['url'] ?? 'https://wa.me/447891341414?text=Hello%20Paul%2C%20I%20would%20like%20to%20talk%20about%20Stonemere%27s%20support.' }}" target="_blank" rel="noopener" data-magnetic><svg class="i" aria-hidden="true" focusable="false"><use href="#i-whatsapp"/></svg><span class="roll" data-text="{{ $lead['button_secondary']['text'] ?? 'Message Paul' }}">{{ $lead['button_secondary']['text'] ?? 'Message Paul' }}</span></a>
       </div>
     </div>
   </div>
@@ -319,69 +320,68 @@
 <section class="tiers" aria-labelledby="tiers-title">
   <div class="wrap">
     <div class="tiers__head">
-      <p class="eyebrow">Price menu</p>
-      <h2 id="tiers-title" data-split>Simple membership, <em>separate costs agreed first</em></h2>
-      <p>Ongoing support is paid as a monthly membership credited to the client&rsquo;s own account and used for Stonemere&rsquo;s time. Transport, purchases, third-party costs and crisis work are charged separately, always agreed in advance.</p>
+      <p class="eyebrow">{{ $tiers['eyebrow'] ?? 'Price menu' }}</p>
+      <h2 id="tiers-title" data-split>@safeHtml($tiers['title'] ?? 'Simple membership, <em>separate costs agreed first</em>')</h2>
+      <p>{{ $tiers['description'] ?? 'Ongoing support is paid as a monthly membership credited to the client&rsquo;s own account and used for Stonemere&rsquo;s time. Transport, purchases, third-party costs and crisis work are charged separately, always agreed in advance.' }}</p>
     </div>
     <ul class="tiers__chips" role="list">
-      <li data-tilt><span class="chip__swatch chip__swatch--silver" aria-hidden="true"></span><h3>Silver</h3><p>Occasional, dependable help</p></li>
-      <li data-tilt><span class="chip__swatch chip__swatch--gold" aria-hidden="true"></span><h3>Gold</h3><p>Regular, ongoing coordination</p></li>
-      <li data-tilt><span class="chip__swatch chip__swatch--platinum" aria-hidden="true"></span><h3>Platinum</h3><p>Complex situations and families at a distance</p></li>
+      @php
+      $membershipLevels = $membershipLevels ?? collect([
+          (object)['name' => 'Silver', 'description' => 'Occasional, dependable help'],
+          (object)['name' => 'Gold', 'description' => 'Regular, ongoing coordination'],
+          (object)['name' => 'Platinum', 'description' => 'Complex situations and families at a distance'],
+      ]);
+      @endphp
+      @foreach($membershipLevels as $membership)
+      <li data-tilt><span class="chip__swatch chip__swatch--{{ strtolower($membership->name) }}" aria-hidden="true"></span><h3>{{ $membership->name }}</h3><p>{{ $membership->description }}</p></li>
+      @endforeach
     </ul>
-    <p class="tiers__more"><a class="tlink" href="price-menu.html">How pricing works, and which level fits<svg class="i" aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg></a></p>
+    <p class="tiers__more"><a class="tlink" href="{{ $tiers['link_url'] ?? '/price-menu' }}">{{ $tiers['link_text'] ?? 'How pricing works, and which level fits' }}<svg class="i" aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg></a></p>
   </div>
 </section>
 
 <section class="questions" aria-labelledby="faq-title">
   <div class="wrap questions__grid">
     <div class="questions__head">
-      <p class="eyebrow">Questions</p>
-      <h2 id="faq-title" data-split>Before you <em>refer</em></h2>
-      <p>Anything else, ask us on WhatsApp or call 01225 338436.</p>
+      <p class="eyebrow">{{ $questions['eyebrow'] ?? 'Questions' }}</p>
+      <h2 id="faq-title" data-split>@safeHtml($questions['title'] ?? 'Before you <em>refer</em>')</h2>
+      <p>{{ $questions['description'] ?? 'Anything else, ask us on WhatsApp or call 01225 338436.' }}</p>
     </div>
     <div class="faq" data-faq>
-  <div class="faq__item">
-    <h3 class="faq__q"><button type="button" aria-expanded="false" aria-controls="hfaq-a0" id="hfaq-q0">Is Stonemere a care agency?<span class="faq__icon" aria-hidden="true"></span></button></h3>
-    <div class="faq__a" id="hfaq-a0" role="region" aria-labelledby="hfaq-q0"><div class="faq__inner"><p>No. We do not provide personal care, nursing or medical treatment. We coordinate the practical side of a client's life and work alongside the care provider, health team or solicitor who is already involved.</p></div></div>
-  </div>
-  <div class="faq__item">
-    <h3 class="faq__q"><button type="button" aria-expanded="false" aria-controls="hfaq-a1" id="hfaq-q1">Who can refer a client to Stonemere?<span class="faq__icon" aria-hidden="true"></span></button></h3>
-    <div class="faq__a" id="hfaq-a1" role="region" aria-labelledby="hfaq-q1"><div class="faq__inner"><p>Domiciliary care companies, solicitors, healthcare professionals, property professionals and other organisations can refer. Families can contact us directly, and so can clients themselves.</p></div></div>
-  </div>
-  <div class="faq__item">
-    <h3 class="faq__q"><button type="button" aria-expanded="false" aria-controls="hfaq-a2" id="hfaq-q2">Who pays for the work?<span class="faq__icon" aria-hidden="true"></span></button></h3>
-    <div class="faq__a" id="hfaq-a2" role="region" aria-labelledby="hfaq-q2"><div class="faq__inner"><p>The client, their family or representative, or the referring organisation. Who pays, what is included and what is charged separately is agreed in writing before any work begins.</p></div></div>
-  </div>
-  <div class="faq__item">
-    <h3 class="faq__q"><button type="button" aria-expanded="false" aria-controls="hfaq-a3" id="hfaq-q3">Which areas do you cover?<span class="faq__icon" aria-hidden="true"></span></button></h3>
-    <div class="faq__a" id="hfaq-a3" role="region" aria-labelledby="hfaq-q3"><div class="faq__inner"><p>Bath first, concentrating on about a five-mile radius of the city, then the wider Bath &amp; North East Somerset area. We can coordinate matters further afield for existing clients and their families.</p></div></div>
-  </div>
-  <div class="faq__item">
-    <h3 class="faq__q"><button type="button" aria-expanded="false" aria-controls="hfaq-a4" id="hfaq-q4">Can you help at short notice?<span class="faq__icon" aria-hidden="true"></span></button></h3>
-    <div class="faq__a" id="hfaq-a4" role="region" aria-labelledby="hfaq-q4"><div class="faq__inner"><p>Yes. Same-day support and out-of-hours assistance are part of our Urgent &amp; Complex Case Support. Call 01225 338436 and tell us what has happened.</p></div></div>
-  </div>
-  <div class="faq__item">
-    <h3 class="faq__q"><button type="button" aria-expanded="false" aria-controls="hfaq-a5" id="hfaq-q5">What does it cost?<span class="faq__icon" aria-hidden="true"></span></button></h3>
-    <div class="faq__a" id="hfaq-a5" role="region" aria-labelledby="hfaq-q5"><div class="faq__inner"><p>Ongoing support runs on a monthly membership credited to the client's own account. Transport, purchases, third-party costs and crisis work are charged separately and agreed first. The <a href="price-menu.html">price menu</a> explains how it works.</p></div></div>
-  </div>
-</div>
+      @php
+      $faqItems = $faqItems ?? collect([
+          (object)['question' => 'Is Stonemere a care agency?', 'answer' => 'No. We do not provide personal care, nursing or medical treatment. We coordinate the practical side of a client\'s life and work alongside the care provider, health team or solicitor who is already involved.'],
+          (object)['question' => 'Who can refer a client to Stonemere?', 'answer' => 'Domiciliary care companies, solicitors, healthcare professionals, property professionals and other organisations can refer. Families can contact us directly, and so can clients themselves.'],
+          (object)['question' => 'Who pays for the work?', 'answer' => 'The client, their family or representative, or the referring organisation. Who pays, what is included and what is charged separately is agreed in writing before any work begins.'],
+          (object)['question' => 'Which areas do you cover?', 'answer' => 'Bath first, concentrating on about a five-mile radius of the city, then the wider Bath & North East Somerset area. We can coordinate matters further afield for existing clients and their families.'],
+          (object)['question' => 'Can you help at short notice?', 'answer' => 'Yes. Same-day support and out-of-hours assistance are part of our Urgent & Complex Case Support. Call 01225 338436 and tell us what has happened.'],
+          (object)['question' => 'What does it cost?', 'answer' => 'Ongoing support runs on a monthly membership credited to the client\'s own account. Transport, purchases, third-party costs and crisis work are charged separately and agreed first. The <a href="/price-menu">price menu</a> explains how it works.'],
+      ]);
+      @endphp
+      @foreach($faqItems as $index => $faq)
+      <div class="faq__item">
+        <h3 class="faq__q"><button type="button" aria-expanded="false" aria-controls="hfaq-a{{ $index }}" id="hfaq-q{{ $index }}">{{ $faq->question }}<span class="faq__icon" aria-hidden="true"></span></button></h3>
+        <div class="faq__a" id="hfaq-a{{ $index }}" role="region" aria-labelledby="hfaq-q{{ $index }}"><div class="faq__inner"><p>@safeHtml($faq->answer)</p></div></div>
+      </div>
+      @endforeach
+    </div>
   </div>
 </section>
 
 <section class="contact-block" id="contact" aria-labelledby="contact-title">
   <div class="wrap contact-block__grid">
     <div class="contact-block__copy">
-      <p class="eyebrow eyebrow--light">Get in touch</p>
-      <h2 id="contact-title">Talk to Stonemere</h2>
-      <p>Tell us about the client and what they need. We will tell you honestly whether we can help, and what it would involve.</p>
+      <p class="eyebrow eyebrow--light">{{ $contact['eyebrow'] ?? 'Get in touch' }}</p>
+      <h2 id="contact-title">{{ $contact['title'] ?? 'Talk to Stonemere' }}</h2>
+      <p>{{ $contact['description'] ?? 'Tell us about the client and what they need. We will tell you honestly whether we can help, and what it would involve.' }}</p>
       <div class="contact-block__office">
-        <p class="contact-block__label">Bath</p>
-        <p class="contact-block__note">Covering Bath and Bath &amp; North East Somerset</p>
-        <a class="contact-block__phone" href="tel:+441225338436">01225 338436</a>
+        <p class="contact-block__label">{{ $contact['office_bath']['label'] ?? 'Bath' }}</p>
+        <p class="contact-block__note">{{ $contact['office_bath']['note'] ?? 'Covering Bath and Bath & North East Somerset' }}</p>
+        <a class="contact-block__phone" href="tel:{{ $settings_phone_tel }}">{{ $contact['office_bath']['phone'] ?? $settings_phone }}</a>
       </div>
       <div class="contact-block__office">
-        <p class="contact-block__label">WhatsApp</p>
-        <a class="contact-block__phone" href="https://wa.me/447891341414?text=Hello%20Stonemere%2C%20I%20would%20like%20to%20talk%20about%20some%20support." target="_blank" rel="noopener">07891 341414</a>
+        <p class="contact-block__label">{{ $contact['office_whatsapp']['label'] ?? 'WhatsApp' }}</p>
+        <a class="contact-block__phone" href="https://wa.me/{{ $settings_whatsapp_tel }}?text=Hello%20Stonemere%2C%20I%20would%20like%20to%20talk%20about%20some%20support." target="_blank" rel="noopener">{{ $contact['office_whatsapp']['phone'] ?? $settings_whatsapp }}</a>
       </div>
     </div>
     <form class="form form--dark" data-wa-form="enquiry" novalidate aria-labelledby="home-form-title">
@@ -434,11 +434,11 @@
       <p class="form__note">Please don&rsquo;t include a client&rsquo;s full name, date of birth or medical details in a WhatsApp message. Initials or a reference are enough; we take the rest safely once we have spoken.</p>
       <div class="form__actions">
         <button class="btn btn--gold" type="submit" data-magnetic><svg class="i" aria-hidden="true" focusable="false"><use href="#i-whatsapp"/></svg><span class="roll" data-text="Send on WhatsApp">Send on WhatsApp</span></button>
-        <p class="form__alt">or call <a href="tel:+441225338436">01225 338436</a></p>
+        <p class="form__alt">or call <a href="tel:{{ $settings_phone_tel }}">{{ $settings_phone }}</a></p>
       </div>
       <div class="form__success" role="status" hidden>
         <p class="form__success-title"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-check"/></svg>WhatsApp has opened with your message.</p>
-        <p>Press send in WhatsApp to reach us. If it didn&rsquo;t open, call <a href="tel:+441225338436">01225 338436</a>.</p>
+        <p>Press send in WhatsApp to reach us. If it didn&rsquo;t open, call <a href="tel:{{ $settings_phone_tel }}">{{ $settings_phone }}</a>.</p>
       </div>
     </form>
   </div>

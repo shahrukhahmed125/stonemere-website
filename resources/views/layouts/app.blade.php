@@ -3,8 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>@yield('title', 'Stonemere Life Management | Practical coordination for care providers, solicitors &amp; health professionals in Bath')</title>
-<meta name="description" content="@yield('meta_description', 'One named contact who coordinates the practical side of a client’s life in Bath: family liaison, care liaison, property and urgent cases, alongside care providers, solicitors and health teams.')">
+<meta name="csrf-token" content="{{ csrf_token() }}">
+<title>@yield('title', $settings_meta_title)</title>
+<meta name="description" content="@yield('meta_description', $settings_meta_description)">
 @hasSection('meta_keywords')
 <meta name="keywords" content="@yield('meta_keywords')">
 @endif
@@ -12,19 +13,27 @@
 <link rel="canonical" href="@yield('canonical_url', url()->current())">
 <meta name="theme-color" content="#1F2943">
 <meta property="og:type" content="@yield('og_type', 'website')">
-<meta property="og:site_name" content="Stonemere Life Management">
+<meta property="og:site_name" content="{{ $settings_company_name }}">
 <meta property="og:locale" content="en_GB">
-<meta property="og:title" content="Stonemere Life Management | Practical coordination for care providers, solicitors &amp; health professionals in Bath">
-<meta property="og:description" content="One named contact who coordinates the practical side of a client's life in Bath: family liaison, care liaison, property and urgent cases, alongside care providers, solicitors and health teams.">
-<meta property="og:url" content="https://www.stonemeremanagement.com/">
+<meta property="og:title" content="@yield('og_title', $settings_meta_title)">
+<meta property="og:description" content="@yield('og_description', $settings_meta_description)">
+<meta property="og:url" content="@yield('og_url', url()->current())">
+@if($settings_og_image)
+<meta property="og:image" content="{{ $settings_og_image }}">
+@else
 <meta property="og:image" content="https://www.stonemeremanagement.com/images/og-image.jpg">
+@endif
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Stonemere Life Management, Bath">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Stonemere Life Management | Practical coordination for care providers, solicitors &amp; health professionals in Bath">
-<meta name="twitter:description" content="One named contact who coordinates the practical side of a client's life in Bath: family liaison, care liaison, property and urgent cases, alongside care providers, solicitors and health teams.">
+<meta property="og:image:alt" content="{{ $settings_company_name }}, Bath">
+<meta name="twitter:card" content="@yield('twitter_card', 'summary_large_image')">
+<meta name="twitter:title" content="@yield('twitter_title', $settings_meta_title)">
+<meta name="twitter:description" content="@yield('twitter_description', $settings_meta_description)">
+@if($settings_twitter_image)
+<meta name="twitter:image" content="{{ $settings_twitter_image }}">
+@else
 <meta name="twitter:image" content="https://www.stonemeremanagement.com/images/og-image.jpg">
+@endif
 <link rel="icon" href="favicon.ico" sizes="48x48">
 <link rel="icon" href="{{ asset('assets/images/favicon.svg') }}" type="image/svg+xml">
 <link rel="icon" href="{{ asset('assets/images/favicon-32.png') }}" type="image/png" sizes="32x32">
@@ -45,148 +54,54 @@
   setTimeout(function () { if (!h.classList.contains('ready')) h.classList.add('fallback'); }, 3000);
 })(document);
 </script>
-<script type="application/ld+json">
-[
- {
-  "@context": "https://schema.org",
-  "@type": "ProfessionalService",
-  "@id": "https://www.stonemeremanagement.com/#business",
-  "name": "Stonemere Life Management",
-  "alternateName": "Stonemere",
-  "url": "https://www.stonemeremanagement.com/",
-  "image": "https://www.stonemeremanagement.com/images/og-image.jpg",
-  "logo": "https://www.stonemeremanagement.com/images/brand/stonemere-logo.png",
-  "description": "Professional support for businesses and organisations whose clients, residents or families need practical coordination beyond their core service, in Bath and Bath & North East Somerset.",
-  "telephone": "+44 1225 338436",
-  "founder": {
-   "@type": "Person",
-   "name": "Paul Harrison"
-  },
-  "areaServed": [
-   {
-    "@type": "City",
-    "name": "Bath"
-   },
-   {
-    "@type": "AdministrativeArea",
-    "name": "Bath and North East Somerset"
-   }
-  ],
-  "audience": [
-   {
-    "@type": "Audience",
-    "audienceType": "Domiciliary care companies"
-   },
-   {
-    "@type": "Audience",
-    "audienceType": "Solicitors"
-   },
-   {
-    "@type": "Audience",
-    "audienceType": "Healthcare professionals"
-   },
-   {
-    "@type": "Audience",
-    "audienceType": "Property professionals"
-   },
-   {
-    "@type": "Audience",
-    "audienceType": "Families of older and vulnerable adults"
-   }
-  ],
-  "knowsAbout": [
-   "Life management",
-   "Care coordination",
-   "Case management",
-   "Hospital discharge support",
-   "Vacant property checks",
-   "House clearance",
-   "Crisis coordination"
-  ],
-  "hasOfferCatalog": {
-   "@type": "OfferCatalog",
-   "name": "Service areas",
-   "itemListElement": [
-    {
-     "@type": "OfferCatalog",
-     "name": "Family & Client Support",
-     "url": "https://www.stonemeremanagement.com/family-client-support.html"
-    },
-    {
-     "@type": "OfferCatalog",
-     "name": "Care & Professional Liaison",
-     "url": "https://www.stonemeremanagement.com/care-professional-liaison.html"
-    },
-    {
-     "@type": "OfferCatalog",
-     "name": "Property & Asset Management",
-     "url": "https://www.stonemeremanagement.com/property-asset-management.html"
-    },
-    {
-     "@type": "OfferCatalog",
-     "name": "Urgent & Complex Case Support",
-     "url": "https://www.stonemeremanagement.com/urgent-complex-cases.html"
-    }
-   ]
-  }
- },
- {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-   {
-    "@type": "Question",
-    "name": "Is Stonemere a care agency?",
-    "acceptedAnswer": {
-     "@type": "Answer",
-     "text": "No. We do not provide personal care, nursing or medical treatment. We coordinate the practical side of a client's life and work alongside the care provider, health team or solicitor who is already involved."
-    }
-   },
-   {
-    "@type": "Question",
-    "name": "Who can refer a client to Stonemere?",
-    "acceptedAnswer": {
-     "@type": "Answer",
-     "text": "Domiciliary care companies, solicitors, healthcare professionals, property professionals and other organisations can refer. Families can contact us directly, and so can clients themselves."
-    }
-   },
-   {
-    "@type": "Question",
-    "name": "Who pays for the work?",
-    "acceptedAnswer": {
-     "@type": "Answer",
-     "text": "The client, their family or representative, or the referring organisation. Who pays, what is included and what is charged separately is agreed in writing before any work begins."
-    }
-   },
-   {
-    "@type": "Question",
-    "name": "Which areas do you cover?",
-    "acceptedAnswer": {
-     "@type": "Answer",
-     "text": "Bath first, concentrating on about a five-mile radius of the city, then the wider Bath & North East Somerset area. We can coordinate matters further afield for existing clients and their families."
-    }
-   },
-   {
-    "@type": "Question",
-    "name": "Can you help at short notice?",
-    "acceptedAnswer": {
-     "@type": "Answer",
-     "text": "Yes. Same-day support and out-of-hours assistance are part of our Urgent & Complex Case Support. Call 01225 338436 and tell us what has happened."
-    }
-   },
-   {
-    "@type": "Question",
-    "name": "What does it cost?",
-    "acceptedAnswer": {
-     "@type": "Answer",
-     "text": "Ongoing support runs on a monthly membership credited to the client's own account. Transport, purchases, third-party costs and crisis work are charged separately and agreed first. The price menu explains how it works."
-    }
-   }
-  ]
- }
-]
-</script>
 @endverbatim
+@php
+$ldEntities = [];
+try {
+    $ldAreas = \App\Models\ServiceArea::published()->ordered()->get();
+    $ldFaqs = \App\Models\FaqItem::published()->ordered()->get();
+    $ldAudiences = \App\Models\ProfessionalAudience::published()->ordered()->get();
+} catch (\Exception $e) {
+    $ldAreas = collect(); $ldFaqs = collect(); $ldAudiences = collect();
+}
+$ldEntities[] = [
+    '@context' => 'https://schema.org',
+    '@type' => 'ProfessionalService',
+    '@id' => url('/').'#business',
+    'name' => $settings_company_name,
+    'alternateName' => 'Stonemere',
+    'url' => url('/'),
+    'image' => $settings_og_image ?: asset('assets/images/og-image.jpg'),
+    'description' => $settings_meta_description,
+    'telephone' => '+44'.preg_replace('/\D/', '', preg_replace('/^0/', '', $settings_phone)),
+    'areaServed' => [
+        ['@type' => 'City', 'name' => 'Bath'],
+        ['@type' => 'AdministrativeArea', 'name' => 'Bath and North East Somerset'],
+    ],
+    'audience' => $ldAudiences->isNotEmpty()
+        ? $ldAudiences->map(fn ($a) => ['@type' => 'Audience', 'audienceType' => strip_tags($a->title)])->push(['@type' => 'Audience', 'audienceType' => 'Families of older and vulnerable adults'])->values()->all()
+        : [['@type' => 'Audience', 'audienceType' => 'Domiciliary care companies'], ['@type' => 'Audience', 'audienceType' => 'Solicitors'], ['@type' => 'Audience', 'audienceType' => 'Healthcare professionals'], ['@type' => 'Audience', 'audienceType' => 'Property professionals'], ['@type' => 'Audience', 'audienceType' => 'Families of older and vulnerable adults']],
+    'hasOfferCatalog' => [
+        '@type' => 'OfferCatalog',
+        'name' => 'Service areas',
+        'itemListElement' => $ldAreas->isNotEmpty()
+            ? $ldAreas->map(fn ($a) => ['@type' => 'OfferCatalog', 'name' => strip_tags($a->name), 'url' => route($a->slug)])->values()->all()
+            : [],
+    ],
+];
+if ($ldFaqs->isNotEmpty()) {
+    $ldEntities[] = [
+        '@context' => 'https://schema.org',
+        '@type' => 'FAQPage',
+        'mainEntity' => $ldFaqs->map(fn ($f) => [
+            '@type' => 'Question',
+            'name' => $f->question,
+            'acceptedAnswer' => ['@type' => 'Answer', 'text' => strip_tags($f->answer)],
+        ])->values()->all(),
+    ];
+}
+@endphp
+<script type="application/ld+json">{!! json_encode($ldEntities, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_PRETTY_PRINT) !!}</script>
 </head>
 <body class="page-home">
 <a class="skip" href="#main">Skip to content</a>
@@ -219,7 +134,7 @@
     <nav class="nav nav--left" aria-label="Primary">
       <ul role="list"><li><a class="nav__link" href="{{ route('services') }}" @if(request()->routeIs('services')) aria-current="page" @endif><span class="roll" data-text="Services">Services</span></a></li><li><a class="nav__link" href="{{ route('professionals') }}" @if(request()->routeIs('professionals')) aria-current="page" @endif><span class="roll" data-text="Professionals">Professionals</span></a></li><li><a class="nav__link" href="{{ route('price-menu') }}" @if(request()->routeIs('price-menu')) aria-current="page" @endif><span class="roll" data-text="Price Menu">Price Menu</span></a></li></ul>
     </nav>
-    <a class="brand" href="{{ route('home') }}" aria-label="Stonemere Life Management, home">
+    <a class="brand" href="{{ route('home') }}" aria-label="{{ $settings_company_name }}, home">
       <img class="brand__logo brand__logo--light" src="{{ asset('assets/images/brand/stonemere-logo-reverse.svg') }}" width="230" height="46" alt="">
       <img class="brand__logo brand__logo--dark" src="{{ asset('assets/images/brand/stonemere-logo.svg') }}" width="230" height="46" alt="">
     </a>
@@ -253,8 +168,8 @@
     <div class="menu__side">
       <div class="menu__preview" aria-hidden="true"><img src="{{ asset('assets/images/art/page-about.svg') }}" alt="" width="800" height="1000"></div>
       <div class="menu__contact">
-        <a class="btn btn--gold" href="https://wa.me/447891341414?text=Hello%20Stonemere%2C%20I%20would%20like%20to%20talk%20about%20some%20support." target="_blank" rel="noopener"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-whatsapp"/></svg><span>Message on WhatsApp</span></a>
-        <a class="menu__phone" href="tel:+441225338436"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-phone"/></svg>01225 338436</a>
+        <a class="btn btn--gold" href="https://wa.me/{{ $settings_whatsapp_tel }}?text=Hello%20Stonemere%2C%20I%20would%20like%20to%20talk%20about%20some%20support." target="_blank" rel="noopener"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-whatsapp"/></svg><span>Message on WhatsApp</span></a>
+        <a class="menu__phone" href="tel:{{ $settings_phone_tel }}"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-phone"/></svg>{{ $settings_phone }}</a>
       </div>
     </div>
   </div>
@@ -266,15 +181,15 @@
   <div class="site-footer__cta">
     <div class="wrap">
       <p class="eyebrow eyebrow--light">One point of contact</p>
-      <a class="footer-word" href="https://wa.me/447891341414?text=Hello%20Stonemere%2C%20I%20would%20like%20to%20talk%20about%20a%20client." target="_blank" rel="noopener" data-cursor="Message">
-        <img src="{{ asset('assets/images/brand/stonemere-wordmark-gold.svg') }}" width="1600" height="230" alt="Stonemere: message us on WhatsApp">
+      <a class="footer-word" href="https://wa.me/{{ $settings_whatsapp_tel }}?text=Hello%20Stonemere%2C%20I%20would%20like%20to%20talk%20about%20a%20client." target="_blank" rel="noopener" data-cursor="Message">
+        <img src="{{ asset('assets/images/brand/stonemere-wordmark-gold.svg') }}" width="1600" height="230" alt="{{ $settings_company_name }}: message us on WhatsApp">
       </a>
     </div>
   </div>
   <div class="wrap site-footer__grid">
     <div class="site-footer__brand">
-      <img src="{{ asset('assets/images/brand/stonemere-logo-stacked-reverse.svg') }}" width="220" height="210" alt="Stonemere Life Management" loading="lazy">
-      <p>Practical coordination for the clients of care providers, solicitors, healthcare and property professionals, and for their families. Bath and Bath &amp; North East Somerset.</p>
+      <img src="{{ asset('assets/images/brand/stonemere-logo-stacked-reverse.svg') }}" width="220" height="210" alt="{{ $settings_company_name }}" loading="lazy">
+      <p>{{ $settings_tagline ?: 'Practical coordination for the clients of care providers, solicitors, healthcare and property professionals, and for their families. Bath and Bath & North East Somerset.' }}</p>
     </div>
     <nav class="site-footer__col" aria-label="Service areas">
       <h2 class="site-footer__title">Service areas</h2>
@@ -287,15 +202,17 @@
     <div class="site-footer__col">
       <h2 class="site-footer__title">Talk to us</h2>
       <ul role="list" class="site-footer__contact">
-        <li><a href="tel:+441225338436"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-phone"/></svg>01225 338436</a></li>
-        <li><a href="https://wa.me/447891341414?text=Hello%20Stonemere%2C%20I%20would%20like%20to%20talk%20about%20some%20support." target="_blank" rel="noopener"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-whatsapp"/></svg>WhatsApp 07891 341414</a></li>
-        <li data-email-row hidden><a data-email href="#"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-mail"/></svg><span data-email-text></span></a></li>
-        <li><svg class="i" aria-hidden="true" focusable="false"><use href="#i-pin"/></svg>Bath, Somerset</li>
+        <li><a href="tel:{{ $settings_phone_tel }}"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-phone"/></svg>{{ $settings_phone }}</a></li>
+        <li><a href="https://wa.me/{{ $settings_whatsapp_tel }}?text=Hello%20Stonemere%2C%20I%20would%20like%20to%20talk%20about%20some%20support." target="_blank" rel="noopener"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-whatsapp"/></svg>WhatsApp {{ $settings_whatsapp }}</a></li>
+        @if($settings_email)
+        <li><a href="mailto:{{ $settings_email }}"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-mail"/></svg>{{ $settings_email }}</a></li>
+        @endif
+        <li><svg class="i" aria-hidden="true" focusable="false"><use href="#i-pin"/></svg>{{ $settings_address }}</li>
       </ul>
     </div>
   </div>
   <div class="wrap site-footer__base">
-    <p>&copy; <span data-year>2026</span> Stonemere Life Management. We coordinate practical matters; we do not provide medical treatment, nursing, regulated personal care, or legal or financial advice. If someone is in immediate danger, call 999.</p>
+    <p>&copy; <span data-year>2026</span> {{ $settings_company_name }}. We coordinate practical matters; we do not provide medical treatment, nursing, regulated personal care, or legal or financial advice. If someone is in immediate danger, call 999.</p>
     <ul role="list" class="site-footer__legal">
       <li><a href="{{ route('privacy') }}">Privacy</a></li>
       <li><a href="{{ route('terms') }}">Terms</a></li>
@@ -305,11 +222,11 @@
   </div>
 </footer>
 <aside class="float-wa" aria-label="WhatsApp">
-  <a href="https://wa.me/447891341414?text=Hello%20Stonemere%2C%20I%20would%20like%20to%20talk%20about%20some%20support." target="_blank" rel="noopener" aria-label="Message Stonemere on WhatsApp (opens in a new tab)"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-whatsapp"/></svg></a>
+  <a href="https://wa.me/{{ $settings_whatsapp_tel }}?text=Hello%20Stonemere%2C%20I%20would%20like%20to%20talk%20about%20some%20support." target="_blank" rel="noopener" aria-label="Message {{ $settings_company_name }} on WhatsApp (opens in a new tab)"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-whatsapp"/></svg></a>
 </aside>
 <nav class="action-bar" aria-label="Quick contact">
-  <a href="tel:+441225338436"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-phone"/></svg>Call</a>
-  <a href="https://wa.me/447891341414?text=Hello%20Stonemere%2C%20I%20would%20like%20to%20talk%20about%20some%20support." target="_blank" rel="noopener"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-whatsapp"/></svg>WhatsApp</a>
+  <a href="tel:{{ $settings_phone_tel }}"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-phone"/></svg>Call</a>
+  <a href="https://wa.me/{{ $settings_whatsapp_tel }}?text=Hello%20Stonemere%2C%20I%20would%20like%20to%20talk%20about%20some%20support." target="_blank" rel="noopener"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-whatsapp"/></svg>WhatsApp</a>
 </nav>
 <script src="{{ asset('assets/js/config.js') }}"></script>
 <script src="{{ asset('assets/js/main.js') }}" defer></script>

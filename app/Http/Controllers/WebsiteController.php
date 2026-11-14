@@ -8,67 +8,225 @@ class WebsiteController extends Controller
 {
     public function home()
     {
-        return view('pages.home');
+        try {
+            $page = \App\Models\Page::where('slug', 'home')->where('is_published', true)->first();
+        } catch (\Exception $e) {
+            $page = null;
+        }
+        
+        try {
+            $membershipLevels = \App\Models\MembershipLevel::published()->ordered()->get();
+        } catch (\Exception $e) {
+            $membershipLevels = collect();
+        }
+        
+        try {
+            $faqItems = \App\Models\FaqItem::published()->ordered()->get();
+        } catch (\Exception $e) {
+            $faqItems = collect();
+        }
+        
+        return view('pages.home', [
+            'page' => $page,
+            'content' => $page?->content ?? [],
+            'membershipLevels' => $membershipLevels,
+            'faqItems' => $faqItems,
+        ]);
     }
 
     public function about()
     {
-        return view('pages.about');
+        try {
+            $page = \App\Models\Page::where('slug', 'about')->where('is_published', true)->first();
+        } catch (\Exception $e) {
+            $page = null;
+        }
+        return view('pages.about', [
+            'page' => $page,
+            'content' => $page?->content ?? [],
+        ]);
     }
 
     public function contact()
     {
-        return view('pages.contact');
+        try {
+            $page = \App\Models\Page::where('slug', 'contact')->where('is_published', true)->first();
+        } catch (\Exception $e) {
+            $page = null;
+        }
+        return view('pages.contact', [
+            'page' => $page,
+            'content' => $page?->content ?? [],
+        ]);
     }
 
     public function team()
     {
-        return view('pages.team');
+        try {
+            $page = \App\Models\Page::where('slug', 'team')->where('is_published', true)->first();
+        } catch (\Exception $e) {
+            $page = null;
+        }
+        
+        try {
+            $teamMembers = \App\Models\TeamMember::published()->ordered()->get();
+        } catch (\Exception $e) {
+            $teamMembers = collect();
+        }
+        
+        return view('pages.team', [
+            'page' => $page,
+            'content' => $page?->content ?? [],
+            'teamMembers' => $teamMembers,
+        ]);
     }
 
     public function professionals()
     {
-        return view('pages.professionals');
+        try {
+            $page = \App\Models\Page::where('slug', 'professionals')->where('is_published', true)->first();
+        } catch (\Exception $e) {
+            $page = null;
+        }
+        
+        try {
+            $audiences = \App\Models\ProfessionalAudience::published()->ordered()->get();
+        } catch (\Exception $e) {
+            $audiences = collect();
+        }
+        
+        return view('pages.professionals', [
+            'page' => $page,
+            'content' => $page?->content ?? [],
+            'audiences' => $audiences,
+        ]);
     }
     
     public function services()
     {
-        return view('pages.services');
+        try {
+            $page = \App\Models\Page::where('slug', 'services')->where('is_published', true)->first();
+        } catch (\Exception $e) {
+            $page = null;
+        }
+        
+        try {
+            $serviceAreas = \App\Models\ServiceArea::published()->ordered()->get();
+        } catch (\Exception $e) {
+            $serviceAreas = collect();
+        }
+        
+        return view('pages.services', [
+            'page' => $page,
+            'content' => $page?->content ?? [],
+            'serviceAreas' => $serviceAreas,
+        ]);
     }
     
     public function priceMenu()
     {
-        return view('pages.price-menu');
+        try {
+            $page = \App\Models\Page::where('slug', 'price-menu')->where('is_published', true)->first();
+        } catch (\Exception $e) {
+            $page = null;
+        }
+        
+        try {
+            $membershipLevels = \App\Models\MembershipLevel::published()->ordered()->get();
+        } catch (\Exception $e) {
+            $membershipLevels = collect();
+        }
+
+        try {
+            $pricingItems = \App\Models\PricingItem::where('type', 'separate')->orderBy('sort_order')->get();
+        } catch (\Exception $e) {
+            $pricingItems = collect();
+        }
+
+        return view('pages.price-menu', [
+            'page' => $page,
+            'content' => $page?->content ?? [],
+            'membershipLevels' => $membershipLevels,
+            'pricingItems' => $pricingItems,
+        ]);
+    }
+
+    private function loadServiceArea(string $slug)
+    {
+        try {
+            return \App\Models\ServiceArea::where('slug', $slug)
+                ->with(['services' => fn ($q) => $q->published()->ordered(), 'scenarios' => fn ($q) => $q->ordered(), 'timelineItems' => fn ($q) => $q->ordered(), 'checkItems' => fn ($q) => $q->ordered()])
+                ->first();
+        } catch (\Exception $e) {
+            return null;
+        }
+    }
+
+    private function serviceAreaPage(string $slug)
+    {
+        try {
+            return \App\Models\Page::where('slug', $slug)->where('is_published', true)->first();
+        } catch (\Exception $e) {
+            return null;
+        }
     }
 
     public function familyClientSupport()
     {
-        return view('pages.family-client-support');
+        return view('pages.family-client-support', [
+            'serviceArea' => $this->loadServiceArea('family-client-support'),
+            'page' => $this->serviceAreaPage('family-client-support'),
+        ]);
     }
 
     public function careProfessionalLiaison()
     {
-        return view('pages.care-professional-liaison');
+        return view('pages.care-professional-liaison', [
+            'serviceArea' => $this->loadServiceArea('care-professional-liaison'),
+            'page' => $this->serviceAreaPage('care-professional-liaison'),
+        ]);
     }
-    
+
     public function propertyAssetManagement()
     {
-        return view('pages.property-asset-management');
+        return view('pages.property-asset-management', [
+            'serviceArea' => $this->loadServiceArea('property-asset-management'),
+            'page' => $this->serviceAreaPage('property-asset-management'),
+        ]);
     }
 
     public function urgentComplexCases()
     {
-        return view('pages.urgent-complex-cases');
+        return view('pages.urgent-complex-cases', [
+            'serviceArea' => $this->loadServiceArea('urgent-complex-cases'),
+            'page' => $this->serviceAreaPage('urgent-complex-cases'),
+        ]);
     }
 
     public function privacy()
     {
-        return view('pages.privacy');
+        try {
+            $page = \App\Models\Page::where('slug', 'privacy')->where('is_published', true)->first();
+        } catch (\Exception $e) {
+            $page = null;
+        }
+        return view('pages.privacy', [
+            'page' => $page,
+            'content' => $page?->content ?? [],
+        ]);
     }
 
     public function terms()
     {
-        return view('pages.terms');
+        try {
+            $page = \App\Models\Page::where('slug', 'terms')->where('is_published', true)->first();
+        } catch (\Exception $e) {
+            $page = null;
+        }
+        return view('pages.terms', [
+            'page' => $page,
+            'content' => $page?->content ?? [],
+        ]);
     }
 
 }

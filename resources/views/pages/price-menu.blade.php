@@ -1,5 +1,11 @@
 @extends('layouts.app')
-@section('title','Stonemere Life Management | Practical coordination for care providers, solicitors &amp; health professionals in Bath')
+@section('title', $page?->meta_title ?: 'Stonemere Life Management | Practical coordination for care providers, solicitors & health professionals in Bath')
+@if($page?->meta_description)
+@section('meta_description', $page->meta_description)
+@endif
+@if($page?->canonical_url)
+@section('canonical_url', $page->canonical_url)
+@endif
 
 @section('css')
 
@@ -15,11 +21,11 @@
   </div>
   <div class="wrap phero__grid">
     <div class="phero__text">
-      <nav class="crumbs" aria-label="Breadcrumb"><ol role="list"><li><a href="index.html">Home</a></li><li><span aria-current="page">Price menu</span></li></ol></nav>
-      <p class="eyebrow eyebrow--light">Price menu</p>
-      <h1 id="page-title" class="phero__title" data-split>Clear charges, <em>agreed upfront</em></h1>
-      <p class="phero__lead" data-reveal>Ongoing support runs on a simple membership credited to the client&rsquo;s own account. Everything else is explained and agreed in advance. Current rates are confirmed in writing.</p>
-      <div class="actions" data-reveal><a class="btn btn--gold" href="https://wa.me/447891341414?text=Hello%20Stonemere%2C%20please%20could%20you%20send%20me%20your%20current%20rates%3F" target="_blank" rel="noopener" data-magnetic><svg class="i" aria-hidden="true" focusable="false"><use href="#i-whatsapp"/></svg><span class="roll" data-text="Ask for current rates">Ask for current rates</span></a><a class="btn btn--line-light" href="#finder" data-magnetic><span class="roll" data-text="Find a level">Find a level</span><svg class="i" aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg></a></div>
+      <nav class="crumbs" aria-label="Breadcrumb"><ol role="list"><li><a href="{{ route('home') }}">Home</a></li><li><span aria-current="page">Price menu</span></li></ol></nav>
+      <p class="eyebrow eyebrow--light">{{ $content['hero']['eyebrow'] ?? 'Price menu' }}</p>
+      <h1 id="page-title" class="phero__title" data-split>@safeHtml($content['hero']['title'] ?? 'Clear charges, <em>agreed upfront</em>')</h1>
+      <p class="phero__lead" data-reveal>{{ $content['hero']['lead'] ?? 'Ongoing support runs on a simple membership credited to the client&rsquo;s own account. Everything else is explained and agreed in advance. Current rates are confirmed in writing.' }}</p>
+      <div class="actions" data-reveal><a class="btn btn--gold" href="{{ $content['hero']['cta_primary']['url'] ?? 'https://wa.me/447891341414?text=Hello%20Stonemere%2C%20please%20could%20you%20send%20me%20your%20current%20rates%3F' }}" target="_blank" rel="noopener" data-magnetic><svg class="i" aria-hidden="true" focusable="false"><use href="#i-whatsapp"/></svg><span class="roll" data-text="{{ $content['hero']['cta_primary']['text'] ?? 'Ask for current rates' }}">{{ $content['hero']['cta_primary']['text'] ?? 'Ask for current rates' }}</span></a><a class="btn btn--line-light" href="{{ $content['hero']['cta_secondary']['url'] ?? '#finder' }}" data-magnetic><span class="roll" data-text="{{ $content['hero']['cta_secondary']['text'] ?? 'Find a level' }}">{{ $content['hero']['cta_secondary']['text'] ?? 'Find a level' }}</span><svg class="i" aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg></a></div>
     </div>
     <figure class="phero__art" data-reveal="mask">
       <img src="{{ asset('assets/images/art/page-price.svg') }}" width="800" height="1000" alt="Illustration of a ledger, in gold line on navy" fetchpriority="high">
@@ -30,45 +36,35 @@
 <section class="account" aria-labelledby="account-title">
   <div class="wrap">
     <div class="account__head">
-      <p class="eyebrow">The client account</p>
-      <h2 id="account-title" data-split>How the membership <em>works</em></h2>
+      <p class="eyebrow">{{ $content['account']['eyebrow'] ?? 'The client account' }}</p>
+      <h2 id="account-title" data-split>@safeHtml($content['account']['title'] ?? 'How the membership <em>works</em>')</h2>
     </div>
     <ol class="account__flow" role="list" data-draw>
-      <li data-reveal><span class="account__n">1</span><h3>Choose a level</h3><p>Silver, Gold or Platinum, depending on how much support is likely to be needed.</p></li>
-      <li data-reveal><span class="account__n">2</span><h3>Payments credit the account</h3><p>Monthly membership payments go into the client&rsquo;s own Stonemere account.</p></li>
-      <li data-reveal><span class="account__n">3</span><h3>Funds are used as we work</h3><p>The account is drawn down against Stonemere&rsquo;s time and services, and you can see how.</p></li>
+      @foreach($content['account']['steps'] ?? [
+          ['title' => 'Choose a level', 'text' => 'Silver, Gold or Platinum, depending on how much support is likely to be needed.'],
+          ['title' => 'Payments credit the account', 'text' => 'Monthly membership payments go into the client&rsquo;s own Stonemere account.'],
+          ['title' => 'Funds are used as we work', 'text' => 'The account is drawn down against Stonemere&rsquo;s time and services, and you can see how.'],
+      ] as $index => $step)
+      <li data-reveal><span class="account__n">{{ $index + 1 }}</span><h3>{{ $step['title'] ?? '' }}</h3><p>@safeHtml($step['text'] ?? '')</p></li>
+      @endforeach
     </ol>
   </div>
 </section>
 
 <section class="levels" aria-labelledby="levels-title">
   <div class="wrap">
-    <div class="levels__head"><p class="eyebrow eyebrow--light">Membership levels</p><h2 id="levels-title" data-split>Three levels</h2></div>
+    <div class="levels__head"><p class="eyebrow eyebrow--light">{{ $content['levels']['eyebrow'] ?? 'Membership levels' }}</p><h2 id="levels-title" data-split>@safeHtml($content['levels']['title'] ?? 'Three levels')</h2></div>
     <div class="levels__grid">
-      <article class="level level--silver" data-reveal data-tilt>
+      @foreach($membershipLevels ?? [] as $level)
+      <article class="level level--{{ $level->slug }}" data-reveal data-tilt>
         <span class="level__swatch" aria-hidden="true"></span>
-        <h3 class="level__name">Silver</h3>
-        <p class="level__for">Occasional, dependable help</p>
-        <ul class="ticks" role="list"><li><svg class="i" aria-hidden="true" focusable="false"><use href="#i-check"/></svg>A named Stonemere contact</li><li><svg class="i" aria-hidden="true" focusable="false"><use href="#i-check"/></svg>Help with appointments, admin and the odd practical problem</li><li><svg class="i" aria-hidden="true" focusable="false"><use href="#i-check"/></svg>Typically suits clients who are largely independent</li></ul>
-        <p class="level__price">Monthly membership &middot; rate on request</p>
-        <a class="tlink" href="https://wa.me/447891341414?text=Hello%20Stonemere%2C%20I%27d%20like%20to%20ask%20about%20the%20Silver%20membership." target="_blank" rel="noopener">Ask about Silver<svg class="i" aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg></a>
+        <h3 class="level__name">{{ $level->name }}</h3>
+        <p class="level__for">{{ $level->description }}</p>
+        <ul class="ticks" role="list">@foreach($level->features ?? [] as $feature)<li><svg class="i" aria-hidden="true" focusable="false"><use href="#i-check"/></svg>@safeHtml($feature)</li>@endforeach</ul>
+        <p class="level__price">{{ $level->price_text }}</p>
+        <a class="tlink" href="https://wa.me/447891341414?text={{ rawurlencode('Hello Stonemere, I\'d like to ask about the '.$level->name.' membership.') }}" target="_blank" rel="noopener">Ask about {{ $level->name }}<svg class="i" aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg></a>
       </article>
-      <article class="level level--gold" data-reveal data-tilt>
-        <span class="level__swatch" aria-hidden="true"></span>
-        <h3 class="level__name">Gold</h3>
-        <p class="level__for">Regular, ongoing coordination</p>
-        <ul class="ticks" role="list"><li><svg class="i" aria-hidden="true" focusable="false"><use href="#i-check"/></svg>A named contact who holds the whole picture</li><li><svg class="i" aria-hidden="true" focusable="false"><use href="#i-check"/></svg>Regular practical help across the organisations involved</li><li><svg class="i" aria-hidden="true" focusable="false"><use href="#i-check"/></svg>Typically suits several organisations being involved</li></ul>
-        <p class="level__price">Monthly membership &middot; rate on request</p>
-        <a class="tlink" href="https://wa.me/447891341414?text=Hello%20Stonemere%2C%20I%27d%20like%20to%20ask%20about%20the%20Gold%20membership." target="_blank" rel="noopener">Ask about Gold<svg class="i" aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg></a>
-      </article>
-      <article class="level level--platinum" data-reveal data-tilt>
-        <span class="level__swatch" aria-hidden="true"></span>
-        <h3 class="level__name">Platinum</h3>
-        <p class="level__for">Complex situations and families at a distance</p>
-        <ul class="ticks" role="list"><li><svg class="i" aria-hidden="true" focusable="false"><use href="#i-check"/></svg>Coordination across many parties</li><li><svg class="i" aria-hidden="true" focusable="false"><use href="#i-check"/></svg>Frequent updates for families near and far</li><li><svg class="i" aria-hidden="true" focusable="false"><use href="#i-check"/></svg>Typically suits complex or changing circumstances</li></ul>
-        <p class="level__price">Monthly membership &middot; rate on request</p>
-        <a class="tlink" href="https://wa.me/447891341414?text=Hello%20Stonemere%2C%20I%27d%20like%20to%20ask%20about%20the%20Platinum%20membership." target="_blank" rel="noopener">Ask about Platinum<svg class="i" aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg></a>
-      </article>
+      @endforeach
     </div>
   </div>
 </section>
@@ -108,40 +104,28 @@
 <section class="separate" aria-labelledby="separate-title">
   <div class="wrap separate__grid">
     <div>
-      <p class="eyebrow">Charged separately</p>
-      <h2 id="separate-title" data-split>Always <em>agreed first</em></h2>
-      <p>These are not drawn from membership. Each one is explained and agreed before it is incurred.</p>
+      <p class="eyebrow">{{ $content['separate']['eyebrow'] ?? 'Charged separately' }}</p>
+      <h2 id="separate-title" data-split>@safeHtml($content['separate']['title'] ?? 'Always <em>agreed first</em>')</h2>
+      <p>{{ $content['separate']['text'] ?? 'These are not drawn from membership. Each one is explained and agreed before it is incurred.' }}</p>
     </div>
     <dl class="ledger">
-      <div data-reveal><dt>Transport</dt><dd>Including accompanied journeys</dd></div>
-      <div data-reveal><dt>Procurement</dt><dd>Goods and services bought on the client&rsquo;s behalf</dd></div>
-      <div data-reveal><dt>Third-party charges</dt><dd>Removals, storage, shipping, tradespeople and similar</dd></div>
-      <div data-reveal><dt>Crisis Management</dt><dd>Urgent work, charged separately when it is needed</dd></div>
-      <div data-reveal><dt>Organisations</dt><dd>Work for a referring organisation is quoted per case, in writing</dd></div>
+      @foreach(($pricingItems ?? collect()) as $item)
+      <div data-reveal><dt>{{ $item->name }}</dt><dd>@safeHtml($item->description)</dd></div>
+      @endforeach
     </dl>
   </div>
 </section>
 
 <section class="questions" aria-labelledby="prfaq-title">
   <div class="wrap questions__grid">
-    <div class="questions__head"><p class="eyebrow">Questions</p><h2 id="prfaq-title" data-split>About <em>pricing</em></h2></div>
+    <div class="questions__head"><p class="eyebrow">{{ $content['faqs']['eyebrow'] ?? 'Questions' }}</p><h2 id="prfaq-title" data-split>@safeHtml($content['faqs']['title'] ?? 'About <em>pricing</em>')</h2></div>
     <div class="faq" data-faq>
-  <div class="faq__item">
-    <h3 class="faq__q"><button type="button" aria-expanded="false" aria-controls="prfaq-a0" id="prfaq-q0">Why are there no prices on this page?<span class="faq__icon" aria-hidden="true"></span></button></h3>
-    <div class="faq__a" id="prfaq-a0" role="region" aria-labelledby="prfaq-q0"><div class="faq__inner"><p>Rates are confirmed in writing for each client, because the right level depends on how much coordination is needed. Ask and we will send current rates straight away.</p></div></div>
-  </div>
-  <div class="faq__item">
-    <h3 class="faq__q"><button type="button" aria-expanded="false" aria-controls="prfaq-a1" id="prfaq-q1">Can a family member or an organisation pay?<span class="faq__icon" aria-hidden="true"></span></button></h3>
-    <div class="faq__a" id="prfaq-a1" role="region" aria-labelledby="prfaq-q1"><div class="faq__inner"><p>Yes. The client, a family member or representative, or the referring organisation can fund the work. This is agreed in writing first.</p></div></div>
-  </div>
-  <div class="faq__item">
-    <h3 class="faq__q"><button type="button" aria-expanded="false" aria-controls="prfaq-a2" id="prfaq-q2">Can the level change?<span class="faq__icon" aria-hidden="true"></span></button></h3>
-    <div class="faq__a" id="prfaq-a2" role="region" aria-labelledby="prfaq-q2"><div class="faq__inner"><p>Yes. Clients can move between levels as circumstances change. Notice is set out in the written agreement.</p></div></div>
-  </div>
-  <div class="faq__item">
-    <h3 class="faq__q"><button type="button" aria-expanded="false" aria-controls="prfaq-a3" id="prfaq-q3">Will we see how the account is used?<span class="faq__icon" aria-hidden="true"></span></button></h3>
-    <div class="faq__a" id="prfaq-a3" role="region" aria-labelledby="prfaq-q3"><div class="faq__inner"><p>Yes. The client account is drawn down against Stonemere&rsquo;s time and services, and you can see how it has been used.</p></div></div>
-  </div>
+      @foreach($content['faqs']['items'] ?? [] as $index => $faq)
+      <div class="faq__item">
+        <h3 class="faq__q"><button type="button" aria-expanded="false" aria-controls="prfaq-a{{ $index }}" id="prfaq-q{{ $index }}">{{ $faq['question'] ?? '' }}<span class="faq__icon" aria-hidden="true"></span></button></h3>
+        <div class="faq__a" id="prfaq-a{{ $index }}" role="region" aria-labelledby="prfaq-q{{ $index }}"><div class="faq__inner"><p>@safeHtml($faq['answer'] ?? '')</p></div></div>
+      </div>
+      @endforeach
 </div>
   </div>
 </section>
@@ -149,13 +133,13 @@
 <section class="cta-band" aria-labelledby="cta-band-title">
   <div class="wrap cta-band__inner">
     <div>
-      <p class="eyebrow">Next step</p>
-      <h2 id="cta-band-title" data-split>Ask for current rates</h2>
-      <p>We will send them straight away and recommend honestly, even when that means the lowest level.</p>
+      <p class="eyebrow">{{ $content['cta']['eyebrow'] ?? 'Next step' }}</p>
+      <h2 id="cta-band-title" data-split>@safeHtml($content['cta']['title'] ?? 'Ask for current rates')</h2>
+      <p>{{ $content['cta']['text'] ?? 'We will send them straight away and recommend honestly, even when that means the lowest level.' }}</p>
     </div>
     <div class="actions actions--stack">
-      <a class="btn btn--gold" href="https://wa.me/447891341414?text=Hello%20Stonemere%2C%20please%20could%20you%20send%20me%20your%20current%20rates%3F" target="_blank" rel="noopener" data-magnetic><svg class="i" aria-hidden="true" focusable="false"><use href="#i-whatsapp"/></svg><span class="roll" data-text="Message on WhatsApp">Message on WhatsApp</span></a>
-      <a class="btn btn--line" href="tel:+441225338436" data-magnetic><svg class="i" aria-hidden="true" focusable="false"><use href="#i-phone"/></svg><span class="roll" data-text="Call 01225 338436">Call 01225 338436</span></a>
+      <a class="btn btn--gold" href="{{ $content['cta']['button_primary']['url'] ?? 'https://wa.me/447891341414?text=Hello%20Stonemere%2C%20please%20could%20you%20send%20me%20your%20current%20rates%3F' }}" target="_blank" rel="noopener" data-magnetic><svg class="i" aria-hidden="true" focusable="false"><use href="#i-whatsapp"/></svg><span class="roll" data-text="{{ $content['cta']['button_primary']['text'] ?? 'Message on WhatsApp' }}">{{ $content['cta']['button_primary']['text'] ?? 'Message on WhatsApp' }}</span></a>
+      <a class="btn btn--line" href="{{ $content['cta']['button_secondary']['url'] ?? 'tel:+441225338436' }}" data-magnetic><svg class="i" aria-hidden="true" focusable="false"><use href="#i-phone"/></svg><span class="roll" data-text="{{ $content['cta']['button_secondary']['text'] ?? 'Call 01225 338436' }}">{{ $content['cta']['button_secondary']['text'] ?? 'Call 01225 338436' }}</span></a>
     </div>
   </div>
 </section>

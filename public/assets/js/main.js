@@ -519,6 +519,20 @@
           + 'Phone: ' + d.get('phone') + '\n\n'
           + d.get('message');
         openWhatsApp(form, text);
+        var csrf = document.querySelector('meta[name="csrf-token"]');
+        if (csrf) {
+          fetch('/contact', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'Accept': 'application/json', 'X-CSRF-TOKEN': csrf.getAttribute('content') },
+            body: JSON.stringify({
+              name: d.get('name'),
+              phone: d.get('phone'),
+              organisation: d.get('organisation') || null,
+              role: d.get('role') || null,
+              message: d.get('message')
+            })
+          }).catch(function () {});
+        }
       });
     });
   }
