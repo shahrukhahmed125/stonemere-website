@@ -24,6 +24,8 @@ class HtmlSanitizerHelper
             ->allowElement('em', ['class'])
             ->allowElement('strong', ['class'])
             ->allowElement('br')
+            ->allowElement('h2', ['id'])
+            ->allowElement('h3', ['id'])
             ->allowElement('a', ['href', 'target', 'rel', 'class'])
             ->allowAttribute('class', 'a')
             ->allowAttribute('class', 'em')

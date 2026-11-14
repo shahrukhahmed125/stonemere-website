@@ -25,23 +25,23 @@
 @section('content')
 
 @php
-$legalSections = $privacyContent->sections ?? [];
+$legalDoc = $privacyContent?->document() ?? ['html' => '', 'toc' => []];
 @endphp
 
 <main id="main" tabindex="-1">
 <section class="legal" aria-labelledby="page-title">
   <div class="wrap legal__grid">
     <header class="legal__head">
-      <nav class="crumbs crumbs--dark" aria-label="Breadcrumb"><ol role="list"><li><a href="{{ route('home') }}">Home</a></li><li><span aria-current="page">{{ $privacyContent->doc_title ?? 'Privacy notice' }}</span></li></ol></nav>
-      <h1 id="page-title">{{ $privacyContent->doc_title ?? 'Privacy notice' }}</h1>
-      <p class="legal__date">{{ $privacyContent->doc_date ?? 'Last updated: November 2026' }}</p>
+      <nav class="crumbs crumbs--dark" aria-label="Breadcrumb"><ol role="list"><li><a href="{{ route('home') }}">Home</a></li><li><span aria-current="page">{{ $privacyContent->hero_title ?? 'Privacy notice' }}</span></li></ol></nav>
+      <h1 id="page-title">{{ $privacyContent->hero_title ?? 'Privacy notice' }}</h1>
+      <p class="legal__date">{{ $privacyContent->last_updated ?? 'Last updated: November 2026' }}</p>
       <p class="legal__review" role="note"><strong>Template for client review.</strong> This page is a starting template prepared by the web designer. Stonemere should check it against its own practices, and take advice where needed, before publishing. It is not legal advice.</p>
     </header>
-    <nav class="legal__toc" aria-label="On this page"><ol role="list">@foreach($legalSections as $section)<li><a href="#{{ $section['id'] }}">{{ $section['toc'] ?? $section['heading'] }}</a></li>@endforeach</ol></nav>
+    @if(!empty($legalDoc['toc']))
+    <nav class="legal__toc" aria-label="On this page"><ol role="list">@foreach($legalDoc['toc'] as $item)<li><a href="#{{ $item['id'] }}">{{ $item['label'] }}</a></li>@endforeach</ol></nav>
+    @endif
     <div class="legal__body">
-      @foreach($legalSections as $section)
-      <h2 id="{{ $section['id'] }}">{{ $section['heading'] }}</h2>@safeHtml($section['html'] ?? '')
-      @endforeach
+      @safeHtml($legalDoc['html'])
     </div>
   </div>
 </section>

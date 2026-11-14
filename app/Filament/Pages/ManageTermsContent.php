@@ -5,14 +5,14 @@ namespace App\Filament\Pages;
 use App\Models\TermsContent;
 use BackedEnum;
 use Filament\Actions\Action;
-use Filament\Forms\Components\Repeater;
+use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Notifications\Notification;
 use Filament\Pages\Page;
 use Filament\Schemas\Components\Actions as SchemaActions;
 use Filament\Schemas\Components\Form;
-use Filament\Schemas\Components\Grid;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
 use UnitEnum;
@@ -44,62 +44,79 @@ class ManageTermsContent extends Page
         return $schema
             ->components([
                 Form::make([
-                    Section::make('Document')
+                    Section::make('Page Header')
+                        ->description('Main page heading and last revision date.')
                         ->schema([
-                            TextInput::make('doc_title')
-                                ->label('Title')
+                            TextInput::make('hero_title')
+                                ->label('Page Title / Heading')
                                 ->required()
                                 ->maxLength(255),
-                            TextInput::make('doc_date')
-                                ->label('Date Line')
+                            TextInput::make('last_updated')
+                                ->label('Last Updated Date')
+                                ->placeholder('Last updated: November 2026')
                                 ->required()
-                                ->maxLength(255)
-                                ->helperText('e.g. "Last updated: November 2026"'),
-                        ]),
+                                ->maxLength(100),
+                        ])
+                        ->columns(2)
+                        ->columnSpanFull(),
 
-                    Section::make('Sections')
-                        ->description('Each section becomes a heading plus body on the page, and an entry in the table of contents.')
+                    Section::make('Website Terms Content')
+                        ->description('The full terms of use body. Use headings (H2/H3), paragraphs and lists to structure it — each H2 becomes a table-of-contents entry on the page.')
                         ->schema([
-                            Repeater::make('sections')
-                                ->label('Sections')
-                                ->schema([
-                                    Grid::make(2)->schema([
-                                        TextInput::make('id')
-                                            ->label('Anchor ID')
-                                            ->required()
-                                            ->maxLength(100)
-                                            ->helperText('Used for the table-of-contents link (e.g. "who")'),
-                                        TextInput::make('toc')
-                                            ->label('TOC Label (optional)')
-                                            ->maxLength(255)
-                                            ->helperText('Leave blank to use the heading'),
-                                    ]),
-                                    TextInput::make('heading')
-                                        ->label('Heading')
-                                        ->required()
-                                        ->maxLength(255),
-                                    Textarea::make('html')
-                                        ->label('Body HTML')
-                                        ->required()
-                                        ->rows(5)
-                                        ->columnSpanFull()
-                                        ->helperText('Basic HTML allowed: p, a, strong, em, ul, li'),
+                            RichEditor::make('content')
+                                ->label('Document Content')
+                                ->required()
+                                ->toolbarButtons([
+                                    'bold',
+                                    'italic',
+                                    'underline',
+                                    'strike',
+                                    'h2',
+                                    'h3',
+                                    'bulletList',
+                                    'orderedList',
+                                    'link',
+                                    'undo',
+                                    'redo',
                                 ])
-                                ->columns(1)
-                                ->defaultItems(1)
-                                ->addActionLabel('Add Section')
-                                ->reorderable()
-                                ->collapsible(),
+                                ->columnSpanFull(),
                         ])
                         ->columnSpanFull(),
 
-                    Section::make('SEO & Social')
+                    Section::make('Search Engine Optimization (SEO) & Social Sharing')
+                        ->description('Manage how the terms page appears on search engines and social media.')
                         ->schema([
-                            TextInput::make('meta_title')->label('Meta Title')->maxLength(255),
-                            TextInput::make('meta_keywords')->label('Meta Keywords')->maxLength(255),
-                            Textarea::make('meta_description')->label('Meta Description')->rows(2)->maxLength(500)->columnSpanFull(),
-                            TextInput::make('og_title')->label('Social Share Title')->maxLength(255),
-                            Textarea::make('og_description')->label('Social Share Description')->rows(2)->maxLength(500)->columnSpanFull(),
+                            TextInput::make('meta_title')
+                                ->label('Meta Title')
+                                ->placeholder('Website Terms | Stonemere Life Management')
+                                ->maxLength(255)
+                                ->helperText('Recommended length: 50-60 characters.'),
+                            TextInput::make('meta_keywords')
+                                ->label('Meta Keywords')
+                                ->maxLength(255),
+                            Textarea::make('meta_description')
+                                ->label('Meta Description')
+                                ->rows(3)
+                                ->maxLength(500)
+                                ->helperText('Recommended length: 150-160 characters.')
+                                ->columnSpanFull(),
+                            TextInput::make('og_title')
+                                ->label('Social Share Title (OG / Twitter)')
+                                ->maxLength(255)
+                                ->helperText('Leave blank to use the Meta Title.'),
+                            FileUpload::make('og_image')
+                                ->label('Social Share Image (OG Image)')
+                                ->image()
+                                ->disk('public')
+                                ->directory('seo')
+                                ->visibility('public')
+                                ->helperText('Recommended size: 1200x630 pixels.'),
+                            Textarea::make('og_description')
+                                ->label('Social Share Description (OG / Twitter)')
+                                ->rows(2)
+                                ->maxLength(500)
+                                ->helperText('Leave blank to use the Meta Description.')
+                                ->columnSpanFull(),
                         ])
                         ->columns(2)
                         ->columnSpanFull(),
