@@ -17,6 +17,10 @@ class MembershipLevelResource extends Resource
 
     protected static ?int $navigationSort = 1;
 
+    protected static string | \UnitEnum | null $navigationGroup = 'Pricing & Memberships';
+
+    protected static string | \BackedEnum | null $navigationIcon = 'heroicon-o-credit-card';
+
     public static function form(Schema $schema): Schema
     {
         return $schema

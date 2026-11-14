@@ -59,6 +59,7 @@ class AdminPanelProvider extends PanelProvider
                 'Team & Professionals',
                 'Pricing & Memberships',
                 'FAQs',
+                'Enquiries',
                 'Media & Assets',
             ]);
     }

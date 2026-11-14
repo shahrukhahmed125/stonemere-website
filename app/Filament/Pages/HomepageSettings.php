@@ -5,8 +5,6 @@ namespace App\Filament\Pages;
 use App\Models\Page;
 use App\Rules\SafeUrl;
 use Filament\Forms;
-use Filament\Forms\Components\Grid;
-use Filament\Forms\Components\Section;
 use Filament\Pages\Page as FilamentPage;
 use Filament\Schemas\Schema;
 
@@ -15,6 +13,10 @@ class HomepageSettings extends FilamentPage
     protected static ?string $navigationLabel = 'Homepage';
 
     protected static ?int $navigationSort = 0;
+
+    protected static string | \UnitEnum | null $navigationGroup = 'Website Settings';
+
+    protected static string | \BackedEnum | null $navigationIcon = 'heroicon-o-home';
 
     protected string $view = 'filament.pages.homepage-settings';
 

@@ -17,6 +17,10 @@ class ProfessionalAudienceResource extends Resource
 
     protected static ?int $navigationSort = 2;
 
+    protected static string | \UnitEnum | null $navigationGroup = 'Team & Professionals';
+
+    protected static string | \BackedEnum | null $navigationIcon = 'heroicon-o-user-group';
+
     public static function form(Schema $schema): Schema
     {
         return $schema

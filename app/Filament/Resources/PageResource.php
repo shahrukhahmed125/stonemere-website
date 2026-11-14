@@ -18,6 +18,10 @@ class PageResource extends Resource
 
     protected static ?int $navigationSort = 1;
 
+    protected static string | \UnitEnum | null $navigationGroup = 'Pages';
+
+    protected static string | \BackedEnum | null $navigationIcon = 'heroicon-o-document-text';
+
     public static function form(Schema $schema): Schema
     {
         return $schema

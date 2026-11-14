@@ -17,6 +17,10 @@ class PricingItemResource extends Resource
 
     protected static ?int $navigationSort = 2;
 
+    protected static string | \UnitEnum | null $navigationGroup = 'Pricing & Memberships';
+
+    protected static string | \BackedEnum | null $navigationIcon = 'heroicon-o-banknotes';
+
     public static function form(Schema $schema): Schema
     {
         return $schema

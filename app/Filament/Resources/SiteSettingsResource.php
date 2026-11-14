@@ -18,6 +18,10 @@ class SiteSettingsResource extends Resource
 
     protected static ?int $navigationSort = 1;
 
+    protected static string | \UnitEnum | null $navigationGroup = 'Website Settings';
+
+    protected static string | \BackedEnum | null $navigationIcon = 'heroicon-o-cog-6-tooth';
+
     public static function form(Schema $schema): Schema
     {
         return $schema
