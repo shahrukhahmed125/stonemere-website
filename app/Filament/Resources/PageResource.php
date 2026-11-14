@@ -46,16 +46,6 @@ class PageResource extends Resource
                             ->default(true),
                     ]),
 
-                \Filament\Schemas\Components\Section::make('Page Content')
-                    ->schema([
-                        Forms\Components\Textarea::make('content_json')
-                            ->label('Content (JSON)')
-                            ->rows(14)
-                            ->columnSpanFull()
-                            ->dehydrated(false)
-                            ->helperText('JSON structure powering this page. Edit carefully — invalid JSON will be rejected on save.'),
-                    ]),
-
                 \Filament\Schemas\Components\Section::make('SEO Settings')
                     ->schema([
                         Forms\Components\TextInput::make('meta_title')
