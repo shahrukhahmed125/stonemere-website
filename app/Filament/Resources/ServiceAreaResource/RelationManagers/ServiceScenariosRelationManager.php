@@ -25,6 +25,13 @@ class ServiceScenariosRelationManager extends RelationManager
                 Forms\Components\Textarea::make('description')
                     ->rows(3)
                     ->maxLength(1000),
+                Forms\Components\FileUpload::make('image')
+                    ->label('Image')
+                    ->image()
+                    ->disk('public')
+                    ->directory('service-areas/scenarios')
+                    ->visibility('public')
+                    ->helperText('Optional illustration for this scenario card'),
                 Forms\Components\TextInput::make('link_page')
                     ->label('Link Page')
                     ->placeholder('services')

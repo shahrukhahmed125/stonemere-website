@@ -193,36 +193,34 @@ class WebsiteController extends Controller
         }
     }
 
+    private function serviceAreaViewData(string $slug): array
+    {
+        $area = $this->loadServiceArea($slug);
+        return [
+            'serviceArea' => $area,
+            'nextArea' => $area?->nextArea(),
+            'page' => $this->serviceAreaPage($slug),
+        ];
+    }
+
     public function familyClientSupport()
     {
-        return view('pages.family-client-support', [
-            'serviceArea' => $this->loadServiceArea('family-client-support'),
-            'page' => $this->serviceAreaPage('family-client-support'),
-        ]);
+        return view('pages.family-client-support', $this->serviceAreaViewData('family-client-support'));
     }
 
     public function careProfessionalLiaison()
     {
-        return view('pages.care-professional-liaison', [
-            'serviceArea' => $this->loadServiceArea('care-professional-liaison'),
-            'page' => $this->serviceAreaPage('care-professional-liaison'),
-        ]);
+        return view('pages.care-professional-liaison', $this->serviceAreaViewData('care-professional-liaison'));
     }
 
     public function propertyAssetManagement()
     {
-        return view('pages.property-asset-management', [
-            'serviceArea' => $this->loadServiceArea('property-asset-management'),
-            'page' => $this->serviceAreaPage('property-asset-management'),
-        ]);
+        return view('pages.property-asset-management', $this->serviceAreaViewData('property-asset-management'));
     }
 
     public function urgentComplexCases()
     {
-        return view('pages.urgent-complex-cases', [
-            'serviceArea' => $this->loadServiceArea('urgent-complex-cases'),
-            'page' => $this->serviceAreaPage('urgent-complex-cases'),
-        ]);
+        return view('pages.urgent-complex-cases', $this->serviceAreaViewData('urgent-complex-cases'));
     }
 
     public function privacy()

@@ -16,6 +16,32 @@ class ServiceArea extends Model
         'short_description',
         'hero_lead',
         'hero_image',
+        'hero_cta_primary_text',
+        'hero_cta_primary_url',
+        'hero_cta_secondary_text',
+        'hero_cta_secondary_url',
+        'services_eyebrow',
+        'services_heading',
+        'services_intro',
+        'scenarios_eyebrow',
+        'scenarios_heading',
+        'faqs_eyebrow',
+        'faqs_heading',
+        'timeline_eyebrow',
+        'timeline_heading',
+        'checks_eyebrow',
+        'checks_heading',
+        'checks_intro',
+        'callflow_eyebrow',
+        'callflow_heading',
+        'callflow_note',
+        'cta_eyebrow',
+        'cta_heading',
+        'cta_text',
+        'cta_primary_text',
+        'cta_primary_url',
+        'cta_secondary_text',
+        'cta_secondary_url',
         'sort_order',
         'is_published',
     ];
@@ -86,5 +112,18 @@ class ServiceArea extends Model
     public function scopeOrdered($query)
     {
         return $query->orderBy('sort_order');
+    }
+
+    /**
+     * The next published service area in sort order (wraps around).
+     */
+    public function nextArea()
+    {
+        $areas = static::published()->ordered()->get(['id', 'slug', 'name', 'sort_order']);
+        if ($areas->isEmpty()) {
+            return null;
+        }
+        $index = $areas->search(fn ($a) => $a->id === $this->id);
+        return $areas[($index === false ? 0 : $index + 1) % $areas->count()];
     }
 }

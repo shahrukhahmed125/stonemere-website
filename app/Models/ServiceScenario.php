@@ -13,6 +13,7 @@ class ServiceScenario extends Model
         'service_area_id',
         'title',
         'description',
+        'image',
         'link_page',
         'sort_order',
     ];

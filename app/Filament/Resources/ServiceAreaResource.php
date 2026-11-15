@@ -74,6 +74,78 @@ class ServiceAreaResource extends Resource
                             ->columnSpanFull()
                             ->helperText('Intro paragraph shown under the page heading'),
                     ]),
+
+                \Filament\Schemas\Components\Section::make('Hero Buttons')
+                    ->schema([
+                        Forms\Components\TextInput::make('hero_cta_primary_text')->label('Primary Button Text'),
+                        Forms\Components\TextInput::make('hero_cta_primary_url')->label('Primary Button URL')->columnSpanFull(),
+                        Forms\Components\TextInput::make('hero_cta_secondary_text')->label('Secondary Button Text'),
+                        Forms\Components\TextInput::make('hero_cta_secondary_url')->label('Secondary Button URL')->columnSpanFull(),
+                    ])
+                    ->columns(2),
+
+                \Filament\Schemas\Components\Section::make('Services Section')
+                    ->schema([
+                        Forms\Components\TextInput::make('services_eyebrow')->label('Eyebrow'),
+                        Forms\Components\TextInput::make('services_heading')->label('Heading')
+                            ->helperText('Use {count} where the number of services appears. Basic HTML like <em> allowed.'),
+                        Forms\Components\Textarea::make('services_intro')->label('Intro')->rows(2)->columnSpanFull(),
+                    ])
+                    ->columns(2),
+
+                \Filament\Schemas\Components\Section::make('Scenarios Section')
+                    ->schema([
+                        Forms\Components\TextInput::make('scenarios_eyebrow')->label('Eyebrow'),
+                        Forms\Components\TextInput::make('scenarios_heading')->label('Heading')
+                            ->helperText('Basic HTML like <em> allowed.'),
+                    ])
+                    ->columns(2),
+
+                \Filament\Schemas\Components\Section::make('FAQ Section')
+                    ->schema([
+                        Forms\Components\TextInput::make('faqs_eyebrow')->label('Eyebrow'),
+                        Forms\Components\TextInput::make('faqs_heading')->label('Heading')
+                            ->helperText('Basic HTML like <em> allowed.'),
+                    ])
+                    ->columns(2),
+
+                \Filament\Schemas\Components\Section::make('Timeline Section (Care & Professional Liaison)')
+                    ->schema([
+                        Forms\Components\TextInput::make('timeline_eyebrow')->label('Eyebrow'),
+                        Forms\Components\TextInput::make('timeline_heading')->label('Heading')
+                            ->helperText('Basic HTML like <em> allowed.'),
+                    ])
+                    ->columns(2),
+
+                \Filament\Schemas\Components\Section::make('Checks Section (Property & Asset Management)')
+                    ->schema([
+                        Forms\Components\TextInput::make('checks_eyebrow')->label('Eyebrow'),
+                        Forms\Components\TextInput::make('checks_heading')->label('Heading')
+                            ->helperText('Basic HTML like <em> allowed.'),
+                        Forms\Components\Textarea::make('checks_intro')->label('Intro')->rows(2)->columnSpanFull(),
+                    ])
+                    ->columns(2),
+
+                \Filament\Schemas\Components\Section::make('Call Flow Section (Urgent & Complex Cases)')
+                    ->schema([
+                        Forms\Components\TextInput::make('callflow_eyebrow')->label('Eyebrow'),
+                        Forms\Components\TextInput::make('callflow_heading')->label('Heading')
+                            ->helperText('Basic HTML like <em> allowed.'),
+                        Forms\Components\Textarea::make('callflow_note')->label('Note below the steps')->rows(2)->columnSpanFull(),
+                    ])
+                    ->columns(2),
+
+                \Filament\Schemas\Components\Section::make('Bottom CTA Band')
+                    ->schema([
+                        Forms\Components\TextInput::make('cta_eyebrow')->label('Eyebrow'),
+                        Forms\Components\TextInput::make('cta_heading')->label('Heading')->columnSpanFull(),
+                        Forms\Components\Textarea::make('cta_text')->label('Text')->rows(2)->columnSpanFull(),
+                        Forms\Components\TextInput::make('cta_primary_text')->label('Primary Button Text'),
+                        Forms\Components\TextInput::make('cta_primary_url')->label('Primary Button URL')->columnSpanFull(),
+                        Forms\Components\TextInput::make('cta_secondary_text')->label('Secondary Button Text'),
+                        Forms\Components\TextInput::make('cta_secondary_url')->label('Secondary Button URL')->columnSpanFull(),
+                    ])
+                    ->columns(2),
             ]);
     }
 
