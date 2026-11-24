@@ -588,6 +588,23 @@ class HomepageSettings extends FilamentPage
                             ->required()
                             ->rows(3)
                             ->maxLength(1000),
+                        Forms\Components\Repeater::make('content.tiers.benefits')
+                            ->label('Key Benefits')
+                            ->schema([
+                                Forms\Components\TextInput::make('title')
+                                    ->label('Title')
+                                    ->required()
+                                    ->maxLength(255),
+                                Forms\Components\Textarea::make('text')
+                                    ->label('Text')
+                                    ->required()
+                                    ->rows(2)
+                                    ->maxLength(500),
+                            ])
+                            ->columns(1)
+                            ->defaultItems(3)
+                            ->addActionLabel('Add Benefit')
+                            ->reorderable(),
                         Grid::make(2)
                             ->schema([
                                 Forms\Components\TextInput::make('content.tiers.link_text')

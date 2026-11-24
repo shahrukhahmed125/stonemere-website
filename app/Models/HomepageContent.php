@@ -58,6 +58,7 @@ class HomepageContent extends Model
         'tiers_eyebrow',
         'tiers_title',
         'tiers_description',
+        'tiers_benefits',
         'tiers_link_text',
         'tiers_link_url',
         'questions_eyebrow',
@@ -96,6 +97,7 @@ class HomepageContent extends Model
             'steps_items' => 'array',
             'standards_items' => 'array',
             'where_figures' => 'array',
+            'tiers_benefits' => 'array',
         ];
     }
 
@@ -151,10 +153,15 @@ class HomepageContent extends Model
   'lead_button_secondary_text' => 'Message Paul',
   'lead_button_secondary_url' => 'https://wa.me/447891341414?text=Hello%20Paul%2C%20I%20would%20like%20to%20talk%20about%20Stonemere%27s%20support.',
   'tiers_eyebrow' => 'Price menu',
-  'tiers_title' => 'Simple membership, <em>separate costs agreed first</em>',
-  'tiers_description' => 'Ongoing support is paid as a monthly membership credited to the client&rsquo;s own account and used for Stonemere&rsquo;s time. Transport, purchases, third-party costs and crisis work are charged separately, always agreed in advance.',
-  'tiers_link_text' => 'How pricing works, and which level fits',
+  'tiers_title' => 'Transparent Pricing, <em>Tailored Support</em>',
+  'tiers_description' => 'Every client has different needs. We offer flexible, professional support with clear hourly rates and charges agreed in advance. Start with a complimentary 30-minute telephone consultation, then choose only the services you need.',
+  'tiers_link_text' => 'View Our Price Menu',
   'tiers_link_url' => '/price-menu',
+  'tiers_benefits' => [
+    ['title' => 'Free Initial Consultation', 'text' => 'Up to 30 minutes by telephone.'],
+    ['title' => 'Flexible Support', 'text' => 'No fixed ongoing package is required.'],
+    ['title' => 'Transparent Pricing', 'text' => 'Service costs, estimated time and additional expenses agreed in advance wherever reasonably possible.'],
+  ],
   'questions_eyebrow' => 'Questions',
   'questions_title' => 'Before you <em>refer</em>',
   'questions_description' => 'Anything else, ask us on WhatsApp or call 01225 338436.',
@@ -438,7 +445,7 @@ class HomepageContent extends Model
     {
         return [
             'statement_paragraphs', 'keystone_captions', 'track_cards', 'refer_cards',
-            'steps_items', 'standards_items', 'where_figures',
+            'steps_items', 'standards_items', 'where_figures', 'tiers_benefits',
         ];
     }
 
@@ -578,6 +585,7 @@ class HomepageContent extends Model
             'eyebrow' => $this->tiers_eyebrow,
             'title' => $this->tiers_title,
             'description' => $this->tiers_description,
+            'benefits' => $this->tiers_benefits ?? [],
             'link_text' => $this->tiers_link_text,
             'link_url' => $this->tiers_link_url,
         ]);

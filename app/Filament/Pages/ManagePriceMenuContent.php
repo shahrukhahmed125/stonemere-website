@@ -58,36 +58,64 @@ class ManagePriceMenuContent extends Page
                             ]),
                         ]),
 
-                    Section::make('Client Account')
+                    Section::make('Pricing Introduction')
                         ->schema([
-                            TextInput::make('account_eyebrow')->label('Eyebrow')->required()->maxLength(100),
-                            TextInput::make('account_title')->label('Title')->required()->maxLength(500),
-                            Repeater::make('account_steps')
-                                ->label('Steps')
-                                ->schema([
-                                    TextInput::make('title')->label('Title')->required()->maxLength(255),
-                                    Textarea::make('text')->label('Text')->required()->rows(2)->maxLength(500),
-                                ])
-                                ->columns(1)
-                                ->defaultItems(3)
-                                ->addActionLabel('Add Step')
-                                ->reorderable(),
+                            TextInput::make('intro_eyebrow')->label('Eyebrow')->required()->maxLength(100),
+                            TextInput::make('intro_title')->label('Title')->required()->maxLength(500),
+                            Textarea::make('intro_text')->label('Text')->required()->rows(4)->maxLength(2000)->columnSpanFull(),
                         ])
                         ->columnSpanFull(),
 
-                    Section::make('Membership Levels Intro')
-                        ->description('The levels themselves are managed under Pricing & Memberships → Membership Levels.')
+                    Section::make('Pricing Table')
+                        ->description('The services and prices shown in the table are managed under Website Content → Service Pricing.')
                         ->schema([
-                            TextInput::make('levels_eyebrow')->label('Eyebrow')->required()->maxLength(100),
-                            TextInput::make('levels_title')->label('Title')->required()->maxLength(255),
+                            TextInput::make('table_eyebrow')->label('Eyebrow')->required()->maxLength(100),
+                            TextInput::make('table_title')->label('Title')->required()->maxLength(500),
                         ]),
 
-                    Section::make('Charged Separately')
+                    Section::make('How Additional Charges Work')
                         ->schema([
-                            TextInput::make('separate_eyebrow')->label('Eyebrow')->required()->maxLength(100),
-                            TextInput::make('separate_title')->label('Title')->required()->maxLength(500),
-                            Textarea::make('separate_text')->label('Text')->required()->rows(3)->maxLength(1000)->columnSpanFull(),
-                        ]),
+                            TextInput::make('charges_eyebrow')->label('Eyebrow')->required()->maxLength(100),
+                            TextInput::make('charges_title')->label('Title')->required()->maxLength(500),
+                            Repeater::make('charge_items')
+                                ->label('Charge Blocks')
+                                ->schema([
+                                    \Filament\Forms\Components\Select::make('icon')
+                                        ->label('Icon')
+                                        ->options([
+                                            'i-pin' => 'Pin / Location',
+                                            'i-keystone' => 'Keystone',
+                                            'i-scale' => 'Scale',
+                                            'i-user' => 'User',
+                                            'i-lock' => 'Lock',
+                                            'i-check' => 'Check',
+                                            'i-clock' => 'Clock',
+                                            'i-shield' => 'Shield',
+                                            'i-phone' => 'Phone',
+                                            'i-mail' => 'Mail',
+                                        ])
+                                        ->default('i-check'),
+                                    TextInput::make('title')->label('Title')->required()->maxLength(255),
+                                    Textarea::make('text')->label('Text')->required()->rows(4)->maxLength(3000)
+                                        ->helperText('Separate paragraphs with a blank line.'),
+                                ])
+                                ->columns(1)
+                                ->defaultItems(5)
+                                ->addActionLabel('Add Block')
+                                ->reorderable()
+                                ->collapsible(),
+                        ])
+                        ->columnSpanFull(),
+
+                    Section::make('Agreement Before Work Starts')
+                        ->schema([
+                            TextInput::make('agreement_eyebrow')->label('Eyebrow')->required()->maxLength(100),
+                            TextInput::make('agreement_title')->label('Title')->required()->maxLength(500),
+                            Textarea::make('agreement_text')->label('Text')->required()->rows(4)->maxLength(2000)
+                                ->helperText('Separate paragraphs with a blank line.')
+                                ->columnSpanFull(),
+                        ])
+                        ->columnSpanFull(),
 
                     Section::make('Pricing FAQs')
                         ->schema([

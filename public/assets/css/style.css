@@ -928,9 +928,67 @@ a.route:hover { padding-left: 12px; color: var(--gold-300); }
 }
 
 /* 37. Contrast safeguards ---------------------------------------------------- */
-.hero, .phero, .contact-hero, .nf, .keystone, .keystone__stage, .mapper, .builder-wrap, .pick, .howteam, .levels, .contact-block, .site-footer { background-color: var(--navy-950); }
+.hero, .phero, .contact-hero, .nf, .keystone, .keystone__stage, .mapper, .builder-wrap, .pick, .howteam, .levels, .contact-block, .site-footer, .agreement { background-color: var(--navy-950); }
 .mapper, .builder-wrap, .pick, .howteam, .contact-block { background-color: var(--navy-900); }
-.mapper h2 em, .keystone h2 em, .builder-wrap h2 em, .pick h2 em, .howteam h2 em, .levels h2 em, .contact-block h2 em, .contact-hero h1 em, .nf h1 em { color: var(--gold-300); }
+.mapper h2 em, .keystone h2 em, .builder-wrap h2 em, .pick h2 em, .howteam h2 em, .levels h2 em, .contact-block h2 em, .contact-hero h1 em, .nf h1 em, .agreement h2 em { color: var(--gold-300); }
 .pick .tlink, .level .tlink, .contact-hero__pro .tlink { color: var(--gold-300); }
 .pick .tlink:hover, .level .tlink:hover, .contact-hero__pro .tlink:hover { color: var(--white); }
 .page-legal .site-header { background: var(--navy-950); }
+
+/* 38. Price menu — service pricing ---------------------------------------- */
+.pintro { padding-block: var(--section); }
+.pintro__inner { max-width: 820px; }
+.pintro__inner h2 { margin-bottom: var(--s-4); }
+.pintro__text { color: var(--muted); max-width: 62ch; }
+
+.ptable-wrap { padding-block: var(--section); background: var(--stone-50); }
+.ptable__head { max-width: 760px; margin-bottom: var(--s-6); }
+.ptable__head h2 { margin-bottom: var(--s-3); }
+.ptable { background: var(--white); border: 1px solid var(--line); border-radius: var(--r); overflow: hidden; }
+.ptable table { width: 100%; border-collapse: collapse; }
+.ptable th { padding: var(--s-3) var(--s-4); background: var(--navy-900); color: var(--white); font-size: var(--fs-xs); font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; text-align: left; }
+.ptable td { padding: var(--s-4); border-top: 1px solid var(--line); vertical-align: top; }
+.ptable tbody tr:nth-child(even) { background: var(--stone-50); }
+.ptable tbody tr:hover { background: color-mix(in srgb, var(--gold-300) 14%, transparent); }
+.ptable__service { width: 55%; }
+.ptable__name { display: block; font-weight: 500; color: var(--ink); }
+.ptable__desc { display: block; margin-top: 4px; color: var(--muted); font-size: var(--fs-sm); }
+.ptable__price { text-align: right; white-space: nowrap; font-weight: 500; color: var(--navy-900); }
+.ptable__price-col { text-align: right; }
+.ptable__price-note { display: block; margin-top: 4px; color: var(--muted); font-size: var(--fs-xs); font-weight: 400; white-space: normal; }
+.ptable__foot { margin-top: var(--s-4); color: var(--muted); font-size: var(--fs-sm); }
+
+.charges { padding-block: var(--section); }
+.charges__grid { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: var(--s-7); align-items: start; }
+.charges__head { position: sticky; top: 120px; }
+.charges__head h2 { margin-bottom: var(--s-3); }
+.charges__icon { display: inline-grid; place-items: center; width: 34px; height: 34px; margin-right: var(--s-2); border: 1px solid var(--line); border-radius: 50%; color: var(--accent-text); vertical-align: middle; }
+.charges__icon .i { width: 16px; height: 16px; }
+.charges__item .faq__q button { grid-template-columns: auto 1fr 28px; }
+
+.agreement { padding-block: var(--section); background: var(--navy-900); color: var(--white); }
+.agreement__inner { max-width: 820px; text-align: center; }
+.agreement__inner .eyebrow { justify-content: center; }
+.agreement__inner h2 { margin-bottom: var(--s-5); }
+.agreement__inner h2 em { color: var(--gold-300); }
+.agreement__text p { color: var(--muted-on-dark); max-width: 60ch; margin: 0 auto var(--s-3); }
+.agreement__text p:last-child { margin-bottom: 0; }
+
+@media (max-width: 899px) {
+  .charges__grid { grid-template-columns: 1fr; }
+  .charges__head { position: static; }
+}
+@media (max-width: 639px) {
+  .ptable table, .ptable tbody, .ptable tr, .ptable td { display: block; width: 100%; }
+  .ptable thead { display: none; }
+  .ptable tr { padding: var(--s-3) var(--s-4); }
+  .ptable td { padding: var(--s-2) 0; border-top: 0; }
+  .ptable__service { padding-bottom: var(--s-3); }
+  .ptable__price { text-align: left; white-space: normal; }
+  .ptable__price::before { content: "Price — "; display: block; font-size: var(--fs-xs); letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); font-weight: 400; }
+  .ptable__price-note { white-space: normal; }
+}
+
+/* 39. Homepage pricing benefits -------------------------------------------- */
+.tiers__benefits li h3 { font-size: 1.3rem; }
+.tierb__n { font-family: var(--font-display); color: var(--gold-500); font-size: 0.85rem; letter-spacing: 0.22em; }

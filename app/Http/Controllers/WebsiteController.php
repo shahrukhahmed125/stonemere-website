@@ -15,12 +15,6 @@ class WebsiteController extends Controller
         }
         
         try {
-            $membershipLevels = \App\Models\MembershipLevel::published()->ordered()->get();
-        } catch (\Exception $e) {
-            $membershipLevels = collect();
-        }
-        
-        try {
             $faqItems = \App\Models\FaqItem::published()->ordered()->get();
         } catch (\Exception $e) {
             $faqItems = collect();
@@ -30,7 +24,6 @@ class WebsiteController extends Controller
             'page' => $page,
             'content' => $page?->content ?? [],
             'homeContent' => $this->contentOrNull(\App\Models\HomepageContent::class),
-            'membershipLevels' => $membershipLevels,
             'faqItems' => $faqItems,
         ]);
     }
@@ -144,23 +137,16 @@ class WebsiteController extends Controller
         }
         
         try {
-            $membershipLevels = \App\Models\MembershipLevel::published()->ordered()->get();
+            $servicePrices = \App\Models\ServicePrice::active()->visible()->ordered()->get();
         } catch (\Exception $e) {
-            $membershipLevels = collect();
-        }
-
-        try {
-            $pricingItems = \App\Models\PricingItem::where('type', 'separate')->orderBy('sort_order')->get();
-        } catch (\Exception $e) {
-            $pricingItems = collect();
+            $servicePrices = collect();
         }
 
         return view('pages.price-menu', [
             'page' => $page,
             'content' => $page?->content ?? [],
             'priceMenuContent' => $this->contentOrNull(\App\Models\PriceMenuContent::class),
-            'membershipLevels' => $membershipLevels,
-            'pricingItems' => $pricingItems,
+            'servicePrices' => $servicePrices,
         ]);
     }
 

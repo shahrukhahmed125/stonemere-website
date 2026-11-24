@@ -318,7 +318,7 @@ $contact = $homeContent?->contact ?? [];
 <section class="lead" aria-labelledby="lead-title">
   <div class="wrap lead__grid">
     <figure class="lead__portrait" data-reveal="mask">
-      <img src="{{ asset('assets/images/art/page-team.svg') }}" width="800" height="1000" alt="Illustration of two people talking, in gold line on navy" loading="lazy">
+      <img src="{{ asset('assets/images/Alex_image.jpeg') }}" width="800" height="1000" alt="Illustration of two people talking, in gold line on navy" loading="lazy">
     </figure>
     <div class="lead__copy">
       <p class="eyebrow">{{ $lead['eyebrow'] ?? 'Our team' }}</p>
@@ -336,22 +336,15 @@ $contact = $homeContent?->contact ?? [];
   <div class="wrap">
     <div class="tiers__head">
       <p class="eyebrow">{{ $tiers['eyebrow'] ?? 'Price menu' }}</p>
-      <h2 id="tiers-title" data-split>@safeHtml($tiers['title'] ?? 'Simple membership, <em>separate costs agreed first</em>')</h2>
-      <p>{{ $tiers['description'] ?? 'Ongoing support is paid as a monthly membership credited to the client&rsquo;s own account and used for Stonemere&rsquo;s time. Transport, purchases, third-party costs and crisis work are charged separately, always agreed in advance.' }}</p>
+      <h2 id="tiers-title" data-split>@safeHtml($tiers['title'] ?? 'Transparent Pricing, <em>Tailored Support</em>')</h2>
+      <p>{{ $tiers['description'] ?? 'Every client has different needs. We offer flexible, professional support with clear hourly rates and charges agreed in advance.' }}</p>
     </div>
-    <ul class="tiers__chips" role="list">
-      @php
-      $membershipLevels = $membershipLevels ?? collect([
-          (object)['name' => 'Silver', 'description' => 'Occasional, dependable help'],
-          (object)['name' => 'Gold', 'description' => 'Regular, ongoing coordination'],
-          (object)['name' => 'Platinum', 'description' => 'Complex situations and families at a distance'],
-      ]);
-      @endphp
-      @foreach($membershipLevels as $membership)
-      <li data-tilt><span class="chip__swatch chip__swatch--{{ strtolower($membership->name) }}" aria-hidden="true"></span><h3>{{ $membership->name }}</h3><p>{{ $membership->description }}</p></li>
+    <ul class="tiers__chips tiers__benefits" role="list">
+      @foreach($tiers['benefits'] ?? [] as $index => $benefit)
+      <li data-tilt><span class="tierb__n" aria-hidden="true">{{ str_pad($index + 1, 2, '0', STR_PAD_LEFT) }}</span><h3>{{ $benefit['title'] ?? '' }}</h3><p>{{ $benefit['text'] ?? '' }}</p></li>
       @endforeach
     </ul>
-    <p class="tiers__more"><a class="tlink" href="{{ $tiers['link_url'] ?? '/price-menu' }}">{{ $tiers['link_text'] ?? 'How pricing works, and which level fits' }}<svg class="i" aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg></a></p>
+    <p class="tiers__more"><a class="tlink" href="{{ $tiers['link_url'] ?? '/price-menu' }}">{{ $tiers['link_text'] ?? 'View Our Price Menu' }}<svg class="i" aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg></a></p>
   </div>
 </section>
 
@@ -370,7 +363,7 @@ $contact = $homeContent?->contact ?? [];
           (object)['question' => 'Who pays for the work?', 'answer' => 'The client, their family or representative, or the referring organisation. Who pays, what is included and what is charged separately is agreed in writing before any work begins.'],
           (object)['question' => 'Which areas do you cover?', 'answer' => 'Bath first, concentrating on about a five-mile radius of the city, then the wider Bath & North East Somerset area. We can coordinate matters further afield for existing clients and their families.'],
           (object)['question' => 'Can you help at short notice?', 'answer' => 'Yes. Same-day support and out-of-hours assistance are part of our Urgent & Complex Case Support. Call 01225 338436 and tell us what has happened.'],
-          (object)['question' => 'What does it cost?', 'answer' => 'Ongoing support runs on a monthly membership credited to the client\'s own account. Transport, purchases, third-party costs and crisis work are charged separately and agreed first. The <a href="/price-menu">price menu</a> explains how it works.'],
+          (object)['question' => 'What does it cost?', 'answer' => 'There is no fixed ongoing package. After a complimentary 30-minute telephone consultation you choose only the services you need, with clear rates and charges agreed in advance. The <a href="/price-menu">price menu</a> lists current rates.'],
       ]);
       @endphp
       @foreach($faqItems as $index => $faq)

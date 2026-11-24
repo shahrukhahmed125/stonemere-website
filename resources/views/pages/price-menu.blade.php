@@ -34,9 +34,9 @@
     <div class="phero__text">
       <nav class="crumbs" aria-label="Breadcrumb"><ol role="list"><li><a href="{{ route('home') }}">Home</a></li><li><span aria-current="page">Price menu</span></li></ol></nav>
       <p class="eyebrow eyebrow--light">{{ $priceMenuContent->hero_eyebrow ?? 'Price menu' }}</p>
-      <h1 id="page-title" class="phero__title" data-split>@safeHtml($priceMenuContent->hero_title ?? 'Clear charges, <em>agreed upfront</em>')</h1>
-      <p class="phero__lead" data-reveal>{{ $priceMenuContent->hero_lead ?? 'Ongoing support runs on a simple membership credited to the client&rsquo;s own account. Everything else is explained and agreed in advance. Current rates are confirmed in writing.' }}</p>
-      <div class="actions" data-reveal><a class="btn btn--gold" href="{{ $priceMenuContent->hero_cta_primary_url ?? 'https://wa.me/447891341414?text=Hello%20Stonemere%2C%20please%20could%20you%20send%20me%20your%20current%20rates%3F' }}" target="_blank" rel="noopener" data-magnetic><svg class="i" aria-hidden="true" focusable="false"><use href="#i-whatsapp"/></svg><span class="roll" data-text="{{ $priceMenuContent->hero_cta_primary_text ?? 'Ask for current rates' }}">{{ $priceMenuContent->hero_cta_primary_text ?? 'Ask for current rates' }}</span></a><a class="btn btn--line-light" href="{{ $priceMenuContent->hero_cta_secondary_url ?? '#finder' }}" data-magnetic><span class="roll" data-text="{{ $priceMenuContent->hero_cta_secondary_text ?? 'Find a level' }}">{{ $priceMenuContent->hero_cta_secondary_text ?? 'Find a level' }}</span><svg class="i" aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg></a></div>
+      <h1 id="page-title" class="phero__title" data-split>@safeHtml($priceMenuContent->hero_title ?? 'Our Price <em>Menu</em>')</h1>
+      <p class="phero__lead" data-reveal>{{ $priceMenuContent->hero_lead ?? 'Clear charges. Flexible support. Agreed upfront. We provide bespoke lifestyle management and professional support, with services tailored to your individual requirements.' }}</p>
+      <div class="actions" data-reveal><a class="btn btn--gold" href="{{ $priceMenuContent->hero_cta_primary_url ?? 'https://wa.me/447891341414?text=Hello%20Stonemere%2C%20I%27d%20like%20to%20book%20a%20free%20telephone%20consultation.' }}" target="_blank" rel="noopener" data-magnetic><svg class="i" aria-hidden="true" focusable="false"><use href="#i-whatsapp"/></svg><span class="roll" data-text="{{ $priceMenuContent->hero_cta_primary_text ?? 'Book Your Free Consultation' }}">{{ $priceMenuContent->hero_cta_primary_text ?? 'Book Your Free Consultation' }}</span></a><a class="btn btn--line-light" href="{{ $priceMenuContent->hero_cta_secondary_url ?? 'tel:+441225338436' }}" data-magnetic><svg class="i" aria-hidden="true" focusable="false"><use href="#i-phone"/></svg><span class="roll" data-text="{{ $priceMenuContent->hero_cta_secondary_text ?? 'Call 01225 338436' }}">{{ $priceMenuContent->hero_cta_secondary_text ?? 'Call 01225 338436' }}</span></a></div>
     </div>
     <figure class="phero__art" data-reveal="mask">
       <img src="{{ asset('assets/images/art/page-price.svg') }}" width="800" height="1000" alt="Illustration of a ledger, in gold line on navy" fetchpriority="high">
@@ -44,86 +44,78 @@
   </div>
 </section>
 
-<section class="account" aria-labelledby="account-title">
+<section class="pintro" aria-labelledby="intro-title">
+  <div class="wrap pintra__inner">
+    <p class="eyebrow">{{ $priceMenuContent->intro_eyebrow ?? 'How our menu pricing works' }}</p>
+    <h2 id="intro-title" data-split>@safeHtml($priceMenuContent->intro_title ?? 'Flexible support, <em>agreed upfront</em>')</h2>
+    <p class="pintro__text">{{ $priceMenuContent->intro_text ?? 'We begin with a complimentary initial telephone conversation of up to 30 minutes. You then choose only the support you need; there is no fixed ongoing package.' }}</p>
+  </div>
+</section>
+
+<section class="ptable-wrap" aria-labelledby="ptable-title">
   <div class="wrap">
-    <div class="account__head">
-      <p class="eyebrow">{{ $priceMenuContent->account_eyebrow ?? 'The client account' }}</p>
-      <h2 id="account-title" data-split>@safeHtml($priceMenuContent->account_title ?? 'How the membership <em>works</em>')</h2>
+    <div class="ptable__head">
+      <p class="eyebrow">{{ $priceMenuContent->table_eyebrow ?? 'Service pricing' }}</p>
+      <h2 id="ptable-title" data-split>@safeHtml($priceMenuContent->table_title ?? 'Rates <em>at a glance</em>')</h2>
     </div>
-    <ol class="account__flow" role="list" data-draw>
-      @foreach($priceMenuContent->account_steps ?? [
-          ['title' => 'Choose a level', 'text' => 'Silver, Gold or Platinum, depending on how much support is likely to be needed.'],
-          ['title' => 'Payments credit the account', 'text' => 'Monthly membership payments go into the client&rsquo;s own Stonemere account.'],
-          ['title' => 'Funds are used as we work', 'text' => 'The account is drawn down against Stonemere&rsquo;s time and services, and you can see how.'],
-      ] as $index => $step)
-      <li data-reveal><span class="account__n">{{ $index + 1 }}</span><h3>{{ $step['title'] ?? '' }}</h3><p>@safeHtml($step['text'] ?? '')</p></li>
-      @endforeach
-    </ol>
+    <div class="ptable" data-reveal>
+      <table>
+        <thead>
+          <tr><th scope="col">Service</th><th scope="col" class="ptable__price-col">Price</th></tr>
+        </thead>
+        <tbody>
+          @foreach($servicePrices ?? [] as $service)
+          <tr>
+            <td class="ptable__service">
+              <span class="ptable__name">{{ $service->name }}</span>
+              @if($service->description)<span class="ptable__desc">{{ $service->description }}</span>@endif
+            </td>
+            <td class="ptable__price">
+              <span class="ptable__price-text">@safeHtml($service->price_text)</span>
+              @if($service->additional_info)<span class="ptable__price-note">{{ $service->additional_info }}</span>@endif
+            </td>
+          </tr>
+          @endforeach
+        </tbody>
+      </table>
+    </div>
+    <p class="ptable__foot">All prices are guide rates agreed before work begins wherever reasonably possible.</p>
   </div>
 </section>
 
-<section class="levels" aria-labelledby="levels-title">
-  <div class="wrap">
-    <div class="levels__head"><p class="eyebrow eyebrow--light">{{ $priceMenuContent->levels_eyebrow ?? 'Membership levels' }}</p><h2 id="levels-title" data-split>@safeHtml($priceMenuContent->levels_title ?? 'Three levels')</h2></div>
-    <div class="levels__grid">
-      @foreach($membershipLevels ?? [] as $level)
-      <article class="level level--{{ $level->slug }}" data-reveal data-tilt>
-        <span class="level__swatch" aria-hidden="true"></span>
-        <h3 class="level__name">{{ $level->name }}</h3>
-        <p class="level__for">{{ $level->description }}</p>
-        <ul class="ticks" role="list">@foreach($level->features ?? [] as $feature)<li><svg class="i" aria-hidden="true" focusable="false"><use href="#i-check"/></svg>@safeHtml($feature)</li>@endforeach</ul>
-        <p class="level__price">{{ $level->price_text }}</p>
-        <a class="tlink" href="https://wa.me/447891341414?text={{ rawurlencode('Hello Stonemere, I\'d like to ask about the '.$level->name.' membership.') }}" target="_blank" rel="noopener">Ask about {{ $level->name }}<svg class="i" aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg></a>
-      </article>
+@php
+$chargeIcons = ['i-pin','i-keystone','i-scale','i-user','i-lock','i-check','i-clock','i-shield','i-phone','i-mail'];
+@endphp
+<section class="charges" aria-labelledby="charges-title">
+  <div class="wrap charges__grid">
+    <div class="charges__head">
+      <p class="eyebrow">{{ $priceMenuContent->charges_eyebrow ?? 'Additional charges' }}</p>
+      <h2 id="charges-title" data-split>@safeHtml($priceMenuContent->charges_title ?? 'How Additional <em>Charges Work</em>')</h2>
+    </div>
+    <div class="faq" data-faq>
+      @foreach($priceMenuContent->charge_items ?? [] as $index => $item)
+      <div class="faq__item charges__item">
+        <h3 class="faq__q"><button type="button" aria-expanded="false" aria-controls="charge-a{{ $index }}" id="charge-q{{ $index }}"><span class="charges__icon"><svg class="i" aria-hidden="true" focusable="false"><use href="#{{ in_array($item['icon'] ?? '', $chargeIcons, true) ? $item['icon'] : 'i-check' }}"/></svg></span>{{ $item['title'] ?? '' }}<span class="faq__icon" aria-hidden="true"></span></button></h3>
+        <div class="faq__a" id="charge-a{{ $index }}" role="region" aria-labelledby="charge-q{{ $index }}"><div class="faq__inner">
+          @foreach(preg_split('/\R{2,}/', trim($item['text'] ?? '')) as $paragraph)
+          @if(trim($paragraph) !== '')<p>{{ trim($paragraph) }}</p>@endif
+          @endforeach
+        </div></div>
+      </div>
       @endforeach
     </div>
   </div>
 </section>
 
-<section class="finder-wrap" id="finder" aria-labelledby="finder-title">
-  <div class="wrap finder-wrap__grid">
-    <div>
-      <p class="eyebrow">Level finder</p>
-      <h2 id="finder-title" data-split>Which level <em>fits?</em></h2>
-      <p>Three questions for a starting point. We confirm the right level with you before anything is agreed.</p>
-    </div>
-    <form class="finder" data-finder novalidate aria-labelledby="finder-title">
-  <div class="finder__qs">
-    <fieldset class="finder__q">
-      <legend><span class="builder__n">1</span> How often is practical help needed?</legend>
-      <div class="chips"><label class="chip"><input type="radio" name="often" value="1" data-label="Now and then"><span>Now and then</span></label><label class="chip"><input type="radio" name="often" value="2" data-label="Most weeks"><span>Most weeks</span></label><label class="chip"><input type="radio" name="often" value="3" data-label="Several times a week"><span>Several times a week</span></label></div>
-    </fieldset>
-    <fieldset class="finder__q">
-      <legend><span class="builder__n">2</span> How many organisations are involved?</legend>
-      <div class="chips"><label class="chip"><input type="radio" name="parties" value="1" data-label="One or two"><span>One or two</span></label><label class="chip"><input type="radio" name="parties" value="2" data-label="Three to five"><span>Three to five</span></label><label class="chip"><input type="radio" name="parties" value="3" data-label="More than five"><span>More than five</span></label></div>
-    </fieldset>
-    <fieldset class="finder__q">
-      <legend><span class="builder__n">3</span> Where is the family?</legend>
-      <div class="chips"><label class="chip"><input type="radio" name="family" value="1" data-label="Close by and involved"><span>Close by and involved</span></label><label class="chip"><input type="radio" name="family" value="2" data-label="Elsewhere in the UK"><span>Elsewhere in the UK</span></label><label class="chip"><input type="radio" name="family" value="3" data-label="Abroad, or no family"><span>Abroad, or no family</span></label></div>
-    </fieldset>
-  </div>
-  <div class="finder__result" aria-live="polite">
-    <p class="finder__label">Suggested level</p>
-    <p class="finder__level" data-finder-level>Three questions</p>
-    <p class="finder__why" data-finder-why>We&rsquo;ll suggest a starting point. We always recommend honestly, even when that means the lowest level.</p>
-    <a class="btn btn--gold" data-finder-cta href="https://wa.me/447891341414?text=Hello%20Stonemere%2C%20I%27d%20like%20to%20ask%20about%20membership%20levels." target="_blank" rel="noopener" data-magnetic><svg class="i" aria-hidden="true" focusable="false"><use href="#i-whatsapp"/></svg><span class="roll" data-text="Ask on WhatsApp">Ask on WhatsApp</span></a>
-  </div>
-</form>
-  </div>
-</section>
-
-<section class="separate" aria-labelledby="separate-title">
-  <div class="wrap separate__grid">
-    <div>
-      <p class="eyebrow">{{ $priceMenuContent->separate_eyebrow ?? 'Charged separately' }}</p>
-      <h2 id="separate-title" data-split>@safeHtml($priceMenuContent->separate_title ?? 'Always <em>agreed first</em>')</h2>
-      <p>{{ $priceMenuContent->separate_text ?? 'These are not drawn from membership. Each one is explained and agreed before it is incurred.' }}</p>
-    </div>
-    <dl class="ledger">
-      @foreach(($pricingItems ?? collect()) as $item)
-      <div data-reveal><dt>{{ $item->name }}</dt><dd>@safeHtml($item->description)</dd></div>
+<section class="agreement" aria-labelledby="agreement-title">
+  <div class="wrap agreement__inner">
+    <p class="eyebrow">{{ $priceMenuContent->agreement_eyebrow ?? 'Before we begin' }}</p>
+    <h2 id="agreement-title" data-split>@safeHtml($priceMenuContent->agreement_title ?? 'Agreement Before <em>Work Starts</em>')</h2>
+    <div class="agreement__text">
+      @foreach(preg_split('/\R{2,}/', trim($priceMenuContent->agreement_text ?? '')) as $paragraph)
+      @if(trim($paragraph) !== '')<p>{{ trim($paragraph) }}</p>@endif
       @endforeach
-    </dl>
+    </div>
   </div>
 </section>
 
