@@ -318,7 +318,7 @@ $contact = $homeContent?->contact ?? [];
 <section class="lead" aria-labelledby="lead-title">
   <div class="wrap lead__grid">
     <figure class="lead__portrait" data-reveal="mask">
-      <img src="{{ asset('assets/images/Alex_image.jpeg') }}" width="800" height="1000" alt="Illustration of two people talking, in gold line on navy" loading="lazy">
+      <img src="{{ asset('assets/images/paul_harrison.jpeg') }}" width="800" height="1000" alt="Illustration of two people talking, in gold line on navy" loading="lazy">
     </figure>
     <div class="lead__copy">
       <p class="eyebrow">{{ $lead['eyebrow'] ?? 'Our team' }}</p>
