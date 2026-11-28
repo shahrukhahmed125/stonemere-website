@@ -36,7 +36,7 @@
       <p class="eyebrow eyebrow--light">{{ $priceMenuContent->hero_eyebrow ?? 'Price menu' }}</p>
       <h1 id="page-title" class="phero__title" data-split>@safeHtml($priceMenuContent->hero_title ?? 'Our Price <em>Menu</em>')</h1>
       <p class="phero__lead" data-reveal>{{ $priceMenuContent->hero_lead ?? 'Clear charges. Flexible support. Agreed upfront. We provide bespoke lifestyle management and professional support, with services tailored to your individual requirements.' }}</p>
-      <div class="actions" data-reveal><a class="btn btn--gold" href="{{ $priceMenuContent->hero_cta_primary_url ?? 'https://wa.me/447891341414?text=Hello%20Stonemere%2C%20I%27d%20like%20to%20book%20a%20free%20telephone%20consultation.' }}" target="_blank" rel="noopener" data-magnetic><svg class="i" aria-hidden="true" focusable="false"><use href="#i-whatsapp"/></svg><span class="roll" data-text="{{ $priceMenuContent->hero_cta_primary_text ?? 'Book Your Free Consultation' }}">{{ $priceMenuContent->hero_cta_primary_text ?? 'Book Your Free Consultation' }}</span></a><a class="btn btn--line-light" href="{{ $priceMenuContent->hero_cta_secondary_url ?? 'tel:+441225338436' }}" data-magnetic><svg class="i" aria-hidden="true" focusable="false"><use href="#i-phone"/></svg><span class="roll" data-text="{{ $priceMenuContent->hero_cta_secondary_text ?? 'Call 01225 338436' }}">{{ $priceMenuContent->hero_cta_secondary_text ?? 'Call 01225 338436' }}</span></a></div>
+      <div class="actions" data-reveal><a class="btn btn--gold" href="{{ $priceMenuContent->hero_cta_primary_url ?? 'https://wa.me/44777753092?text=Hello%20Stonemere%2C%20I%27d%20like%20to%20book%20a%20free%20telephone%20consultation.' }}" target="_blank" rel="noopener" data-magnetic><svg class="i" aria-hidden="true" focusable="false"><use href="#i-whatsapp"/></svg><span class="roll" data-text="{{ $priceMenuContent->hero_cta_primary_text ?? 'Book Your Free Consultation' }}">{{ $priceMenuContent->hero_cta_primary_text ?? 'Book Your Free Consultation' }}</span></a><a class="btn btn--line-light" href="{{ $priceMenuContent->hero_cta_secondary_url ?? 'tel:+443330541060' }}" data-magnetic><svg class="i" aria-hidden="true" focusable="false"><use href="#i-phone"/></svg><span class="roll" data-text="{{ $priceMenuContent->hero_cta_secondary_text ?? 'Call +44 3330 541060' }}">{{ $priceMenuContent->hero_cta_secondary_text ?? 'Call +44 3330 541060' }}</span></a></div>
     </div>
     <figure class="phero__art" data-reveal="mask">
       <img src="{{ asset('assets/images/art/page-price.svg') }}" width="800" height="1000" alt="Illustration of a ledger, in gold line on navy" fetchpriority="high">
@@ -48,7 +48,11 @@
   <div class="wrap pintra__inner">
     <p class="eyebrow">{{ $priceMenuContent->intro_eyebrow ?? 'How our menu pricing works' }}</p>
     <h2 id="intro-title" data-split>@safeHtml($priceMenuContent->intro_title ?? 'Flexible support, <em>agreed upfront</em>')</h2>
-    <p class="pintro__text">{{ $priceMenuContent->intro_text ?? 'We begin with a complimentary initial telephone conversation of up to 30 minutes. You then choose only the support you need; there is no fixed ongoing package.' }}</p>
+    <div class="pintro__text">
+      @foreach(preg_split('/\R{2,}/', trim($priceMenuContent->intro_text ?? 'We begin with a complimentary initial telephone conversation of up to 30 minutes. You then choose only the support you need; there is no fixed ongoing package. The scope of work, likely time and any third-party spending are agreed in advance wherever reasonably possible.')) as $paragraph)
+      @if(trim($paragraph) !== '')<p>{{ trim($paragraph) }}</p>@endif
+      @endforeach
+    </div>
   </div>
 </section>
 
@@ -141,8 +145,8 @@ $chargeIcons = ['i-pin','i-keystone','i-scale','i-user','i-lock','i-check','i-cl
       <p>{{ $priceMenuContent->cta_text ?? 'We will send them straight away and recommend honestly, even when that means the lowest level.' }}</p>
     </div>
     <div class="actions actions--stack">
-      <a class="btn btn--gold" href="{{ $priceMenuContent->cta_button_primary_url ?? 'https://wa.me/447891341414?text=Hello%20Stonemere%2C%20please%20could%20you%20send%20me%20your%20current%20rates%3F' }}" target="_blank" rel="noopener" data-magnetic><svg class="i" aria-hidden="true" focusable="false"><use href="#i-whatsapp"/></svg><span class="roll" data-text="{{ $priceMenuContent->cta_button_primary_text ?? 'Message on WhatsApp' }}">{{ $priceMenuContent->cta_button_primary_text ?? 'Message on WhatsApp' }}</span></a>
-      <a class="btn btn--line" href="{{ $priceMenuContent->cta_button_secondary_url ?? 'tel:+441225338436' }}" data-magnetic><svg class="i" aria-hidden="true" focusable="false"><use href="#i-phone"/></svg><span class="roll" data-text="{{ $priceMenuContent->cta_button_secondary_text ?? 'Call 01225 338436' }}">{{ $priceMenuContent->cta_button_secondary_text ?? 'Call 01225 338436' }}</span></a>
+      <a class="btn btn--gold" href="{{ $priceMenuContent->cta_button_primary_url ?? 'https://wa.me/44777753092?text=Hello%20Stonemere%2C%20please%20could%20you%20send%20me%20your%20current%20rates%3F' }}" target="_blank" rel="noopener" data-magnetic><svg class="i" aria-hidden="true" focusable="false"><use href="#i-whatsapp"/></svg><span class="roll" data-text="{{ $priceMenuContent->cta_button_primary_text ?? 'Message on WhatsApp' }}">{{ $priceMenuContent->cta_button_primary_text ?? 'Message on WhatsApp' }}</span></a>
+      <a class="btn btn--line" href="{{ $priceMenuContent->cta_button_secondary_url ?? 'tel:+443330541060' }}" data-magnetic><svg class="i" aria-hidden="true" focusable="false"><use href="#i-phone"/></svg><span class="roll" data-text="{{ $priceMenuContent->cta_button_secondary_text ?? 'Call +44 3330 541060' }}">{{ $priceMenuContent->cta_button_secondary_text ?? 'Call +44 3330 541060' }}</span></a>
     </div>
   </div>
 </section>

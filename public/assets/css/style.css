@@ -939,7 +939,8 @@ a.route:hover { padding-left: 12px; color: var(--gold-300); }
 .pintro { padding-block: var(--section); }
 .pintro__inner { max-width: 820px; }
 .pintro__inner h2 { margin-bottom: var(--s-4); }
-.pintro__text { color: var(--muted); max-width: 62ch; }
+.pintro__text p { color: var(--muted); max-width: 62ch; margin: 0 0 var(--s-3); }
+.pintro__text p:last-child { margin-bottom: 0; }
 
 .ptable-wrap { padding-block: var(--section); background: var(--stone-50); }
 .ptable__head { max-width: 760px; margin-bottom: var(--s-6); }

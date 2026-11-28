@@ -29,7 +29,7 @@ class ModelRelationshipsTest extends TestCase
         
         $this->assertInstanceOf(SiteSettings::class, $settings);
         $this->assertEquals('Stonemere Life Management', $settings->company_name);
-        $this->assertEquals('01225 338436', $settings->phone);
+        $this->assertEquals('+44 3330 541060', $settings->phone);
     }
 
     public function test_page_model_loads_and_scopes_work()

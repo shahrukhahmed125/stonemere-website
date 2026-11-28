@@ -10,8 +10,8 @@
    Phone numbers written in the page text also appear in the HTML files.
    ========================================================================== */
 window.STONEMERE = {
-  phone: '+441225338436',
-  phoneDisplay: '01225 338436',
-  whatsapp: '447891341414',
+  phone: '+443330541060',
+  phoneDisplay: '+44 3330 541060',
+  whatsapp: '44777753092',
   email: ''
 };

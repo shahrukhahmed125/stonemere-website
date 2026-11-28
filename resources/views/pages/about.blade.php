@@ -36,7 +36,7 @@
       <p class="eyebrow eyebrow--light">{{ $aboutContent->hero_eyebrow ?? 'About' }}</p>
       <h1 id="page-title" class="phero__title" data-split>@safeHtml($aboutContent->hero_title ?? 'Life management, <em>defined</em>')</h1>
       <p class="phero__lead" data-reveal>{{ $aboutContent->hero_lead ?? 'Trusted, practical support and coordination for the clients of care providers, solicitors and health professionals, and for older people, vulnerable adults and families facing difficulty or change.' }}</p>
-      <div class="actions" data-reveal><a class="btn btn--gold" href="{{ $aboutContent->hero_cta_url ?? 'https://wa.me/447891341414?text=Hello%20Stonemere%2C%20I%20would%20like%20to%20know%20more%20about%20what%20you%20do.' }}" target="_blank" rel="noopener" data-magnetic><svg class="i" aria-hidden="true" focusable="false"><use href="#i-whatsapp"/></svg><span class="roll" data-text="{{ $aboutContent->hero_cta_text ?? 'Talk to Stonemere' }}">{{ $aboutContent->hero_cta_text ?? 'Talk to Stonemere' }}</span></a></div>
+      <div class="actions" data-reveal><a class="btn btn--gold" href="{{ $aboutContent->hero_cta_url ?? 'https://wa.me/44777753092?text=Hello%20Stonemere%2C%20I%20would%20like%20to%20know%20more%20about%20what%20you%20do.' }}" target="_blank" rel="noopener" data-magnetic><svg class="i" aria-hidden="true" focusable="false"><use href="#i-whatsapp"/></svg><span class="roll" data-text="{{ $aboutContent->hero_cta_text ?? 'Talk to Stonemere' }}">{{ $aboutContent->hero_cta_text ?? 'Talk to Stonemere' }}</span></a></div>
     </div>
     <figure class="phero__art" data-reveal="mask">
       <img src="{{ asset('assets/images/art/page-about.svg') }}" width="800" height="1000" alt="Illustration of a stone arch with a keystone, in gold line on navy" fetchpriority="high">
@@ -106,8 +106,8 @@
       <p>{{ $aboutContent->cta_text ?? 'Tell us about the client or the situation. We will be honest about whether Stonemere is the right fit.' }}</p>
     </div>
     <div class="actions actions--stack">
-      <a class="btn btn--gold" href="{{ $aboutContent->cta_button_primary_url ?? 'https://wa.me/447891341414?text=Hello%20Stonemere%2C%20I%20would%20like%20to%20see%20whether%20you%20can%20help.' }}" target="_blank" rel="noopener" data-magnetic><svg class="i" aria-hidden="true" focusable="false"><use href="#i-whatsapp"/></svg><span class="roll" data-text="{{ $aboutContent->cta_button_primary_text ?? 'Message on WhatsApp' }}">{{ $aboutContent->cta_button_primary_text ?? 'Message on WhatsApp' }}</span></a>
-      <a class="btn btn--line" href="{{ $aboutContent->cta_button_secondary_url ?? 'tel:+441225338436' }}" data-magnetic><svg class="i" aria-hidden="true" focusable="false"><use href="#i-phone"/></svg><span class="roll" data-text="{{ $aboutContent->cta_button_secondary_text ?? 'Call 01225 338436' }}">{{ $aboutContent->cta_button_secondary_text ?? 'Call 01225 338436' }}</span></a>
+      <a class="btn btn--gold" href="{{ $aboutContent->cta_button_primary_url ?? 'https://wa.me/44777753092?text=Hello%20Stonemere%2C%20I%20would%20like%20to%20see%20whether%20you%20can%20help.' }}" target="_blank" rel="noopener" data-magnetic><svg class="i" aria-hidden="true" focusable="false"><use href="#i-whatsapp"/></svg><span class="roll" data-text="{{ $aboutContent->cta_button_primary_text ?? 'Message on WhatsApp' }}">{{ $aboutContent->cta_button_primary_text ?? 'Message on WhatsApp' }}</span></a>
+      <a class="btn btn--line" href="{{ $aboutContent->cta_button_secondary_url ?? 'tel:+443330541060' }}" data-magnetic><svg class="i" aria-hidden="true" focusable="false"><use href="#i-phone"/></svg><span class="roll" data-text="{{ $aboutContent->cta_button_secondary_text ?? 'Call +44 3330 541060' }}">{{ $aboutContent->cta_button_secondary_text ?? 'Call +44 3330 541060' }}</span></a>
     </div>
   </div>
 </section>

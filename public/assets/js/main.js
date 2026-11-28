@@ -8,7 +8,7 @@
 
   var doc = document;
   var root = doc.documentElement;
-  var CFG = window.STONEMERE || { phone: '+441225338436', whatsapp: '447891341414', email: '' };
+  var CFG = window.STONEMERE || { phone: '+443330541060', whatsapp: '44777753092', email: '' };
   var finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
   var calm = function () { return root.classList.contains('calm'); };
   var $ = function (s, c) { return (c || doc).querySelector(s); };

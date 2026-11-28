@@ -65,7 +65,7 @@ class PagesSeeder extends Seeder
                 'title' => 'Contact',
                 'slug' => 'contact',
                 'template_key' => 'contact',
-                'meta_title' => 'Contact Stonemere Life Management | Call 01225 338436 | Bath',
+                'meta_title' => 'Contact Stonemere Life Management | Call +44 3330 541060 | Bath',
                 'meta_description' => 'Get in touch with Stonemere Life Management for practical coordination services in Bath and Bath & North East Somerset.',
                 'is_published' => true,
             ],

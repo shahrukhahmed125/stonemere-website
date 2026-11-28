@@ -64,8 +64,8 @@ class ProfessionalsContent extends Model
   'hero_lead' => 'For care providers, solicitors, healthcare and property professionals whose clients need practical coordination beyond your core service. One named contact, a clear remit and no chasing.',
   'hero_cta_primary_text' => 'Build a referral',
   'hero_cta_primary_url' => '#referral',
-  'hero_cta_secondary_text' => 'Call 01225 338436',
-  'hero_cta_secondary_url' => 'tel:+441225338436',
+  'hero_cta_secondary_text' => 'Call +44 3330 541060',
+  'hero_cta_secondary_url' => 'tel:+443330541060',
   'remit_eyebrow' => 'The remit',
   'remit_title' => 'Where your service ends, <em>ours begins</em>',
   'remit_lede' => 'Every service has edges. The practical matters just outside them, such as the empty house, the family abroad, the appointment nobody can attend or the clearance after a death, are where clients come to harm and professionals lose time.',
@@ -77,11 +77,11 @@ class ProfessionalsContent extends Model
   'faqs_title' => 'What referrers <em>ask first</em>',
   'cta_eyebrow' => 'Next step',
   'cta_title' => 'Prefer to talk it through?',
-  'cta_text' => 'Call 01225 338436 or message us. Outline the situation and we will tell you straight away whether we can help.',
+  'cta_text' => 'Call +44 3330 541060 or message us. Outline the situation and we will tell you straight away whether we can help.',
   'cta_button_primary_text' => 'Message on WhatsApp',
-  'cta_button_primary_url' => 'https://wa.me/447891341414?text=Hello%20Stonemere%2C%20I%20am%20a%20professional%20and%20would%20like%20to%20discuss%20a%20possible%20referral.',
-  'cta_button_secondary_text' => 'Call 01225 338436',
-  'cta_button_secondary_url' => 'tel:+441225338436',
+  'cta_button_primary_url' => 'https://wa.me/44777753092?text=Hello%20Stonemere%2C%20I%20am%20a%20professional%20and%20would%20like%20to%20discuss%20a%20possible%20referral.',
+  'cta_button_secondary_text' => 'Call +44 3330 541060',
+  'cta_button_secondary_url' => 'tel:+443330541060',
   'builder_referrer_options' => 
   array (
     0 => 

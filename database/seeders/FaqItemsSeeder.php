@@ -42,7 +42,7 @@ class FaqItemsSeeder extends Seeder
             ],
             [
                 'question' => 'Can you help at short notice?',
-                'answer' => 'Yes. Same-day support and out-of-hours assistance are part of our Urgent & Complex Case Support. Call 01225 338436 and tell us what has happened.',
+                'answer' => 'Yes. Same-day support and out-of-hours assistance are part of our Urgent & Complex Case Support. Call +44 3330 541060 and tell us what has happened.',
                 'sort_order' => 5,
             ],
             [

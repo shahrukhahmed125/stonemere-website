@@ -60,8 +60,8 @@ class SiteSettings extends Model
     {
         return static::firstOrCreate([], [
             'company_name' => 'Stonemere Life Management',
-            'phone' => '01225 338436',
-            'whatsapp' => '07891 341414',
+            'phone' => '+44 3330 541060',
+            'whatsapp' => '+44 777 753 092',
             'address' => 'Bath, Somerset',
         ]);
     }

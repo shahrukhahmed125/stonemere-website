@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', $contactContent?->meta_title ?: ($page?->meta_title ?: 'Contact Stonemere Life Management | Call 01225 338436 | Bath'))
+@section('title', $contactContent?->meta_title ?: ($page?->meta_title ?: 'Contact Stonemere Life Management | Call +44 3330 541060 | Bath'))
 @if($contactContent?->meta_description || $page?->meta_description)
 @section('meta_description', $contactContent?->meta_description ?: $page->meta_description)
 @endif

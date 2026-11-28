@@ -28,10 +28,10 @@ class SiteSettingsComposer
                 'stacked_reverse' => null,
                 'favicon' => null,
             ]);
-            $view->with('settings_phone', '01225 338436');
-            $view->with('settings_phone_tel', '+441225338436');
-            $view->with('settings_whatsapp', '07891 341414');
-            $view->with('settings_whatsapp_tel', '447891341414');
+            $view->with('settings_phone', '+44 3330 541060');
+            $view->with('settings_phone_tel', '+443330541060');
+            $view->with('settings_whatsapp', '+44 777 753 092');
+            $view->with('settings_whatsapp_tel', '44777753092');
             $view->with('settings_email', '');
             $view->with('settings_address', 'Bath, Somerset');
             $view->with('settings_company_name', 'Stonemere Life Management');
@@ -49,24 +49,14 @@ class SiteSettingsComposer
         }
         
         // Provide formatted values for common use cases
-        $phone = $settings->phone ?? '01225 338436';
-        $whatsapp = $settings->whatsapp ?? '07891 341414';
+        $phone = $settings->phone ?? '+44 3330 541060';
+        $whatsapp = $settings->whatsapp ?? '+44 777 753 092';
         
-        // Format phone for tel: links (remove spaces, ensure +44 prefix for UK numbers)
-        $phoneClean = preg_replace('/\s+/', '', $phone);
-        if (str_starts_with($phoneClean, '0')) {
-            $phoneTel = '+44' . substr($phoneClean, 1);
-        } else {
-            $phoneTel = $phoneClean;
-        }
+        // Format phone for tel: links (digits only, UK numbers get +44)
+        $phoneTel = '+' . self::ukDialingDigits($phone);
         
-        // Format WhatsApp for wa.me links (remove spaces, ensure country code)
-        $whatsappClean = preg_replace('/\s+/', '', $whatsapp);
-        if (str_starts_with($whatsappClean, '0')) {
-            $whatsappTel = '44' . substr($whatsappClean, 1);
-        } else {
-            $whatsappTel = $whatsappClean;
-        }
+        // Format WhatsApp for wa.me links (digits only, UK numbers get 44)
+        $whatsappTel = self::ukDialingDigits($whatsapp);
         
         $view->with('settings_phone', $phone);
         $view->with('settings_phone_tel', $phoneTel);
@@ -98,5 +88,23 @@ class SiteSettingsComposer
             'stacked_reverse' => !empty($settings->logo_stacked_reverse) ? \App\Helpers\ImageUrlHelper::resolve($settings->logo_stacked_reverse) : null,
             'favicon' => !empty($settings->favicon) ? \App\Helpers\ImageUrlHelper::resolve($settings->favicon) : null,
         ]);
+    }
+
+    /**
+     * Normalise a UK phone number to international digits (e.g. 443330541060).
+     * Accepts "01225 123456", "+44 1225 123456", "0044..." or "44...".
+     */
+    private static function ukDialingDigits(string $number): string
+    {
+        $d = preg_replace('/\D/', '', $number);
+        if (str_starts_with($d, '00')) {
+            $d = substr($d, 2);
+        }
+        if (str_starts_with($d, '0')) {
+            $d = '44' . substr($d, 1);
+        } elseif (!str_starts_with($d, '44') && strlen($d) <= 11 && str_starts_with($d, '7')) {
+            $d = '44' . $d;
+        }
+        return $d;
     }
 }

@@ -61,8 +61,8 @@ $contact = $homeContent?->contact ?? [];
     <h1 id="hero-title" class="hero__title" data-split>@safeHtml($hero['title'] ?? 'The practical side of your client&rsquo;s life, <em>coordinated</em>')</h1>
     <p class="hero__lead" data-reveal>{{ $hero['lead'] ?? 'One named contact for care providers, solicitors and healthcare professionals in Bath. We work alongside you, so the matters outside your service are followed through and nothing is missed.' }}</p>
     <div class="actions actions--center" data-reveal>
-      <a class="btn btn--gold" href="{{ $hero['cta_primary']['url'] ?? 'https://wa.me/447891341414?text=Hello%20Stonemere%2C%20I%20would%20like%20to%20refer%20a%20client.' }}" target="_blank" rel="noopener" data-magnetic><svg class="i" aria-hidden="true" focusable="false"><use href="#i-whatsapp"/></svg><span class="roll" data-text="{{ $hero['cta_primary']['text'] ?? 'Refer a client' }}">{{ $hero['cta_primary']['text'] ?? 'Refer a client' }}</span></a>
-      <a class="btn btn--line-light" href="{{ $hero['cta_secondary']['url'] ?? 'tel:+441225338436' }}" data-magnetic><svg class="i" aria-hidden="true" focusable="false"><use href="#i-phone"/></svg><span class="roll" data-text="{{ $hero['cta_secondary']['text'] ?? 'Call 01225 338436' }}">{{ $hero['cta_secondary']['text'] ?? 'Call 01225 338436' }}</span></a>
+      <a class="btn btn--gold" href="{{ $hero['cta_primary']['url'] ?? 'https://wa.me/44777753092?text=Hello%20Stonemere%2C%20I%20would%20like%20to%20refer%20a%20client.' }}" target="_blank" rel="noopener" data-magnetic><svg class="i" aria-hidden="true" focusable="false"><use href="#i-whatsapp"/></svg><span class="roll" data-text="{{ $hero['cta_primary']['text'] ?? 'Refer a client' }}">{{ $hero['cta_primary']['text'] ?? 'Refer a client' }}</span></a>
+      <a class="btn btn--line-light" href="{{ $hero['cta_secondary']['url'] ?? 'tel:+443330541060' }}" data-magnetic><svg class="i" aria-hidden="true" focusable="false"><use href="#i-phone"/></svg><span class="roll" data-text="{{ $hero['cta_secondary']['text'] ?? 'Call +44 3330 541060' }}">{{ $hero['cta_secondary']['text'] ?? 'Call +44 3330 541060' }}</span></a>
     </div>
   </div>
   <a class="hero__scroll" href="#statement" aria-label="Scroll to the next section"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-arrow-down"/></svg></a>
@@ -200,7 +200,7 @@ $contact = $homeContent?->contact ?? [];
       <h2 id="mapper-title" data-split>@safeHtml($mapper['title'] ?? 'Who is involved in <em>this case?</em>')</h2>
       <p>{{ $mapper['description'] ?? 'Select everyone your client deals with. However many there are, you and the family speak to one person.' }}</p>
       <p class="mapper__count" aria-live="polite"><span class="mapper__n" data-mapper-n>0</span> <span data-mapper-label>{{ $mapper['count_text'] ?? 'parties selected. Choose the people and organisations involved.' }}</span></p>
-      <a class="btn btn--gold" data-mapper-cta href="{{ $mapper['cta_url'] ?? 'https://wa.me/447891341414?text=Hello%20Stonemere%2C%20I%20would%20like%20to%20talk%20about%20a%20case.' }}" target="_blank" rel="noopener" data-magnetic><svg class="i" aria-hidden="true" focusable="false"><use href="#i-whatsapp"/></svg><span class="roll" data-text="{{ $mapper['cta_text'] ?? 'Send this case to Stonemere' }}">{{ $mapper['cta_text'] ?? 'Send this case to Stonemere' }}</span></a>
+      <a class="btn btn--gold" data-mapper-cta href="{{ $mapper['cta_url'] ?? 'https://wa.me/44777753092?text=Hello%20Stonemere%2C%20I%20would%20like%20to%20talk%20about%20a%20case.' }}" target="_blank" rel="noopener" data-magnetic><svg class="i" aria-hidden="true" focusable="false"><use href="#i-whatsapp"/></svg><span class="roll" data-text="{{ $mapper['cta_text'] ?? 'Send this case to Stonemere' }}">{{ $mapper['cta_text'] ?? 'Send this case to Stonemere' }}</span></a>
     </div>
     <div class="mapper__stage">
       <svg class="mapper__lines" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
@@ -236,7 +236,7 @@ $contact = $homeContent?->contact ?? [];
       <svg class="steps__line" viewBox="0 0 2 100" preserveAspectRatio="none" aria-hidden="true"><line x1="1" y1="0" x2="1" y2="100" pathLength="1"/></svg>
       <ol class="steps__list" role="list">
       @foreach($steps['steps'] ?? [
-          ['number' => '01', 'title' => 'Message or call', 'text' => 'WhatsApp us or call 01225 338436. Tell us who you are and, in outline, what the client needs.'],
+          ['number' => '01', 'title' => 'Message or call', 'text' => 'WhatsApp us or call +44 3330 541060. Tell us who you are and, in outline, what the client needs.'],
           ['number' => '02', 'title' => 'Agree the scope in writing', 'text' => 'We talk it through, confirm what we will take on and how it will be paid for, and put it in writing before anything starts.'],
           ['number' => '03', 'title' => 'One named contact takes it on', 'text' => 'The same person coordinates every matter, liaises with everyone involved and follows each one through.'],
           ['number' => '04', 'title' => 'You stay informed', 'text' => 'We keep you and the family updated, with the client&rsquo;s consent, so you always know where things stand.']
@@ -326,7 +326,7 @@ $contact = $homeContent?->contact ?? [];
       <p class="lead__lede" data-reveal>{{ $lead['description'] ?? 'Stonemere is led by Paul. When you refer a client, you know exactly who is responsible for the case and how to reach them.' }}</p>
       <div class="actions" data-reveal>
         <a class="btn btn--navy" href="{{ $lead['button_primary']['url'] ?? '/team' }}" data-magnetic><span class="roll" data-text="{{ $lead['button_primary']['text'] ?? 'Meet the team' }}">{{ $lead['button_primary']['text'] ?? 'Meet the team' }}</span><svg class="i" aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg></a>
-        <a class="btn btn--line" href="{{ $lead['button_secondary']['url'] ?? 'https://wa.me/447891341414?text=Hello%20Paul%2C%20I%20would%20like%20to%20talk%20about%20Stonemere%27s%20support.' }}" target="_blank" rel="noopener" data-magnetic><svg class="i" aria-hidden="true" focusable="false"><use href="#i-whatsapp"/></svg><span class="roll" data-text="{{ $lead['button_secondary']['text'] ?? 'Message Paul' }}">{{ $lead['button_secondary']['text'] ?? 'Message Paul' }}</span></a>
+        <a class="btn btn--line" href="{{ $lead['button_secondary']['url'] ?? 'https://wa.me/44777753092?text=Hello%20Paul%2C%20I%20would%20like%20to%20talk%20about%20Stonemere%27s%20support.' }}" target="_blank" rel="noopener" data-magnetic><svg class="i" aria-hidden="true" focusable="false"><use href="#i-whatsapp"/></svg><span class="roll" data-text="{{ $lead['button_secondary']['text'] ?? 'Message Paul' }}">{{ $lead['button_secondary']['text'] ?? 'Message Paul' }}</span></a>
       </div>
     </div>
   </div>
@@ -353,7 +353,7 @@ $contact = $homeContent?->contact ?? [];
     <div class="questions__head">
       <p class="eyebrow">{{ $questions['eyebrow'] ?? 'Questions' }}</p>
       <h2 id="faq-title" data-split>@safeHtml($questions['title'] ?? 'Before you <em>refer</em>')</h2>
-      <p>{{ $questions['description'] ?? 'Anything else, ask us on WhatsApp or call 01225 338436.' }}</p>
+      <p>{{ $questions['description'] ?? 'Anything else, ask us on WhatsApp or call +44 3330 541060.' }}</p>
     </div>
     <div class="faq" data-faq>
       @php
@@ -362,7 +362,7 @@ $contact = $homeContent?->contact ?? [];
           (object)['question' => 'Who can refer a client to Stonemere?', 'answer' => 'Domiciliary care companies, solicitors, healthcare professionals, property professionals and other organisations can refer. Families can contact us directly, and so can clients themselves.'],
           (object)['question' => 'Who pays for the work?', 'answer' => 'The client, their family or representative, or the referring organisation. Who pays, what is included and what is charged separately is agreed in writing before any work begins.'],
           (object)['question' => 'Which areas do you cover?', 'answer' => 'Bath first, concentrating on about a five-mile radius of the city, then the wider Bath & North East Somerset area. We can coordinate matters further afield for existing clients and their families.'],
-          (object)['question' => 'Can you help at short notice?', 'answer' => 'Yes. Same-day support and out-of-hours assistance are part of our Urgent & Complex Case Support. Call 01225 338436 and tell us what has happened.'],
+          (object)['question' => 'Can you help at short notice?', 'answer' => 'Yes. Same-day support and out-of-hours assistance are part of our Urgent & Complex Case Support. Call +44 3330 541060 and tell us what has happened.'],
           (object)['question' => 'What does it cost?', 'answer' => 'There is no fixed ongoing package. After a complimentary 30-minute telephone consultation you choose only the services you need, with clear rates and charges agreed in advance. The <a href="/price-menu">price menu</a> lists current rates.'],
       ]);
       @endphp

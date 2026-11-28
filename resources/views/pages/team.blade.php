@@ -36,7 +36,7 @@
       <p class="eyebrow eyebrow--light">{{ $teamContent->hero_eyebrow ?? 'Our team' }}</p>
       <h1 id="page-title" class="phero__title" data-split>@safeHtml($teamContent->hero_title ?? 'Led by <em>Paul Harrison</em>')</h1>
       <p class="phero__lead" data-reveal>{{ $teamContent->hero_lead ?? 'A Bath team with one rule: every client has a named person who knows the whole situation, and every referrer knows exactly who to call.' }}</p>
-      <div class="actions" data-reveal><a class="btn btn--gold" href="{{ $teamContent->hero_cta_primary_url ?? 'https://wa.me/447891341414?text=Hello%20Paul%2C%20I%20would%20like%20to%20talk%20about%20Stonemere%27s%20support.' }}" target="_blank" rel="noopener" data-magnetic><svg class="i" aria-hidden="true" focusable="false"><use href="#i-whatsapp"/></svg><span class="roll" data-text="{{ $teamContent->hero_cta_primary_text ?? 'Message Paul' }}">{{ $teamContent->hero_cta_primary_text ?? 'Message Paul' }}</span></a><a class="btn btn--line-light" href="{{ $teamContent->hero_cta_secondary_url ?? 'tel:+441225338436' }}" data-magnetic><svg class="i" aria-hidden="true" focusable="false"><use href="#i-phone"/></svg><span class="roll" data-text="{{ $teamContent->hero_cta_secondary_text ?? 'Call 01225 338436' }}">{{ $teamContent->hero_cta_secondary_text ?? 'Call 01225 338436' }}</span></a></div>
+      <div class="actions" data-reveal><a class="btn btn--gold" href="{{ $teamContent->hero_cta_primary_url ?? 'https://wa.me/44777753092?text=Hello%20Paul%2C%20I%20would%20like%20to%20talk%20about%20Stonemere%27s%20support.' }}" target="_blank" rel="noopener" data-magnetic><svg class="i" aria-hidden="true" focusable="false"><use href="#i-whatsapp"/></svg><span class="roll" data-text="{{ $teamContent->hero_cta_primary_text ?? 'Message Paul' }}">{{ $teamContent->hero_cta_primary_text ?? 'Message Paul' }}</span></a><a class="btn btn--line-light" href="{{ $teamContent->hero_cta_secondary_url ?? 'tel:+443330541060' }}" data-magnetic><svg class="i" aria-hidden="true" focusable="false"><use href="#i-phone"/></svg><span class="roll" data-text="{{ $teamContent->hero_cta_secondary_text ?? 'Call +44 3330 541060' }}">{{ $teamContent->hero_cta_secondary_text ?? 'Call +44 3330 541060' }}</span></a></div>
     </div>
     <figure class="phero__art" data-reveal="mask">
       <img src="{{ asset('assets/images/art/page-team.svg') }}" width="800" height="1000" alt="Illustration of two people talking, in gold line on navy" fetchpriority="high">
@@ -55,10 +55,10 @@
       <h2 id="paul-title" data-split>@safeHtml($leadMember?->name ?? $teamContent->paul_name ?? 'Paul Harrison')</h2>
       <p class="paul__lede" data-reveal>{{ $leadMember?->bio ?? $teamContent->paul_lede ?? 'Paul leads Stonemere Life Management. Speak to him directly about a client, a referral or how the service works.' }}</p>
       <ul class="paul__contact" role="list" data-reveal>
-        @php $memberPhoneTel = preg_replace('/\s+/', '', $leadMember?->phone ?? '01225 338436'); $memberPhoneTel = str_starts_with($memberPhoneTel, '0') ? '+44'.substr($memberPhoneTel,1) : $memberPhoneTel; @endphp
-        <li><a href="tel:{{ $memberPhoneTel }}"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-phone"/></svg>{{ $leadMember?->phone ?? $teamContent->paul_phone ?? '01225 338436' }}</a></li>
-        @php $memberWa = preg_replace('/\s+/', '', $leadMember?->whatsapp ?? '07891 341414'); $memberWa = str_starts_with($memberWa, '0') ? '44'.substr($memberWa,1) : $memberWa; @endphp
-        <li><a href="https://wa.me/{{ $memberWa }}?text=Hello%20Paul%2C%20I%20would%20like%20to%20talk%20about%20Stonemere%27s%20support." target="_blank" rel="noopener"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-whatsapp"/></svg>WhatsApp {{ $leadMember?->whatsapp ?? $teamContent->paul_whatsapp ?? '07891 341414' }}</a></li>
+        @php $memberPhoneTel = preg_replace('/\s+/', '', $leadMember?->phone ?? '+44 3330 541060'); $memberPhoneTel = str_starts_with($memberPhoneTel, '0') ? '+44'.substr($memberPhoneTel,1) : $memberPhoneTel; @endphp
+        <li><a href="tel:{{ $memberPhoneTel }}"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-phone"/></svg>{{ $leadMember?->phone ?? $teamContent->paul_phone ?? '+44 3330 541060' }}</a></li>
+        @php $memberWa = preg_replace('/\s+/', '', $leadMember?->whatsapp ?? '+44 777 753 092'); $memberWa = str_starts_with($memberWa, '0') ? '44'.substr($memberWa,1) : $memberWa; @endphp
+        <li><a href="https://wa.me/{{ $memberWa }}?text=Hello%20Paul%2C%20I%20would%20like%20to%20talk%20about%20Stonemere%27s%20support." target="_blank" rel="noopener"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-whatsapp"/></svg>WhatsApp {{ $leadMember?->whatsapp ?? $teamContent->paul_whatsapp ?? '+44 777 753 092' }}</a></li>
       </ul>
     </div>
   </div>
@@ -88,11 +88,11 @@
     <div>
       <p class="eyebrow">{{ $teamContent->cta_eyebrow ?? 'Next step' }}</p>
       <h2 id="cta-band-title" data-split>@safeHtml($teamContent->cta_title ?? 'Speak to the team')</h2>
-      <p>{{ $teamContent->cta_text ?? 'Call 01225 338436 or message us. You will speak to someone who can act.' }}</p>
+      <p>{{ $teamContent->cta_text ?? 'Call +44 3330 541060 or message us. You will speak to someone who can act.' }}</p>
     </div>
     <div class="actions actions--stack">
-      <a class="btn btn--gold" href="{{ $teamContent->cta_button_primary_url ?? 'https://wa.me/447891341414?text=Hello%20Stonemere%2C%20I%20would%20like%20to%20speak%20to%20the%20team.' }}" target="_blank" rel="noopener" data-magnetic><svg class="i" aria-hidden="true" focusable="false"><use href="#i-whatsapp"/></svg><span class="roll" data-text="{{ $teamContent->cta_button_primary_text ?? 'Message on WhatsApp' }}">{{ $teamContent->cta_button_primary_text ?? 'Message on WhatsApp' }}</span></a>
-      <a class="btn btn--line" href="{{ $teamContent->cta_button_secondary_url ?? 'tel:+441225338436' }}" data-magnetic><svg class="i" aria-hidden="true" focusable="false"><use href="#i-phone"/></svg><span class="roll" data-text="{{ $teamContent->cta_button_secondary_text ?? 'Call 01225 338436' }}">{{ $teamContent->cta_button_secondary_text ?? 'Call 01225 338436' }}</span></a>
+      <a class="btn btn--gold" href="{{ $teamContent->cta_button_primary_url ?? 'https://wa.me/44777753092?text=Hello%20Stonemere%2C%20I%20would%20like%20to%20speak%20to%20the%20team.' }}" target="_blank" rel="noopener" data-magnetic><svg class="i" aria-hidden="true" focusable="false"><use href="#i-whatsapp"/></svg><span class="roll" data-text="{{ $teamContent->cta_button_primary_text ?? 'Message on WhatsApp' }}">{{ $teamContent->cta_button_primary_text ?? 'Message on WhatsApp' }}</span></a>
+      <a class="btn btn--line" href="{{ $teamContent->cta_button_secondary_url ?? 'tel:+443330541060' }}" data-magnetic><svg class="i" aria-hidden="true" focusable="false"><use href="#i-phone"/></svg><span class="roll" data-text="{{ $teamContent->cta_button_secondary_text ?? 'Call +44 3330 541060' }}">{{ $teamContent->cta_button_secondary_text ?? 'Call +44 3330 541060' }}</span></a>
     </div>
   </div>
 </section>

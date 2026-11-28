@@ -17,8 +17,8 @@ class SiteSettingsSeeder extends Seeder
             [
                 'company_name' => 'Stonemere Life Management',
                 'tagline' => 'Practical coordination for care providers, solicitors & health professionals in Bath',
-                'phone' => '01225 338436',
-                'whatsapp' => '07891 341414',
+                'phone' => '+44 3330 541060',
+                'whatsapp' => '+44 777 753 092',
                 'address' => 'Bath, Somerset',
                 'default_meta_title' => 'Stonemere Life Management | Practical coordination for care providers, solicitors & health professionals in Bath',
                 'default_meta_description' => 'One named contact who coordinates the practical side of a client\'s life in Bath: family liaison, care liaison, property and urgent cases, alongside care providers, solicitors and health teams.',

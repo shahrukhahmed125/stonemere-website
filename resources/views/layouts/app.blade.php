@@ -65,7 +65,7 @@ $ldEntities[] = [
     'url' => url('/'),
     'image' => $settings_og_image ?: asset('assets/images/og-image.jpg'),
     'description' => $settings_meta_description,
-    'telephone' => '+44'.preg_replace('/\D/', '', preg_replace('/^0/', '', $settings_phone)),
+    'telephone' => $settings_phone_tel ?? '+44'.preg_replace('/\D/', '', preg_replace('/^0/', '', $settings_phone)),
     'areaServed' => [
         ['@type' => 'City', 'name' => 'Bath'],
         ['@type' => 'AdministrativeArea', 'name' => 'Bath and North East Somerset'],

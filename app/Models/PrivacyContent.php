@@ -27,7 +27,7 @@ class PrivacyContent extends Model
             [
                 'hero_title' => 'Privacy notice',
                 'last_updated' => 'Last updated: November 2026',
-                'content' => '<h2 id="who">Who we are</h2><p>Stonemere Life Management (&ldquo;Stonemere&rdquo;, &ldquo;we&rdquo;) provides practical coordination and support in Bath and Bath &amp; North East Somerset. You can contact us on <a href="tel:+441225338436">01225 338436</a>.</p>',
+                'content' => '<h2 id="who">Who we are</h2><p>Stonemere Life Management (&ldquo;Stonemere&rdquo;, &ldquo;we&rdquo;) provides practical coordination and support in Bath and Bath &amp; North East Somerset. You can contact us on <a href="tel:+443330541060">+44 3330 541060</a>.</p>',
                 'meta_title' => 'Privacy Notice | Stonemere Life Management',
                 'meta_description' => 'Stonemere Life Management privacy notice for clients and website users.',
             ]
